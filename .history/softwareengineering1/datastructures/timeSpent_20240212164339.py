@@ -5,7 +5,6 @@ class timeSpent:
         self.timerName = timerName
         startTime = 0
         endTime = 0
-        currentlyRunning = False
 
 
     def startTimer(self):
@@ -14,14 +13,8 @@ class timeSpent:
     def endTimer(self):
         endTime = time.time()
 
-    def getTimeSinceTimerStart():
-        currentTime = time.time()
-        if (currentlyRunning & currentTime <= self.endTime):
-            return currentTime - self.endTime
-
-
     def getTimeSpent(self):
-        if (self.startTime <= self.endTime):
+        if self.startTime <= self.endTime:
             return self.endTime - self.startTime
         else:
             return "Timer not ended or started incorrectly"
