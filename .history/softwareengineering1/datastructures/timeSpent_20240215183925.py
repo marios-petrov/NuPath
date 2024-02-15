@@ -23,10 +23,7 @@ class timeSpent:
 
 
     def getTimeSpent(self):
-        if (self.startTime <= self.endTime & self.currentlyRunning == False):
+        if (self.startTime <= self.endTime):
             return self.endTime - self.startTime
-        elif (self.startTime <= self.endTime):
-            return time.time() - self.startTime
         else:
-            print("ERROR: timeSpent.py getTimeSpent not possible time error")
-            return 0 #error
+            return "Timer not ended or started incorrectly"
