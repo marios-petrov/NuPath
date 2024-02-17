@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+{%load static %}
+<div id='calendar-container'>
+    <div id='calendar'></div>
+</div>
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<!-- Include your static JavaScript files -->
+<script src="{% static 'fullcalendar/packages/core/main.js' %}"></script>
+<script src="{% static 'fullcalendar/packages/interaction/main.js' %}"></script>
+<script src="{% static 'fullcalendar/packages/daygrid/main.js' %}"></script>
+<script src="{% static 'fullcalendar/packages/timegrid/main.js' %}"></script>
+<script src="{% static 'fullcalendar/packages/list/main.js' %}"></script>
+
+
+
+<script src="{% static 'js/main.js' %}"></script>
+
+{% endblock %}
