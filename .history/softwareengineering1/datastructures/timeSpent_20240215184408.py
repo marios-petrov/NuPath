@@ -28,5 +28,4 @@ class timeSpent:
         elif (self.startTime <= self.endTime):
             return time.time() - self.startTime
         else:
-            print("ERROR: timeSpent.py getTimeSpent not possible time error")
-            return 0 #error
+            return 0 /*error*/
