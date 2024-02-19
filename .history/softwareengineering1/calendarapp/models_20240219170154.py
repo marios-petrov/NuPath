@@ -17,6 +17,6 @@ class CalendarEvent(models.Model):
     group = models.ForeignKey(CalendarGroup, on_delete=models.CASCADE, null=True, default='')
 
     def __str__(self):
-        return 'Group: ' + self.group.group_name + ' Title: ' + self.title
+        return self.title + ' ' + self.group.group_name
 
 
