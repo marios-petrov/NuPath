@@ -1,5 +1,4 @@
 from django.db import models
-from .calenderEvent import CalendarEvent
 
 class CollegeClass(models.Model):
     class_name = models.CharField(max_length=64)

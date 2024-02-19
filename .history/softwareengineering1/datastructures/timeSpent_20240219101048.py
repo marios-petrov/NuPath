@@ -23,7 +23,7 @@ class TimeSpent(models.Model):
     def getTimeSpent(self):
         if self.startTime <= self.endTime and not self.currentlyRunning:
             return self.endTime - self.startTime
-        elif self.startTime <= self.endTime and not self.currentlyRunning:
+        elif self.startTime <= self.endTime:
             return timezone.now() - self.startTime
         else:
             raise ValueError("ERROR: timeSpent.py getTimeSpent not possible time error")
