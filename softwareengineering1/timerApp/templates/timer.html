@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer Page</title>
+</head>
+<body>
+    <h1>Timer Page</h1>
+    {% for timer in timers %}
+    <div>
+        <p>Timer Name: {{ timer.timerName }}</p>
+        <p>Start Time: {{ timer.startTime }}</p>
+        <p>End Time: {{ timer.endTime }}</p>
+        <p>Currently Running: {{ timer.currentlyRunning }}</p>
+        <form action="{% url 'start_timer' timer.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Start Timer</button>
+        </form>
+        <form action="{% url 'stop_timer' timer.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Stop Timer</button>
+        </form>
+    </div>
+    {% endfor %}
+</body>
+</html>

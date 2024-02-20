@@ -23,5 +23,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('calendar/', include('calendarapp.urls')),
     path("admin/", admin.site.urls),
+    path('timer/', include('timerApp.urls')),
 
 ]
