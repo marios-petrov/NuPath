@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+import HTTPResponse from django.http
 
 # Create your views here.
-def todoList(request):
+def notifications(request):
     return HttpResponse("This is the todo list page")

@@ -25,6 +25,6 @@ urlpatterns = [
     path('calendar/', include('calendarapp.urls')),    
     path("notes/", include("notesapp.urls")),
     path("timer/", include("timerApp.urls")),
-    path("todolist/", include("todoListApp.urls")),
+    path("todo/", include("todoListApp.urls")),
     path("notifications/", include("notifications.urls")),
 ]

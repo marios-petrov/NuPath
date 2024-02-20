@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+import HTTPResponse from django.http
 # Create your views here.
 
 
 # Create your views here.
 def timer(request):
-    return HttpResponse("This is the timer page")
+    return HTTPResponse("This is the todo list page")
