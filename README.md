@@ -1,7 +1,7 @@
 # Software-Engineering-1
 
 Download:
-`git clone github.com/NateClarkTech/Software-Engineering-1.git'
+`git clone github.com/NateClarkTech/Software-Engineering-1.git`
     
 Requirements:
 Python 3 installed on your system
