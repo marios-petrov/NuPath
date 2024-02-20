@@ -1,23 +1,22 @@
 # Software-Engineering-1
 
-Download:
+Download:<br>
 `git clone github.com/NateClarkTech/Software-Engineering-1.git`
     
-Requirements:
-Python 3 installed on your system
-Django 5.0.2
+Requirements:<br>
+Python 3 installed on your system<br>
+Django 5.0.2<br>
 
-Installation:
+Installation:<br>
 1. Cd into the directory you cloned the code into.
 2. Activate the python virtual environment by running one of the scripts:
 
-The scripts to activate the python virtual environment are located in the Scripts folder
-Linux and Mac OS:
-`source activate`
+    The scripts to activate the python virtual environment are located in the Scripts folder<br>
+    Linux and Mac OS:<br>
+    `source activate`
 
-Windows:
-run 
-CMD: `activate.bat` or  PowerShell: `Activate.ps1` 
+    Windows:<br>
+    run `activate.bat` with Command Prompt or `Activate.ps1` in PowerShell 
 
 3. run `pip install -r requirements.txt`
 
