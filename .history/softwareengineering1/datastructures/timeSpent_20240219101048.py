@@ -1,22 +1,22 @@
-import time
+from django.db import models
+from django.utils import timezone
 
-class TimeSpent:
-    def __init__(self, timerName):
-        self.timerName = timerName
-        self.startTime = 0
-        self.endTime = 0
-        self.currentlyRunning = False
+class TimeSpent(models.Model):
+    timerName = models.CharField(max_length=64)
+    startTime = models.DateTimeField()
+    endTime = models.DateTimeField()
+    currentlyRunning = models.BooleanField(default=False)
 
     def startTimer(self):
         self.currentlyRunning = True
-        self.startTime = time.time()
+        self.startTime = timezone.now()
     
     def endTimer(self):
         self.currentlyRunning = False
-        self.endTime = time.time()
+        self.endTime = timezone.now()
 
     def getTimeSinceTimerStart(self):
-        currentTime = time.time()
+        currentTime = timezone.now()
         if self.currentlyRunning and currentTime <= self.endTime:
             return currentTime - self.endTime
 
@@ -24,6 +24,6 @@ class TimeSpent:
         if self.startTime <= self.endTime and not self.currentlyRunning:
             return self.endTime - self.startTime
         elif self.startTime <= self.endTime:
-            return time.time() - self.startTime
+            return timezone.now() - self.startTime
         else:
             raise ValueError("ERROR: timeSpent.py getTimeSpent not possible time error")
