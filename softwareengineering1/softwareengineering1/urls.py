@@ -21,8 +21,11 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('calendar/', include('calendarapp.urls')),
     path("admin/", admin.site.urls),
-    path('timer/', include('timerApp.urls')),
+    path('calendar/', include('calendarapp.urls')),    
+    path("notes/", include("notesapp.urls")),
+    path("timer/", include("timerApp.urls")),
+    path("todolist/", include("todoListApp.urls")),
+    path("notifications/", include("notifications.urls")),    path('timer/', include('timerApp.urls')),
 
 ]
