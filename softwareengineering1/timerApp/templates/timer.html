@@ -4,17 +4,14 @@
 
 {% extends "base.html" %}
 
-{% block content %}
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timer App</title>
-    <!-- Include Bootstrap CSS -->
-    {% load static %}
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+
+    {% block content %}
     <div class="container mt-5">
         <h1>Timer</h1>
         <p>Elapsed Time: <span id="timer">00:00:00</span></p>
@@ -22,8 +19,8 @@
         <button id="stop" class="btn btn-danger" onclick="stopTimer()">Stop</button>
         <button id="reset" class="btn btn-secondary" onclick="resetTimer()">Reset</button>
     </div>
-    {% endblock %}
 
+   
     <script>
         let timerInterval;
         let timerRunning = false;
@@ -62,6 +59,7 @@
         }
     </script>
 
+{% endblock %}
 
 </body>
 </html>

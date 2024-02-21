@@ -16,8 +16,3 @@ def stop_timer(request, timer_id):
     timer = TimeSpent.objects.get(id=timer_id)
     timer.endTimer()
     return redirect('timer_page')
-
-
-# Create your views here.
-def timer(request):
-    return HttpResponse("This is the timer page")
