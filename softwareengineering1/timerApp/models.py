@@ -30,8 +30,8 @@ class TimeSpent(models.Model):
         
     def resetTimer(self):
         self.currentlyRunning = False
-        self.startTime = 0
-        self.endTime = 0
+        self.startTime = None
+        self.endTime = None
 
         
 class TimeTracker(models.Model):
