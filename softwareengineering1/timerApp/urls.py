@@ -5,5 +5,6 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    path('', views.timer_page, name='timer_page')
+    path('', views.timer_page, name='timer_page'),
+    
 ]

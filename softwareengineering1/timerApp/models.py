@@ -28,6 +28,12 @@ class TimeSpent(models.Model):
         else:
             raise ValueError("ERROR: timeSpent.py getTimeSpent not possible time error")
         
+    def resetTimer(self):
+        self.currentlyRunning = False
+        self.startTime = 0
+        self.endTime = 0
+
+        
 class TimeTracker(models.Model):
     categoryName = models.CharField(max_length=64)
     timer = models.ForeignKey(TimeSpent, on_delete=models.CASCADE)
