@@ -9,6 +9,15 @@ class Migration(migrations.Migration):
 
     dependencies = [
     ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Notes',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('noteText', models.TextField()),
+    dependencies = []
+
     operations = [
         migrations.CreateModel(
             name="Notes",
