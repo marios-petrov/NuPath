@@ -1,0 +1,42 @@
+<!-- templates/timer.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link href="path/to/your/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container text-center">
+    <h1>Welcome to the Novo Ninja Scheduler!</h1>
+    <p>We're glad you're here. Our app is designed to make your life easier by offering different features to keep up with your academic and social life.</p>
+    <p>Here's how to get started:</p>
+    <ol>
+        <li>First, take a look at the navigation bar to the left to see the list of features our app offers.</li>
+        <li>You can begin by taking a look at the calendar page which displays the days in different views (month, week, day, etc.) You can also click the "today" button to be brought to the current day.</li>
+        <li>If you would like to add an event, such as a class or a COUP, scroll to the bottom of the page and click add event.</li>
+        <li>This will allow you to select the start day/time and the end day/time, as well as the name and/or description. Your event should now appear on the calendar.</li>
+        <li>Some other fetures this app includes are, links for the New College academic calendar as well as NovoConnect, so that you can add relevant events you would like to attend or days classes will not be occuring.</li>
+        <li>You can also use the timer to track time spent in certain classes, studying, doing homework, etc.</li>
+        <li>The last feature is a to-do list that will allow you to add tasks you need to complete, whether that be for personal use, or CYC/AOC requirements.</li>
+    </ol>
+    <p>Have fun getting organized and we hope to make your life a little easier!.</p>
+</div>
+{% endblock %}
+
+</body>
+</html>

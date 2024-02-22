@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'timerApp',
     'todoListApp',
     'notesapp',
-    'linksapp'
+    'linksapp',
+    'welcomeapp'
 ]
 
 MIDDLEWARE = [
