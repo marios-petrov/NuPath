@@ -2,12 +2,12 @@ from django.db import models
 
 # Create your models here.
 class Welcome(models.Model):
-    noteText = models.TextField()
+    messageText = models.TextField()
 
-    def updateNoteText(self, newNoteText):
-        self.noteText = newNoteText
+    def updateMessageText(self, newMessageText):
+        self.messageText = newMessageText
         self.save()
 
-    def clearNoteText(self):
-        self.noteText = ""
+    def clearMessageText(self):
+        self.messageText = ""
         self.save()

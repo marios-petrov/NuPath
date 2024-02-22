@@ -13,7 +13,7 @@
     </li>
     <li>
       <a href="/links " class="nav-link text-white">
-        <svg class="bi me-2" width="16" height="16"><use xlink:href="/links"></use></svg>
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#notepad"></use></svg>
         Helpful Links
       </a>
     </li>
@@ -29,12 +29,6 @@
         Todo List
       </a>
     </li>
-    <li>
-      <a href="/notifications" class="nav-link text-white">
-        <svg class="bi me-2" width="16" height="16"><use xlink:href="#bell"></use></svg>
-        Notifications
-      </a>
-    </li>
     <li class="d-flex justify-content-center">
       {% load static %}
       <button id="changeColorButton" style="border: none; background: none;">
@@ -48,8 +42,8 @@
 </div>
 
 <script>
-document.getElementById('changeColorButton').addEventListener('click', function() {
-  var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
-  document.body.style.backgroundColor = randomColor;
-});
-</script>
+  document.getElementById('changeColorButton').addEventListener('click', function() {
+    var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+    document.body.style.backgroundColor = randomColor;
+  });
+  </script>
