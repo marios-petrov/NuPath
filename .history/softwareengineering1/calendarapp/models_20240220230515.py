@@ -13,6 +13,7 @@ class CalendarEvent(models.Model):
     title = models.CharField(max_length=64)
     startTime = models.DateTimeField()
     endTime = models.DateTimeField()
+    date = models.DateField()
     description = models.TextField(blank=True, default="")
     group = models.ForeignKey(CalendarGroup, on_delete=models.CASCADE, null=True, default='')
 

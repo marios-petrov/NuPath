@@ -66,7 +66,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form method='POST' action="{% url 'calendar' %}">
+          <form method='POST' action="{% url 'dataTest' %}">
             {% csrf_token %}
 
             <div class="form-group">
@@ -85,9 +85,11 @@
                 <label for="message-text" class="col-form-label">Description:</label>
                 <input type="text" class="form-control" id="eventDescription" name='description'>
             </div>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn fc-button-primary fc-button-active">Add Event</button>
           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn fc-button-primary fc-button-active">Add Event</button>
         </div>
       </div>
     </div>
