@@ -1,7 +1,18 @@
+<!-- templates/timer.html -->
+<!DOCTYPE html>
+<html lang="en">
+
 {% extends "base.html" %}
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer App</title>
+</head>
+<body>
+
     {% block content %}
-    <div class="col-10 mt-5">
+    <div class="container mt-5">
         <h1>Timer</h1>
         <p>Elapsed Time: <span id="timer">00:00:00</span></p>
         <button id="start" class="btn btn-primary" onclick="startTimer()">Start</button>
@@ -49,3 +60,6 @@
     </script>
 
 {% endblock %}
+
+</body>
+</html>
