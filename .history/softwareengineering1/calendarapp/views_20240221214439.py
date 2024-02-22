@@ -12,4 +12,4 @@ def calendar(request):
             eventForm.save()
             return render(request, 'calendar.html', {'events': calendear_events, 'groups': calendar_groups})
     else:
-        return render(request, 'calendar.html', {'events': calendear_events, 'groups': calendar_groups})
+        return render(request, 'dataTest.html', {'events': calendear_events, 'groups': calendar_groups})

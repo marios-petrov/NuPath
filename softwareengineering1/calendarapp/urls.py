@@ -4,5 +4,4 @@ from . import views
 
 urlpatterns = [
     path('', views.calendar, name='calendar'),
-    path('test/', views.dataTest, name='dataTest'),
 ]
