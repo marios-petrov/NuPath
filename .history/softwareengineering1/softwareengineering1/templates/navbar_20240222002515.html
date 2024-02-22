@@ -1,0 +1,55 @@
+<div class="d-flex flex-column flex-shrink-0 p-0 text-white bg-dark min-vh-100 col-2" style="width: 100px;">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+    <span class="fs-4">Novo Ninja</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a href="/calendar" class="nav-link text-white" aria-current="page">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#calendar"></use></svg>
+        Calendar
+      </a>
+    </li>
+    <li>
+      <a href="/notes" class="nav-link text-white">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#notepad"></use></svg>
+        Notes
+      </a>
+    </li>
+    <li>
+      <a href="/timer" class="nav-link text-white">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#stopwatch"></use></svg>
+        Timer
+      </a>
+    </li>
+    <li>
+      <a href="/todolist" class="nav-link text-white">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#checkbox"></use></svg>
+        Todo List
+      </a>
+    </li>
+    <li>
+      <a href="/notifications" class="nav-link text-white">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#bell"></use></svg>
+        Notifications
+      </a>
+    </li>
+    <li class="d-flex justify-content-center">
+      {% load static %}
+      <button id="changeColorButton" style="border: none; background: none;">
+        <div>
+          <img src="{% static 'wand.png' %}" alt="Change Background Color" width="100" height="100">
+        </div>
+      </button>
+    </li>
+  </ul>
+  <hr>
+</div>
+
+<script>
+document.getElementById('changeColorButton').addEventListener('click', function() {
+  var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+  document.body.style.backgroundColor = randomColor;
+});
+</script>

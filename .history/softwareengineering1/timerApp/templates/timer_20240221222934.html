@@ -1,0 +1,65 @@
+<!-- templates/timer.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends "base.html" %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer App</title>
+</head>
+<body>
+
+    {% block content %}
+    <div class="container mt-5">
+        <h1>Timer</h1>
+        <p>Elapsed Time: <span id="timer">00:00:00</span></p>
+        <button id="start" class="btn btn-primary" onclick="startTimer()">Start</button>
+        <button id="stop" class="btn btn-danger" onclick="stopTimer()">Stop</button>
+        <button id="reset" class="btn btn-secondary" onclick="resetTimer()">Reset</button>
+    </div>
+
+   
+    <script>
+        let timerInterval;
+        let timerRunning = false;
+        let elapsedTime = 0;
+    
+        function startTimer() {
+            if (!timerRunning) {
+                timerInterval = setInterval(updateTimer, 1000);
+                timerRunning = true;
+            }
+        }
+    
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+        }
+    
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            elapsedTime = 0;
+            updateTimer();
+        }
+    
+        function updateTimer() {
+            elapsedTime++;
+            let hours = Math.floor(elapsedTime / 3600);
+            let minutes = Math.floor((elapsedTime % 3600) / 60);
+            let seconds = elapsedTime % 60;
+    
+            document.getElementById('timer').innerText = formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds);
+        }
+    
+        function formatTime(time) {
+            return time < 10 ? '0' + time : time;
+        }
+    </script>
+
+{% endblock %}
+
+</body>
+</html>

@@ -35,6 +35,21 @@
         Notifications
       </a>
     </li>
+    <li class="d-flex justify-content-center">
+      {% load static %}
+      <button id="changeColorButton" style="border: none; background: none;">
+        <div>
+          <img src="{% static 'wand.png' %}" alt="Change Background Color" width="50" height="50">
+        </div>
+      </button>
+    </li>
   </ul>
   <hr>
 </div>
+
+<script>
+document.getElementById('changeColorButton').addEventListener('click', function() {
+  var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+  document.body.style.backgroundColor = randomColor;
+});
+</script>
