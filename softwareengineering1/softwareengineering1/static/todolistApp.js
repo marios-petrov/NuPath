@@ -1,4 +1,4 @@
-// checklistApp.js
+// todolistApp.js
 const taskInput = document.getElementById("task");
 const taskList = document.getElementById("taskList");
 
