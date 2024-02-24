@@ -11,38 +11,48 @@
 
    
     <script>
+        // Initialize variables for the timer interval, running state, and elapsed time in seconds
         let timerInterval;
         let timerRunning = false;
         let elapsedTime = 0;
     
+        // Start the timer unless it's already running
         function startTimer() {
             if (!timerRunning) {
+                // Set an interval to update the timer every second
                 timerInterval = setInterval(updateTimer, 1000);
                 timerRunning = true;
             }
         }
     
         function stopTimer() {
+            // Clear the interval to stop the timer update
             clearInterval(timerInterval);
             timerRunning = false;
         }
     
         function resetTimer() {
+            // Stop the timer and reset elapsed time to 0
             clearInterval(timerInterval);
             timerRunning = false;
             elapsedTime = 0;
+            // Update the timer display to 00:00:00
             updateTimer();
         }
     
+        // Update the timer display based on elapsed time
         function updateTimer() {
             elapsedTime++;
+            // Calculate hours, minutes, and seconds from elapsed time
             let hours = Math.floor(elapsedTime / 3600);
             let minutes = Math.floor((elapsedTime % 3600) / 60);
             let seconds = elapsedTime % 60;
     
+            // Update the timer display with formatted time
             document.getElementById('timer').innerText = formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds);
         }
     
+        // Format time values to ensure they are displayed with two digits
         function formatTime(time) {
             return time < 10 ? '0' + time : time;
         }
