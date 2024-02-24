@@ -1,11 +1,4 @@
-<!-- This template file represents the calendar page of the application. 
-  It includes the necessary HTML, CSS, and JavaScript code to display a calendar with event functionality. 
-  The calendar is rendered using the FullCalendar library. Users can add new events by clicking the "Add Event" button,
-  which opens a modal with a form. The form allows users to enter the event name, 
-  start time, end time, and description. When the form is submitted, the event is added to the calendar. 
-  The calendar is populated with events using a for loop that iterates over the "events" variable. 
-  Each event is displayed as a title with its corresponding start and end times. -->
-
+<!-- This template file represents the calendar page of the application. It includes the necessary HTML, CSS, and JavaScript code to display a calendar with event functionality. The calendar is rendered using the FullCalendar library. Users can add new events by clicking the "Add Event" button, which opens a modal with a form. The form allows users to enter the event name, start time, end time, and description. When the form is submitted, the event is added to the calendar. The calendar is populated with events using a for loop that iterates over the "events" variable. Each event is displayed as a title with its corresponding start and end times. -->
 <!--initial calendar js, css, and bootstrap from https://colorlib.com/wp/template/calendar-20/ -->
 <!-- https://colorlib.com/wp/bootstrap-calendars/ last visited: 2/19/2024-->
 
@@ -14,12 +7,8 @@
 {% block content %}
 {%load static %}
     
-<!-- Div for the calendar -->
 <div id='calendar-container' class='col-10 px-0'>
     <div id='calendar'></div>
-
-    <!-- Button to add an event to the calendar, the reason this button is below the calendar is because I did not 
-         Have enough time to learn FullCalendar and find out how to add the button the calendar header -->
     <div class="col-2 pt-2">
         <button class="btn fc-button-primary fc-button-active"  data-toggle="modal" data-target="#exampleModal">Add Event</button>
     </div>

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    #User added apps
+    #User added
     'softwareengineering1',
     'calendarapp',
     'timerApp',

@@ -1,11 +1,3 @@
-<!-- 
-  This is the base HTML template file for the Novo Ninja website.
-  It includes the necessary meta tags, CSS files, and Bootstrap CSS.
-  The title of the website is set to "Novo Ninja".
-  The content of the page is wrapped inside a container and a row.
-  The navbar is included using the 'navbar.html' template.
-  The main content of each page should be placed inside the 'content' block.
--->
 <!doctype html>
 <html lang="en">
 
@@ -30,18 +22,15 @@
 
     <title>Novo Ninja</title>
   </head>
-  
-  <body>
-    <div class='container min-vw-100 justify-content'>
-      <div class='row'>
-        <!-- Include the navbar -->
-        {% include 'navbar.html' %}
+<body>
+  <div class='container min-vw-100 justify-content'>
+    <div class='row'>
+  {% include 'navbar.html' %}
 
-        <!-- Include the main content of the page -->
-        {% block content %}
-        {% endblock %}
-
-      </div>
-    </div>
-  </body>
+  {% block content %}
+   
+  {% endblock %}
+</div>
+</div>
+</body>
 </html>

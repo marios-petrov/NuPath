@@ -21,7 +21,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path("admin/", admin.site.urls),  # User name and password to the admin page are both admin. If you need security change these values
+    path("admin/", admin.site.urls),
     path('calendar/', include('calendarapp.urls')),    
     path("notes/", include("notesapp.urls")),
     path("timer/", include("timerApp.urls")),

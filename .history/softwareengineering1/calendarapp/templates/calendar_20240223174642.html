@@ -1,11 +1,3 @@
-<!-- This template file represents the calendar page of the application. 
-  It includes the necessary HTML, CSS, and JavaScript code to display a calendar with event functionality. 
-  The calendar is rendered using the FullCalendar library. Users can add new events by clicking the "Add Event" button,
-  which opens a modal with a form. The form allows users to enter the event name, 
-  start time, end time, and description. When the form is submitted, the event is added to the calendar. 
-  The calendar is populated with events using a for loop that iterates over the "events" variable. 
-  Each event is displayed as a title with its corresponding start and end times. -->
-
 <!--initial calendar js, css, and bootstrap from https://colorlib.com/wp/template/calendar-20/ -->
 <!-- https://colorlib.com/wp/bootstrap-calendars/ last visited: 2/19/2024-->
 
@@ -14,12 +6,8 @@
 {% block content %}
 {%load static %}
     
-<!-- Div for the calendar -->
 <div id='calendar-container' class='col-10 px-0'>
     <div id='calendar'></div>
-
-    <!-- Button to add an event to the calendar, the reason this button is below the calendar is because I did not 
-         Have enough time to learn FullCalendar and find out how to add the button the calendar header -->
     <div class="col-2 pt-2">
         <button class="btn fc-button-primary fc-button-active"  data-toggle="modal" data-target="#exampleModal">Add Event</button>
     </div>
@@ -36,46 +24,38 @@
 <script src="{% static 'fullcalendar/packages/timegrid/main.js' %}"></script>
 <script src="{% static 'fullcalendar/packages/list/main.js' %}"></script>
 
-<!-- This script initializes and renders a FullCalendar instance on the 'calendar' element.
-   It sets up various configuration options such as plugins, header, default view, default date,
-   navigation links, event editing, event limit, and event data. The event data is dynamically
-   generated using a Django template loop. -->
-
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var calendarEl = document.getElementById('calendar');
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
-      height: 'parent',
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-      },
-      defaultView: 'dayGridMonth',
-      defaultDate: '2024-02-01',
-      navLinks: true, // can click day/week names to navigate views
-      editable: true,
-      eventLimit: true, // allow "more" link when too many events
-      events: [
-      {% for e in events %}
-        {
-          title: '{{e.title}}',
-          start: '{{e.startTime|date:"c"}}',
-          end: '{{e.endTime|date:"c"}}',
-        },
-      {% endfor %}
-      ]
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
+            height: 'parent',
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            },
+            defaultView: 'dayGridMonth',
+            defaultDate: '2024-02-01',
+            navLinks: true, // can click day/week names to navigate views
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: [
+            {% for e in events %}
+                {
+                    title: '{{e.title}}',
+                    start: '{{e.startTime|date:"c"}}',
+                    end: '{{e.endTime|date:"c"}}',
+                },
+            {% endfor %}
+            ]
+        });
+
+        calendar.render();
     });
-
-    calendar.render();
-  });
 </script>
 
-<!-- This code represents a modal form for creating a new event in a calendar. 
-  It contains input fields for event name, start time, end time, and description. 
-  The form is submitted to the 'calendar' URL using the POST method. -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -86,7 +66,6 @@
           </button>
         </div>
         <div class="modal-body">
-          <!-- Form Input For the Calendar Event. -->
           <form method='POST' action="{% url 'calendar' %}">
             {% csrf_token %}
 
