@@ -22,10 +22,11 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path("admin/", admin.site.urls),  # User name and password to the admin page are both admin. If you need security change these values
+    path('', include('welcomeapp.urls')),
     path('calendar/', include('calendarapp.urls')),    
-    path("notes/", include("notesapp.urls")),
     path("timer/", include("timerApp.urls")),
     path("todolist/", include("todoListApp.urls")),
-    path("notifications/", include("notifications.urls")),    path('timer/', include('timerApp.urls')),
+    path("notifications/", include("notifications.urls")),    
+    path('links/', include('linksapp.urls'))
 
 ]

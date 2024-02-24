@@ -1,0 +1,31 @@
+<!-- templates/timer.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    {% extends "base.html" %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helpful Links</title>
+
+    
+
+    {% block content %}
+        <div class="container text-center mt-5"> <!-- Ensure the container is centered and has top margin -->
+        <h1>Helpful Links</h1>
+        <div class="list-group"> <!-- Use Bootstrap's list group for better styling -->
+            <a href="https://www.ncf.edu/" class="list-group-item list-group-item-action">New College Home Page</a>
+            <a href="https://novoconnect.ncf.edu/" class="list-group-item list-group-item-action">NovoConnect</a>
+            <a href="https://www.ncf.edu/academics/academic-calendar/" class="list-group-item list-group-item-action">Academic Calendar</a>
+            
+        </div>
+    </div>
+    </head>
+    <body>
+
+{% endblock %}
+
+</body>
+</html>
