@@ -1,4 +1,9 @@
 // todolistApp.js
+
+// Author: Alexander Aldama-Apodaca
+
+// Contains functions for basic functionality of a to-do list
+
 const taskInput = document.getElementById("task");
 const taskList = document.getElementById("taskList");
 
