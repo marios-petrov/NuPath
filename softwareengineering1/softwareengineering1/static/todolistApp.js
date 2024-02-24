@@ -1,6 +1,7 @@
 // todolistApp.js
 
 // Author: Alexander Aldama-Apodaca
+// Generated using Microsoft Copilot
 
 // Contains functions for basic functionality of a to-do list
 
