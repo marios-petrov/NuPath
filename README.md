@@ -4,7 +4,7 @@
 - [] User Authentication
 - [] User Registration
 - [] User Profile
-- [x] DoodleSpace
+- [x] Doodling Page
 - [] Community Page
 - [] Embedding NCF YouTube Videos on Tre's Home Page
 - [] Amazon Wishlists Being added to Alexander's Resource List
