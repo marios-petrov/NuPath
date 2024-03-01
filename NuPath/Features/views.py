@@ -5,4 +5,4 @@ from .models import *
 
 # Create your views here.
 def doodlespace(request):
-    return render(request, 'doodlespace.html')
+    return render(request, 'templates/doodlespace.html')
