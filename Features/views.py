@@ -6,3 +6,6 @@ from .models import *
 # Create your views here.
 def doodlespace(request):
     return render(request, 'Features/doodlespace.html')
+
+def home(request):
+    return render(request, 'Features/home.html')

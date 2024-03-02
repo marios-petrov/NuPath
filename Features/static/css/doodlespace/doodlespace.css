@@ -8,7 +8,7 @@
   position: center;
   border: 8px solid #0031ff;
   height: 70vh;
-  width: 70%;
+  width: 100%;
 }
 .options {
   height: 30vh;
@@ -71,10 +71,11 @@ body {
 }
 
 #paintArea {
-
+    flex-grow: 1; /* Let paint area take up all available space */
     display: flex;
     justify-content: center;
     align-items: center;
+    position: center;
     border: 8px solid #0031ff;
     overflow: hidden;
 }
