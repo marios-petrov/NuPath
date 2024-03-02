@@ -2,7 +2,7 @@
 
 ## Full Stack Features Being Implemented in this Branch:
 - [] User Authentication
-- [] User Registration
+- [x] User Registration
 - [] User Profile
 - [x] Doodling Page
 - [] Community Page
