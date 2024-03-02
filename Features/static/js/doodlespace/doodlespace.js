@@ -23,20 +23,16 @@ let rectTop = canvas.getBoundingClientRect().top;
 //Inital Features
 
 const init = () => {
-  context.strokeStyle = "black";
-  context.lineWidth = 1;
-  //Set canvas height to parent div height
-  canvas.style.width = "100%";
-  canvas.style.height = "100%";
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-  //Set range title to pen size
-  toolType.innerHTML = "Pen";
-  //Set background and color inputs initially
-  canvas.style.backgroundColor = "#ffffff";
-  backgroundButton.value = "#ffffff";
-  penButton.value = context.strokeStyle;
+    context.strokeStyle = "#000"; // Default drawing color
+    context.lineWidth = penSize.value; // Default pen size
+    toolType.innerHTML = "Pen"; // Default tool type
+
+    // Initialize the background color of the canvas
+    canvas.style.backgroundColor = backgroundButton.value;
+    context.fillStyle = backgroundButton.value;
+    context.fillRect(0, 0, canvas.width, canvas.height); // Fill in the background color
 };
+
 
 //Detect touch device
 const is_touch_device = () => {
@@ -145,4 +141,28 @@ clearButton.addEventListener("click", () => {
   backgroundButton.value = "#fff";
 });
 
+function resizeCanvas() {
+    // Calculate the available height for the canvas
+    let optionsHeight = document.querySelector('.options').offsetHeight; // Get the actual height of the options area
+    let availableHeight = window.innerHeight - optionsHeight; // Subtract options height from viewport height
+
+    // Adjust canvas size
+    canvas.width = window.innerWidth; // Full width of the viewport
+    canvas.height = availableHeight; // Use the calculated available height
+
+    // Redraw or refresh the canvas if necessary
+    context.fillStyle = backgroundButton.value;
+    context.fillRect(0, 0, canvas.width, canvas.height); // Apply background color to the entire canvas
+}
+
+
+
 window.onload = init();
+window.onload = function() {
+    init();
+    resizeCanvas(); // Ensure the canvas is correctly sized at load
+};
+
+window.onresize = function() {
+    resizeCanvas(); // Adjust canvas size when window is resized
+};

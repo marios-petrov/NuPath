@@ -1,4 +1,7 @@
+{% extends './base.html' %}
+
 {% load static %}
+{% block content %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +14,8 @@
       rel="stylesheet"
     />
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="{% static 'css/doodlespace/../static/css/doodlespace/doodlespace.css' %}" />
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/doodlespace/doodlespace.css' %}" />
   </head>
   <body>
     <div id="paintArea">
@@ -29,7 +33,7 @@
             <input type="color" id="color-input" />
           </div>
           <div class="tools-wrapper">
-            <h5>Background Color:</h5>
+            <h5>Background:</h5>
             <input type="color" id="color-background" />
           </div>
         </div>
@@ -41,6 +45,7 @@
       </div>
     </div>
     <!-- Script-->
-    <script src="{% static 'js/doodlespace/../static/js/doodlespace/doodlespace.js' %}"></script>
+    <script src="{% static 'js/doodlespace/doodlespace.js' %}"></script>
   </body>
 </html>
+{% endblock %}
