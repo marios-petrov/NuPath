@@ -13,19 +13,17 @@
         body {
             background-color: #0d6efd;
         }
-
-        .horizontal-list {
+        
+        .card-body {
             display: flex;
             flex-wrap: wrap;
-            list-style: none;
-            padding-left: 0;
-            margin-bottom: 0; /* Remove margin bottom for horizontal list */
         }
-
-        .horiontal-list li {
-            margin-right: 10px; /* Adjust as needed */
+        
+        .card-body h4 {
+            margin-right: 20px; /* Adjust as needed */
         }
     </style>
+    <!-- End of ChaGPT-assisted content -->
 
     <title> {% block title %} NovoGuide {% endblock %}</title>
   </head>
@@ -40,7 +38,7 @@
                   <div class="card-header">
                       <h6 class="mb-0">Restaurants</h6>
                   </div>
-                  <div class="card-body horizontal-list"> <!-- Add horizontal-list class -->
+                  <div class="card-body">
                       <h4>Hamilton</h4>
                       <h6>Monday to Friday Hours:</h6>
                       <ul>
@@ -92,7 +90,7 @@
                   <div class="card-header">
                       <h6 class="mb-0">Places of Interest</h6>
                   </div>
-                  <div class="card-body horizontal-list">
+                  <div class="card-body">
                       <h4>Marie Selby Gardens</h4>
                       <ul>
                           <li>Daily Hours: 10:00 AM to 5:00 PM</li>
@@ -121,7 +119,7 @@
                   <div class="card-header">
                       <h6 class="mb-0">Transportation</h6>
                   </div>
-                  <div class="card-body horizontal-list">
+                  <div class="card-body">
                       <h4>Breeze Transit</h4>
                       <ul>
                           <li>Monday to Saturday Hours: 5:00 AM to 11:00 PM</li>
@@ -142,7 +140,7 @@
                   <div class="card-header">
                       <h6 class="mb-0">Food Forest</h6>
                   </div>
-                  <div class="card-body horizontal-list">
+                  <div class="card-body">
                       <h4>To be added...</h4>
                   </div>
               </div>
@@ -154,7 +152,7 @@
                   <div class="card-header">
                       <h6 class="mb-0">Art Installations</h6>
                   </div>
-                  <div class="card-body horizontal-list">
+                  <div class="card-body">
                       <h4>To be added...</h4>
                   </div>
               </div>
@@ -166,7 +164,7 @@
                   <div class="card-header">
                       <h6 class="mb-0">Grocery and Supply Stores</h6>
                   </div>
-                  <div class="card-body horizontal-list">
+                  <div class="card-body">
                       <h4>Publix</h4>
                       <h4>Target</h4>
                       <h4>Walgreens</h4>
