@@ -9,3 +9,7 @@ def doodlespace(request):
 
 def home(request):
     return render(request, 'Features/home.html')
+
+def calendar(request):
+    # TODO (Tre)
+    return render(request, 'Features/calendar.html')

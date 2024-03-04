@@ -1,0 +1,59 @@
+{% extends 'Features\base.html' %}
+{% block content %}
+{% block title %}Calendar{% endblock %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css\calendar\calendar.css' %}">
+
+<div class="container calendar-container">
+    <!-- Calendar -->
+    <div class="calendar-header">
+        <h2>March 2024</h2>
+    </div>
+    <table class="table table-bordered calendar-table">
+        <thead>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dummy data for demonstration purposes -->
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><span class="event-banner">Event 1</span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><span class="event-banner">Event 2</span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Add more rows for other weeks in the month -->
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

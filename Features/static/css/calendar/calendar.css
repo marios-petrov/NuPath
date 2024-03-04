@@ -1,0 +1,36 @@
+/* GPT-3.5 helped quite a bit
+author: Tre
+chat link:
+https://chat.openai.com/share/1f8b0e66-e27c-4815-b37f-2e0e306a9baf
+*/
+
+/* Custom styles */
+.calendar-container {
+  margin-top: 55px; /* Adjust margin-top according to your navbar height */
+}
+
+.calendar-header {
+  text-align: center;
+}
+
+.calendar-table {
+  width: 100%;
+}
+.calendar-table th, .calendar-table td {
+  text-align: center;
+  padding: 10px;
+}
+
+.calendar-table .current-month {
+  background-color: #007bff;
+  color: white;
+}
+
+.event-banner {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
