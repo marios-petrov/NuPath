@@ -1,5 +1,6 @@
+{% extends "Features/base.html" %}
 {% load crispy_forms_tags %}
-<!DOCTYPE html>
+{% block content %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">'
@@ -25,10 +26,12 @@
         <div class="container centered" >
         <div class="border-top pt-3">
             <small class="text-muted">
-                Already Have An Account? <a class="ml-5" href="#">Sign In</a>
+                Already Have An Account? <a class="ml-5" href="{% url 'login' %}">Sign In</a>
             </small>
         </div>
         </div>
     </div>
 </body>
 </html>
+{% endblock %}
+```
