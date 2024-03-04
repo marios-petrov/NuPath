@@ -2,10 +2,31 @@ lib/
 lib64/
 bin/
 Lib/
-*.DS_Store
+
+# GPT-generated gitignore, link to chat here:
+# https://chat.openai.com/share/baf354c3-bf60-49d3-a328-34653baa3d97
+# Ignore PyCharm files
 .idea/
+# Ignore system files
 *.pyc
 __pycache__/
+# Ignore local development settings
+*.env
+# Ignore database files
+*.sqlite3
+# Ignore static files collected locally
+/staticfiles/
+# Ignore user-specific Python environments
 venv/
 env/
 .env/
+# Ignore migration files (if you're using Django migrations)
+*/migrations/
+# Ignore log files
+*.log
+# Ignore any other generated files or directories
+*.DS_Store
+
+# added this guy- folder for holding scratch files on my branch
+tre_scratch/
+*.sqlite3
