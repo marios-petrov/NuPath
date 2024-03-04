@@ -8,7 +8,7 @@
 <div class="container calendar-container">
     <!-- Calendar -->
     <div class="calendar-header">
-        <h2>March 2024</h2>
+        <h2>March</h2>
     </div>
     <table class="table table-bordered calendar-table">
         <thead>
@@ -55,5 +55,29 @@
         </tbody>
     </table>
 </div>
+
+<script>
+  // Adjust event banner font size based on cell width
+  function adjustEventBannerFontSize() {
+    var cells = document.querySelectorAll('.calendar-table td');
+    cells.forEach(function(cell) {
+      var cellWidth = cell.offsetWidth;
+      var eventBanner = cell.querySelector('.event-banner');
+      if (eventBanner) {
+        var eventBannerWidth = eventBanner.offsetWidth;
+        var fontSize = parseFloat(window.getComputedStyle(eventBanner).fontSize);
+        while (eventBannerWidth > cellWidth) {
+          fontSize -= 1;
+          eventBanner.style.fontSize = fontSize + 'px';
+          eventBannerWidth = eventBanner.offsetWidth;
+        }
+      }
+    });
+  }
+
+  // Adjust font size on page load and window resize
+  window.addEventListener('load', adjustEventBannerFontSize);
+  window.addEventListener('resize', adjustEventBannerFontSize);
+</script>
 
 {% endblock %}

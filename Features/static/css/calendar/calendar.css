@@ -7,6 +7,8 @@ https://chat.openai.com/share/1f8b0e66-e27c-4815-b37f-2e0e306a9baf
 /* Custom styles */
 .calendar-container {
   margin-top: 55px; /* Adjust margin-top according to your navbar height */
+  overflow-x: auto; /* Enable horizontal scrolling on small screens */
+  -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
 }
 
 .calendar-header {
@@ -15,10 +17,13 @@ https://chat.openai.com/share/1f8b0e66-e27c-4815-b37f-2e0e306a9baf
 
 .calendar-table {
   width: 100%;
+  table-layout: fixed; /* Set fixed table layout to prevent overflowing on small screens */
 }
+
 .calendar-table th, .calendar-table td {
   text-align: center;
   padding: 10px;
+  white-space: nowrap; /* Prevent line breaks for long content */
 }
 
 .calendar-table .current-month {
@@ -26,11 +31,20 @@ https://chat.openai.com/share/1f8b0e66-e27c-4815-b37f-2e0e306a9baf
   color: white;
 }
 
-.event-banner {
+.event-banner { /* TODO: fix event banners stretching across multiple days on small screens */
+  /* the CSS for them here is GPT's attempt at solving that, to no avail. */
   background-color: #28a745;
   color: white;
   font-weight: bold;
   padding: 5px;
   border-radius: 5px;
   font-size: 0.8rem;
+  white-space: nowrap; /* Prevent line breaks */
+}
+
+@media only screen and (max-width: 576px) { /* see event banner TODO item */
+  /* Adjust font size for smaller screens */
+  .event-banner {
+    font-size: 0.6rem;
+  }
 }

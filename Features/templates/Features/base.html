@@ -1,69 +1,76 @@
 <!DOCTYPE html>
-
 <!--
-  God bless GPT and its divine knowledge of bootstrap.
-  Here's the chat link:
-  https://chat.openai.com/share/3f64ab55-9442-4306-baa4-a09f7464710c
-
-  Author: Tre
+God bless GPT and its divine knowledge of bootstrap.
+Here's the chat link:
+https://chat.openai.com/share/3f64ab55-9442-4306-baa4-a09f7464710c
+Author: Tre
 -->
-
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}NuPath{% endblock %}</title> <!-- Default title -->
-  {% load static %}
-  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
-</head>
-
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <a class="navbar-brand" href="#">NuPath</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NuPath{% endblock %}</title> <!-- Default title -->
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css\base\bootstrap.min.css' %}">
+    
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <a class="navbar-brand" href="#">NuPath</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item {% if request.path == '/' %}active{% endif %}">
-          <a class="nav-link" href="/">Home{% if request.path == '/' %}<span class="sr-only">(current)</span>{% endif %}</a>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <!-- Left-justified urls VVV -->
+          <li class="nav-item {% if request.path == '/home/' %}active{% endif %}">
+          <a class="nav-link" href="/home/">Home{% if request.path == '/home/' %}<span class="sr-only">(current)</span>{% endif %}</a> <!-- TODO: see what to do about the '/' url -->
         </li>
-        <li class="nav-item {% if request.path == '/calendar/' %}active{% endif %}">
-          <a class="nav-link" href="/calendar/">Calendar{% if request.path == '/calendar/' %}<span class="sr-only">(current)</span>{% endif %}</a>
-        </li>
-        <li class="nav-item {% if request.path == '/links/' %}active{% endif %}">
-          <a class="nav-link" href="/links/">Links{% if request.path == '/links/' %}<span class="sr-only">(current)</span>{% endif %}</a>
-        </li>
-        <li class="nav-item {% if request.path == '/timer/' %}active{% endif %}">
-          <a class="nav-link" href="/timer/">Timer{% if request.path == '/timer/' %}<span class="sr-only">(current)</span>{% endif %}</a>
-        </li>
-        <li class="nav-item {% if request.path == '/todolist/' %}active{% endif %}">
-          <a class="nav-link" href="/todolist/">To-Do List{% if request.path == '/todolist/' %}<span class="sr-only">(current)</span>{% endif %}</a> <!-- just throwing in links to the pages from project 1 for testing -->
-        </li>
-        <!-- Add more menu items as needed -->
-      </ul>
-      <!-- You can add a search bar or other elements here (like a profile button) -->
-    </div>
-  </nav>
-
-  <!-- Your content -->
-  <div class="container-centered" style="margin-top: 55px;"> <!-- Adjust margin-top according to your navbar height -->
-    <!-- Your Django template content goes here -->
-    {% block content %}
-    {% endblock %}
-  </div>
-
-  <script src="{% static 'js/base/base.js' %}"></script>
-
-  <!-- JavaScript to update page title -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var pageTitle = document.title; // Get the current page title
-      var brandElement = document.querySelector(".navbar-brand"); // Select the navbar brand element
-      brandElement.textContent += " - " + pageTitle; // Update the navbar brand text with page title
-    });
-  </script>
+        <li class="nav-item {% if request.path == '/community/' %}active{% endif %}">
+        <a class="nav-link" href="/community/">Community{% if request.path == '/community/' %}<span class="sr-only">(current)</span>{% endif %}</a>
+      </li>
+      <li class="nav-item {% if request.path == '/calendar/' %}active{% endif %}">
+      <a class="nav-link" href="/calendar/">Planning{% if request.path == '/calendar/' %}<span class="sr-only">(current)</span>{% endif %}</a> <!-- TODO: may rework this to use /planning/ url -->
+    </li>
+    <li class="nav-item {% if request.path == '/resources/' %}active{% endif %}">
+    <a class="nav-link" href="/timer/">Resources{% if request.path == '/resources/' %}<span class="sr-only">(current)</span>{% endif %}</a>
+  </li>
+  <li class="nav-item {% if request.path == '/news/' %}active{% endif %}">
+  <a class="nav-link" href="/news/">News{% if request.path == '/news/' %}<span class="sr-only">(current)</span>{% endif %}</a> <!-- just throwing in links to the pages from project 1 for testing -->
+</li>
+<li class="nav-item {% if request.path == '/doodlespace/' %}active{% endif %}">
+<a class="nav-link" href="/doodlespace/">Doodles{% if request.path == '/doodlespace/' %}<span class="sr-only">(current)</span>{% endif %}</a> <!-- TODO: may rework this to use /doodles/ url -->
+</li>
+</ul>
+<!-- Right-justified buttons -->
+<ul class="navbar-nav ml-auto justify-content-end">
+<li class="nav-item">
+<a class="nav-link" href="/profile/">Profile</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/logout/">Logout</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Your content -->
+<div class="container-centered" style="margin-top: 55px;"> <!-- Adjust margin-top according to your navbar height -->
+<!-- Your Django template content goes here -->
+{% block content %}
+{% endblock %}
+</div>
+<!-- we gotta commit to a bootstrap and javascript version and flavor i think that's the issue here -->
+<script src="{% static 'js/base/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'js/base/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/base/base.js' %}"></script>
+<!-- JavaScript to update page title -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+var pageTitle = document.title; // Get the current page title
+var brandElement = document.querySelector(".navbar-brand"); // Select the navbar brand element
+brandElement.textContent += " - " + pageTitle; // Update the navbar brand text with page title
+});
+</script>
 </body>
 </html>
