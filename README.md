@@ -1,7 +1,7 @@
 # NuPath (NCF SE Project 2) 'Marios' Branch README
 
 ## Full Stack Features Being Implemented in this Branch:
-- [] User Authentication
+- [x] User Authentication
 - [x] User Registration
 - [] User Profile
 - [x] Doodling Page
