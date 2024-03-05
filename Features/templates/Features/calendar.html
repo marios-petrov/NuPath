@@ -3,81 +3,26 @@
 {% block title %}Calendar{% endblock %}
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css\calendar\calendar.css' %}">
+<!-- calendar template (Tre) -->
+    
+<!-- may no longer be necessary with FullCalendar library
+    <link rel="stylesheet" type="text/css" href="{% static 'css\calendar\calendar.css' %}">
+-->
 
-<div class="container calendar-container">
-    <!-- Calendar -->
-    <div class="calendar-header">
-        <h2>March</h2>
-    </div>
-    <table class="table table-bordered calendar-table">
-        <thead>
-            <tr>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Dummy data for demonstration purposes -->
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><span class="event-banner">Event 1</span></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><span class="event-banner">Event 2</span></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <!-- Add more rows for other weeks in the month -->
-        </tbody>
-    </table>
-</div>
+<!--
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css" integrity="sha512-muZKtPiVz73bng/GXZ9djLa4WLlDPhFvXtVs5Q04HVrqprCwr7zAup1DyekVqg3r78QXfhZZm34esE4lR3yqdg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<script>
-  // Adjust event banner font size based on cell width
-  function adjustEventBannerFontSize() {
-    var cells = document.querySelectorAll('.calendar-table td');
-    cells.forEach(function(cell) {
-      var cellWidth = cell.offsetWidth;
-      var eventBanner = cell.querySelector('.event-banner');
-      if (eventBanner) {
-        var eventBannerWidth = eventBanner.offsetWidth;
-        var fontSize = parseFloat(window.getComputedStyle(eventBanner).fontSize);
-        while (eventBannerWidth > cellWidth) {
-          fontSize -= 1;
-          eventBanner.style.fontSize = fontSize + 'px';
-          eventBannerWidth = eventBanner.offsetWidth;
-        }
-      }
-    });
-  }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-AwkpXX35UOrHfzaXtfWBgwhOPWkUrBeNjMZ6nyselU2wpgElG3Q51Fuvc2rBv53e0SzYpX0fMU2a+HHnaehw8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  // Adjust font size on page load and window resize
-  window.addEventListener('load', adjustEventBannerFontSize);
-  window.addEventListener('resize', adjustEventBannerFontSize);
-</script>
+GPT recommended those two, moment.js might not be necessary though -->
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+<!-- fullcalendar library, the one nate used -->
+
+<!-- my fullcalendar js file, in static ofc -->
+<script src="{% static 'js/calendar/calendar.js' %}"></script>
+
+<div id="calendar"></div>
+
 
 {% endblock %}
