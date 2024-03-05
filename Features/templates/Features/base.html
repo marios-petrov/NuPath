@@ -11,66 +11,87 @@ Author: Tre
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}NuPath{% endblock %}</title> <!-- Default title -->
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css\base\bootstrap.min.css' %}">
-    
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
+    <style>
+      /* Brighten the text of active navbar items */
+      .navbar-nav .nav-item.active .nav-link {
+        color: #fff; /* Change to your desired color */
+        font-weight: bold; /* Optionally make the text bold */
+      }
+    </style>
   </head>
+
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
       <a class="navbar-brand" href="#">NuPath</a>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <!-- Left-justified urls VVV -->
           <li class="nav-item {% if request.path == '/home/' %}active{% endif %}">
-          <a class="nav-link" href="/home/">Home{% if request.path == '/home/' %}<span class="sr-only">(current)</span>{% endif %}</a> <!-- TODO: see what to do about the '/' url -->
-        </li>
-        <li class="nav-item {% if request.path == '/community/' %}active{% endif %}">
-        <a class="nav-link" href="/community/">Community{% if request.path == '/community/' %}<span class="sr-only">(current)</span>{% endif %}</a>
-      </li>
-      <li class="nav-item {% if request.path == '/calendar/' %}active{% endif %}">
-      <a class="nav-link" href="/calendar/">Planning{% if request.path == '/calendar/' %}<span class="sr-only">(current)</span>{% endif %}</a> <!-- TODO: may rework this to use /planning/ url -->
-    </li>
-    <li class="nav-item {% if request.path == '/resources/' %}active{% endif %}">
-    <a class="nav-link" href="/timer/">Resources{% if request.path == '/resources/' %}<span class="sr-only">(current)</span>{% endif %}</a>
-  </li>
-  <li class="nav-item {% if request.path == '/news/' %}active{% endif %}">
-  <a class="nav-link" href="/news/">News{% if request.path == '/news/' %}<span class="sr-only">(current)</span>{% endif %}</a> <!-- just throwing in links to the pages from project 1 for testing -->
-</li>
-<li class="nav-item {% if request.path == '/doodlespace/' %}active{% endif %}">
-<a class="nav-link" href="/doodlespace/">Doodles{% if request.path == '/doodlespace/' %}<span class="sr-only">(current)</span>{% endif %}</a> <!-- TODO: may rework this to use /doodles/ url -->
-</li>
-</ul>
-<!-- Right-justified buttons -->
-<ul class="navbar-nav ml-auto justify-content-end">
-<li class="nav-item">
-<a class="nav-link" href="/profile/">Profile</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="/logout/">Logout</a>
-</li>
-</ul>
-</div>
-</nav>
-<!-- Your content -->
-<div class="container-centered" style="margin-top: 55px;"> <!-- Adjust margin-top according to your navbar height -->
-<!-- Your Django template content goes here -->
-{% block content %}
-{% endblock %}
-</div>
-<!-- we gotta commit to a bootstrap and javascript version and flavor i think that's the issue here -->
-<script src="{% static 'js/base/jquery-3.7.1.min.js' %}"></script>
-<script src="{% static 'js/base/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/base/base.js' %}"></script>
-<!-- JavaScript to update page title -->
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-var pageTitle = document.title; // Get the current page title
-var brandElement = document.querySelector(".navbar-brand"); // Select the navbar brand element
-brandElement.textContent += " - " + pageTitle; // Update the navbar brand text with page title
-});
-</script>
-</body>
+            <a class="nav-link" href="/home/">Home</a>
+          </li>
+
+          <li class="nav-item {% if request.path == '/community/' %}active{% endif %}">
+            <a class="nav-link" href="/community/">Community</a>
+          </li>
+
+          <li class="nav-item {% if request.path == '/calendar/' %}active{% endif %}">
+            <a class="nav-link" href="/calendar/">Planning</a>
+          </li>
+
+          <li class="nav-item {% if request.path == '/resources/' %}active{% endif %}">
+            <a class="nav-link" href="/timer/">Resources</a>
+          </li>
+
+          <li class="nav-item {% if request.path == '/news/' %}active{% endif %}">
+            <a class="nav-link" href="/news/">News</a>
+          </li>
+
+          <li class="nav-item {% if request.path == '/doodlespace/' %}active{% endif %}">
+            <a class="nav-link" href="/doodlespace/">Doodles</a>
+          </li>
+
+        </ul>
+        <!-- Right-justified buttons -->
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item {% if request.path == '/profile/' %}active{% endif %}">
+            <a class="nav-link" href="/profile/">Profile</a>
+          </li>
+
+          <li class="nav-item {% if request.path == '/logout/' %}active{% endif %}">
+            <a class="nav-link" href="/logout/">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Your content -->
+    <div class="container-centered" style="margin-top: 55px;"> <!-- Adjust margin-top according to your navbar height -->
+      <!-- Your Django template content goes here -->
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    
+    <script src="{% static 'js/base/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/base/bootstrap.min.js' %}"></script>
+    <!-- couldn't for the life of me get these to work with a CDN so we're sticking to my static files for now -->
+    
+    
+    <!-- JavaScript to update page title -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var pageTitle = document.title; // Get the current page title
+        var brandElement = document.querySelector(".navbar-brand"); // Select the navbar brand element
+        brandElement.textContent += " - " + pageTitle; // Update the navbar brand text with page title
+      });
+    </script>
+
+  </body>
 </html>
