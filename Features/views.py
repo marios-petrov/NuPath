@@ -7,8 +7,20 @@ from .models import *
 def doodlespace(request):
     return render(request, 'doodlespace.html')
 
-def dorms(request):
-    return render(request, 'dorms.html')
+@require_http_methods(["GET", "POST"])
+def dorms(request): #TODO - just return the user's dorm
+    if request.method == "POST":
+        action = request.POST.get('action')
 
-def dormview(request):
+    if action == '':
+        # Capture the additional time and days fields
+        course_name = request.POST.get('course_name', '')
+        
+    return redirect('dormview.html')
+
+@require_http_methods(["GET", "POST"])
+def dormview(request): #TODO - allow user to select dorm, GET should send jinja the dorm & lists associated
+    if request.method == "POST":
+        action = request.POST.get('action')
+
     return render(request, 'dormview.html')
