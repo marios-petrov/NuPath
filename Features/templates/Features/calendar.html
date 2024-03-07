@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
             $('#eventDetailModal').modal('show');
             document.getElementById('eventDetailTitle').innerText = event.title;
 
-            // Adjusting the start time for time zone offset
+            // Adjusting the start time for time zone offset (otherwise returning wrong time)
             var startTimeStr = info.event.startStr;
             var startTime = new Date(startTimeStr);
             var offsetMinutes = startTime.getTimezoneOffset();
@@ -131,26 +131,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to delete event
     function deleteEvent(eventId) {
-        $.ajax({ // TODO: figure out ajax not a function error
-            url: '{% url 'delete_calendar_event' %}',
-            type: 'POST',
-            data: {
-                'event_id': eventId,
-                'csrfmiddlewaretoken': '{{ csrf_token }}'
-            },
-            success: function(response) {
-                if (response.success) {
-                    // Remove the event from the calendar
-                    calendar.getEventById(eventId).remove();
-                    // Close the event detail modal
-                    $('#eventDetailModal').modal('hide');
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '{% url 'delete_calendar_event' %}', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        // Remove the event from the calendar
+                        calendar.getEventById(eventId).remove();
+                        // Close the event detail modal
+                        document.getElementById('eventDetailModal').classList.remove('show');
+                        document.body.classList.remove('modal-open');
+                        var modalBackdrops = document.getElementsByClassName('modal-backdrop');
+                        for (var i = 0; i < modalBackdrops.length; i++) {
+                            modalBackdrops[i].parentNode.removeChild(modalBackdrops[i]);
+                        }
+                    }
+                } else {
+                    console.error('Failed to delete event. Status:', xhr.status);
                 }
             }
-        });
+        };
+        xhr.send('event_id=' + encodeURIComponent(eventId));
     }
+
 
     calendar.render();
 });
+
+// thank you gpt once again, updated link here:
+// https://chat.openai.com/share/ef154ed4-f499-4712-890c-9113af4dfe38
 
 </script>
 
