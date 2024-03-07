@@ -8,20 +8,22 @@ def doodlespace(request):
     return render(request, 'doodlespace.html')
 
 #@require_http_methods(["GET", "POST"])
-def dorms(request): #TODO - just return the user's dorm
+def dorms(request):
 
     # Querysets for the context
     dorms = Dorms.objects.all() #this is here to display all the dorms available
     current_dorm = Dorms.objects.filter(is_current_dorm=True) #this is here to display the user's current dorm
+    checklist = Checklist.objects.all()
 
     context = {
         'dorms': dorms,
-        'current_dorm': current_dorm #TODO - make this only return a list or something
+        'current_dorm': current_dorm, #TODO - make this only return a single item
+        'checklist': checklist
     }
     return render(request, 'dorms.html', context) 
 
 @require_http_methods(["GET", "POST"])
-def dormview(request, dorm): #TODO - allow user to select dorm, GET should send jinja the dorm & lists associated
+def dormview(request, dorm): 
     dorm = Dorms.objects.get(id=dorm)
 
     if request.method == "POST":

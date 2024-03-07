@@ -12,13 +12,13 @@ class Checklist(models.Model):
 
 class Dorms(models.Model):
     dormtype = models.CharField(max_length=200)
-    address = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)  # i may make this editable at some point for off-campus students.
 
     #there's a better way to have several images, but i'd prefer to have a fixed three for each dorm. 
     # alternatives later: manytomany....? or charfield storing urls...
-    dormpic1 = models.ImageField(upload_to='dormview', blank=True) #THIS ONLY WORKS WITH MEDIA FILE. FOR SOME REASON
-    dormpic2 = models.ImageField(upload_to='dormview', blank=True)
-    dormpic3 = models.ImageField(upload_to='dormview', blank=True)
+    dormpic1 = models.ImageField(upload_to='dormview', default='default.webp', blank=True) #THIS ONLY WORKS WITH MEDIA FILE. FOR SOME REASON
+    dormpic2 = models.ImageField(upload_to='dormview', default='default.webp', blank=True)
+    dormpic3 = models.ImageField(upload_to='dormview', default='default.webp', blank=True)
     foodoptions = models.CharField(max_length=200)
     
     is_current_dorm = models.BooleanField(default=False) #this should be temporary until user profiles store it
@@ -43,6 +43,7 @@ class Dorms(models.Model):
         return str(self.foodoptions).split(', ')
     #the str() function is so i don't have to use an entire json processing function
     
+    """ might do something with this later...
     def get_dp1(self):
         return self.dormpic1.url
     
@@ -51,6 +52,7 @@ class Dorms(models.Model):
     
     def get_dp3(self):
         return self.dormpic3.url
+    """
 
 
 """
