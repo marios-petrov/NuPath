@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Catalyst{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
+</head>
+<body>
+    <script>
+        $('#divFeed').FeedEk({
+            FeedUrl:'https://ncfcatalyst.com/feed',
+            MaxCount: 5,
+            ShowDesc: true,
+            ShowPubDate: true,
+            DescCharacterLimit: 100
+            });
+    </script>
+    <div id="divFeed"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="FeedEk.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+</body>
+</html>
