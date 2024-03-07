@@ -77,87 +77,82 @@
 
 <!-- calendar event script -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
+// calendar event script
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            timeZone: 'GMT-5', // our time zone (starting march 10th, before that its GMT-6)
-            initialView: 'dayGridMonth',
-            events: [
-                {% for e in events %}
-                {
-                    title: '{{e.title}}',
-                    start: '{{e.start_time|date:"c"}}',
-                    description: '{{e.description}}',
-                    id: '{{e.id}}'
-                },
-                {% endfor %}
-            ],
-            editable: false, // Disable dragging and resizing
-            selectable: true,
-            dateClick: function(info) {
-                // Open the modal
-                $('#eventModal').modal('show');
-                // Populate the "time" slot with the clicked date and default time of 12:00 PM
-                var date = info.dateStr; // Get the date string from the info object
-                var defaultTime = 'T12:00'; // Default time: 12:00 PM
-                var dateTime = date + defaultTime;
-                document.getElementById('eventStartTime').value = dateTime;
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        timeZone: 'GMT-5', // our time zone (starting march 10th, before that its GMT-6)
+        initialView: 'dayGridMonth',
+        events: [
+            {% for e in events %}
+            {
+                title: '{{e.title}}',
+                start: '{{e.start_time|date:"c"}}',
+                description: '{{e.description}}',
+                id: '{{e.id}}'
             },
-            eventClick: function(info) {
-                /*
-                NOTE
-                going to bed
-                left off fixing moment parsing (returning wrong time, try info.event.dateStr?),
-                fixing ajax error down below,
-                and making sure delete event view working in backend (DB and frontend calendar)
+            {% endfor %}
+        ],
+        editable: false, // Disable dragging and resizing
+        selectable: true,
+        dateClick: function(info) {
+            // Open the modal
+            $('#eventModal').modal('show');
+            // Populate the "time" slot with the clicked date and default time of 12:00 PM
+            var date = info.dateStr; // Get the date string from the info object
+            var defaultTime = 'T12:00'; // Default time: 12:00 PM
+            var dateTime = date + defaultTime;
+            document.getElementById('eventStartTime').value = dateTime;
+        },
+        eventClick: function(info) {
+            var event = info.event;
+            $('#eventDetailModal').modal('show');
+            document.getElementById('eventDetailTitle').innerText = event.title;
 
-                after that, look into making it responsive if there's time, otherwise prep
-                for feature negotiations on thursday mar7
-                */
-                var event = info.event;
-                $('#eventDetailModal').modal('show');
-                document.getElementById('eventDetailTitle').innerText = event.title;
-                document.getElementById('eventDetailStartTime').innerText = moment(event.start).format('YYYY-MM-DD HH:mm');
-                document.getElementById('eventDetailDescription').innerText = event.extendedProps.description;
-                $('#deleteEventButton').data('event-id', event.id);
+            // Adjusting the start time for time zone offset
+            var startTimeStr = info.event.startStr;
+            var startTime = new Date(startTimeStr);
+            var offsetMinutes = startTime.getTimezoneOffset();
+            var adjustedStartTime = new Date(startTime.getTime() + (offsetMinutes * 60 * 1000));
+            var formattedStartTime = moment(adjustedStartTime).format('YYYY-MM-DD HH:mm');
+            document.getElementById('eventDetailStartTime').innerText = formattedStartTime;
+
+            document.getElementById('eventDetailDescription').innerText = event.extendedProps.description;
+            $('#deleteEventButton').data('event-id', event.id);
+        }
+    });
+
+    // Delete event button click handler
+    $('#deleteEventButton').on('click', function() {
+        var eventId = $(this).data('event-id');
+        deleteEvent(eventId);
+    });
+
+    // Function to delete event
+    function deleteEvent(eventId) {
+        $.ajax({ // TODO: figure out ajax not a function error
+            url: '{% url 'delete_calendar_event' %}',
+            type: 'POST',
+            data: {
+                'event_id': eventId,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Remove the event from the calendar
+                    calendar.getEventById(eventId).remove();
+                    // Close the event detail modal
+                    $('#eventDetailModal').modal('hide');
+                }
             }
         });
+    }
 
-        // Delete event button click handler
-        $('#deleteEventButton').on('click', function() {
-            var eventId = $(this).data('event-id');
-            deleteEvent(eventId);
-        });
+    calendar.render();
+});
 
-        // Function to delete event
-        function deleteEvent(eventId) {
-            $.ajax({
-                url: '{% url 'delete_calendar_event' %}',
-                type: 'POST',
-                data: {
-                    'event_id': eventId,
-                    'csrfmiddlewaretoken': '{{ csrf_token }}'
-                },
-                success: function(response) {
-                    if (response.success) {
-                        // Remove the event from the calendar
-                        calendar.getEventById(eventId).remove();
-                        // Close the event detail modal
-                        $('#eventDetailModal').modal('hide');
-                    }
-                }
-            });
-        }
-
-        calendar.render();
-    });
 </script>
-
-
-
-
-
 
 
 {% endblock %}
