@@ -1,6 +1,5 @@
 {% extends 'Features\base.html' %}
 {% block content %}
-{% block title %}Calendar{% endblock %}
 {% load static %}
 
 <!-- calendar template (Tre) -->
@@ -60,30 +59,40 @@
                 <label for="eventDescription">Description:</label>
                 <input type="text" class="form-control" id="eventDescription" name="description">
             </div>
-            <button type="submit" class="btn fc-button-primary fc-button-active">Add</button>
+            <button type="submit" class="btn btn-outline-info">Add</button>
         </form>
       </div>
     </div>
   </div>
 </div>
 
-<div> <!-- refactored from nate's code, ig it doesn't really need to be in a wrapper div but maybe it will later -->
+<div class="vh-100">
     <div class="col-2 pt-2">
-        <button class="btn fc-button-primary fc-button-active"  data-toggle="modal" data-target="#eventModal">Add Event</button>
+        <button class="btn btn-outline-info"  data-toggle="modal" data-target="#eventModal">Add Event</button>
     </div>
 
-    <div id="calendar"></div>
+    <div class="row">
+        <div class="col-12">
+            <!-- Calendar container -->
+            <div id="calendar"></div>
+        </div>
+    </div>
 </div>
 
 <!-- calendar event script -->
 <script>
 // calendar event script
+var calendar = null;
+
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
+    var initialView = window.innerWidth < 576 ? 'timeGridWeek' : 'dayGridMonth';
+
     var calendar = new FullCalendar.Calendar(calendarEl, {
         timeZone: 'GMT-5', // our time zone (starting march 10th, before that its GMT-6)
-        initialView: 'dayGridMonth',
+        initialView: initialView,
+        contentHeight: 'auto',
         events: [
             {% for e in events %}
             {
