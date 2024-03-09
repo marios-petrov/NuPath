@@ -45,7 +45,7 @@
       </div>
       <div class="modal-body">
         <!-- Add Event Form -->
-        <form method="POST" id="addEventForm" action="{% url 'calendar' %}">
+        <form method="POST" id="addEventForm" action="{% url 'add_calendar_event' %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="eventName">Event Name:</label>
@@ -59,7 +59,7 @@
                 <label for="eventDescription">Description:</label>
                 <input type="text" class="form-control" id="eventDescription" name="description">
             </div>
-            <button type="submit" class="btn btn-outline-info">Add</button>
+            <button type="submit" name="add_event" class="btn btn-outline-info">Add</button>
         </form>
       </div>
     </div>
@@ -132,6 +132,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+
+
     // Delete event button click handler
     $('#deleteEventButton').on('click', function() {
         var eventId = $(this).data('event-id');
@@ -144,10 +146,12 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.open('POST', '{% url 'delete_calendar_event' %}', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+        //console.log('{{ csrf_token }}');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     var response = JSON.parse(xhr.responseText);
+                    console.log(response);
                     if (response.success) {
                         // Remove the event from the calendar
                         calendar.getEventById(eventId).remove();

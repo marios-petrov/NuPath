@@ -18,4 +18,4 @@ class CalendarEvent(models.Model):
 	# end-time, whether it repeats, etc to be added later (stretch goal)
 
 	def __str__(self):
-		return 'CalendarEvent ' + self.title
+		return f'Event{self.id} {self.title} @ {self.start_time}'

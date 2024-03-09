@@ -28,12 +28,14 @@ def delete_calendar_event(request):
     # Return a success response
     return JsonResponse({'success': True})
 
+@require_POST
+def add_calendar_event(request):
+    # not ideal to have another view but it fixed the glaring dupe bug
+    event_form = AddCalendarEvent(request.POST or None)
+    if event_form.is_valid():
+        event_form.save()
+        return redirect('/calendar/')
+
 def calendar(request):
     calendar_events = CalendarEvent.objects.all();
-    if request.method == 'POST':
-        event_form = AddCalendarEvent(request.POST or None)
-        if event_form.is_valid():
-            event_form.save()
-            return render(request, 'Features/calendar.html', {'events': calendar_events})
-    else:
-        return render(request, 'Features/calendar.html', {'events': calendar_events})
+    return render(request, 'Features/calendar.html', {'events': calendar_events})
