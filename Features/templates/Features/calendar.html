@@ -1,0 +1,182 @@
+{% extends 'Features\base.html' %}
+{% block content %}
+{% load static %}
+
+<title>Calendar</title>
+
+<!-- calendar template (Tre) -->
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+<!-- fullcalendar library, the one nate used -->
+
+<!-- adding in for now so that the modal X button works -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> <!-- for date parsing -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script> <!-- for popups -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script> <!-- might not be needed, originally was a fix for the modals not closing -->
+
+<!-- Event Detail Modal -->
+<div class="modal fade" id="eventDetailModal" tabindex="-1" aria-labelledby="eventDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventDetailModalLabel">Event Details</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <<< it dont work -->
+      </div>
+      <div class="modal-body">
+        <p><strong>Title:</strong> <span id="eventDetailTitle"></span></p>
+        <p><strong>Time:</strong> <span id="eventDetailStartTime"></span></p>
+        <p><strong>Description:</strong> <span id="eventDetailDescription"></span></p>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button id="deleteEventButton" type="button" class="btn btn-danger" action="">Delete Event</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- add event modal, refactored from nate's code using some gpt, link to convo:
+    https://chat.openai.com/share/ef154ed4-f499-4712-890c-9113af4dfe38
+-->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventModalLabel">Add Event</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        <!-- Add Event Form -->
+        <form method="POST" id="addEventForm" action="{% url 'calendar' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="eventName">Event Name:</label>
+                <input type="text" class="form-control" id="eventName" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="eventStartTime">Time:</label>
+                <input type="datetime-local" class="form-control" id="eventStartTime" name="start_time" required>
+            </div>
+            <div class="form-group">
+                <label for="eventDescription">Description:</label>
+                <input type="text" class="form-control" id="eventDescription" name="description">
+            </div>
+            <button type="submit" class="btn btn-outline-info">Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="vh-100">
+    <div class="col-2 pt-2">
+        <button class="btn btn-outline-info"  data-toggle="modal" data-target="#eventModal">Add Event</button>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <!-- Calendar container -->
+            <div id="calendar"></div>
+        </div>
+    </div>
+</div>
+
+<!-- calendar event script -->
+<script>
+// calendar event script
+var calendar = null;
+
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var initialView = window.innerWidth < 576 ? 'timeGridWeek' : 'dayGridMonth';
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        timeZone: 'GMT-5', // our time zone (starting march 10th, before that its GMT-6)
+        initialView: initialView,
+        contentHeight: 'auto',
+        events: [
+            {% for e in events %}
+            {
+                title: '{{e.title}}',
+                start: '{{e.start_time|date:"c"}}',
+                description: '{{e.description}}',
+                id: '{{e.id}}'
+            },
+            {% endfor %}
+        ],
+        editable: false, // Disable dragging and resizing
+        selectable: true,
+        dateClick: function(info) {
+            // Open the modal
+            $('#eventModal').modal('show');
+            // Populate the "time" slot with the clicked date and default time of 12:00 PM
+            var date = info.dateStr; // Get the date string from the info object
+            var defaultTime = 'T12:00'; // Default time: 12:00 PM
+            var dateTime = date + defaultTime;
+            document.getElementById('eventStartTime').value = dateTime;
+        },
+        eventClick: function(info) {
+            var event = info.event;
+            $('#eventDetailModal').modal('show');
+            document.getElementById('eventDetailTitle').innerText = event.title;
+
+            // Adjusting the start time for time zone offset (otherwise returning wrong time)
+            var startTimeStr = info.event.startStr;
+            var startTime = new Date(startTimeStr);
+            var offsetMinutes = startTime.getTimezoneOffset();
+            var adjustedStartTime = new Date(startTime.getTime() + (offsetMinutes * 60 * 1000));
+            var formattedStartTime = moment(adjustedStartTime).format('YYYY-MM-DD HH:mm');
+            document.getElementById('eventDetailStartTime').innerText = formattedStartTime;
+
+            document.getElementById('eventDetailDescription').innerText = event.extendedProps.description;
+            $('#deleteEventButton').data('event-id', event.id);
+        }
+    });
+
+    // Delete event button click handler
+    $('#deleteEventButton').on('click', function() {
+        var eventId = $(this).data('event-id');
+        deleteEvent(eventId);
+    });
+
+    // Function to delete event
+    function deleteEvent(eventId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '{% url 'delete_calendar_event' %}', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        // Remove the event from the calendar
+                        calendar.getEventById(eventId).remove();
+                        // Close the event detail modal
+                        document.getElementById('eventDetailModal').classList.remove('show');
+                        document.body.classList.remove('modal-open');
+                        var modalBackdrops = document.getElementsByClassName('modal-backdrop');
+                        for (var i = 0; i < modalBackdrops.length; i++) {
+                            modalBackdrops[i].parentNode.removeChild(modalBackdrops[i]);
+                        }
+                    }
+                } else {
+                    console.error('Failed to delete event. Status:', xhr.status);
+                }
+            }
+        };
+        xhr.send('event_id=' + encodeURIComponent(eventId));
+    }
+
+
+    calendar.render();
+});
+
+// thank you gpt once again, updated link here:
+// https://chat.openai.com/share/ef154ed4-f499-4712-890c-9113af4dfe38
+
+</script>
+
+
+{% endblock %}
