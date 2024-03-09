@@ -1,11 +1,10 @@
-{% extends './base.html' %}
+{% extends 'Features/base.html' %}
 
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/doodlespace/doodlespace.css' %}" />
 
-<title>Doodle Space</title>
-
+<title>Doodles</title>
 
 <div id="paintArea">
    <canvas id="canvas"></canvas>
@@ -30,6 +29,7 @@
           <button id="button-clear">Clear</button>
           <button id="button-pen">Pen</button>
           <button id="button-erase">Erase</button>
+          <button id="button-save">Save Doodle</button>
         </div>
       </div>
 </div>

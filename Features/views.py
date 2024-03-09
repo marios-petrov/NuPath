@@ -1,14 +1,41 @@
-from django.http import JsonResponse
-from django.utils.dateparse import parse_time
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods, require_POST
-
 from .forms import AddCalendarEvent
 from .models import *
+import base64
+import json  # Import json for parsing the request body
+from django.core.files.base import ContentFile
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required
+from .models import Doodle
+
+@require_http_methods(["POST"])
+@login_required
+def save_doodle(request):
+    # Parse the JSON body of the request
+    data = json.loads(request.body)
+    image_data = data.get('image_data')
+    if image_data:
+        # Split the base64 string
+        format, imgstr = image_data.split(';base64,')
+        # Extract the image file extension
+        ext = format.split('/')[-1]
+
+        # Convert base64 to image file
+        image = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+
+        # Save the image to a new Doodle object
+        Doodle.objects.create(user=request.user, image=image)
+
+        return JsonResponse({'message': 'Doodle saved successfully!'})
+    else:
+        return JsonResponse({'error': 'No image data provided.'}, status=400)
 
 # Create your views here.
 def doodlespace(request):
     return render(request, 'Features/doodlespace.html')
+
 
 def home(request):
     return render(request, 'Features/home.html')
@@ -38,3 +65,4 @@ def calendar(request):
             return render(request, 'Features/calendar.html', {'events': calendar_events})
     else:
         return render(request, 'Features/calendar.html', {'events': calendar_events})
+
