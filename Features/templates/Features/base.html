@@ -63,15 +63,18 @@ Author: Tre
             <a class="nav-link" href="/profile/">Profile</a>
           </li>
 
-          <li class="nav-item {% if request.path == '/logout/' %}active{% endif %}">
-            <a class="nav-link" href="/logout/">Logout</a>
+          <li class="nav-item">
+            <form action="{% url 'logout' %}" method="post" class="form-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-link nav-link" >Logout</button>
+            </form>
           </li>
         </ul>
       </div>
     </nav>
 
     <!-- Your content -->
-    <div class="container-centered d-flex flex-column vh-100" style="margin-top: 75px;"> <!-- Adjust margin-top according to your navbar height -->
+    <div class="container-centered d-flex flex-column vh-100" style="margin-top: 65px;"> <!-- Adjust margin-top according to your navbar height -->
       <!-- Your Django template content goes here -->
       {% block content %}
       {% endblock %}

@@ -1,0 +1,193 @@
+{% extends 'Features/base.html' %}
+{% load static %}
+
+{% block content %}
+<title> Resources </title>
+    <div class="container" id="allCards">
+      <div class="row">
+          <!-- Restaurants -->
+          <div class="col-md-4">
+              <div class="card">
+                  <div class="card-header">
+                      <h6 class="mb-0">Restaurants</h6>
+                  </div>
+                  <div class="card-body">
+                      <h4>Hamilton</h4>
+                      <br>
+                      <h6>Monday to Friday Hours:</h6>
+                      <ul>
+                          <li> Continental Breakfast: 7:30 to 8:00 AM and 10:00 to 10:30 AM</li>
+                          <li> Breakfast: 8:00 to 10:00 AM</li>
+                          <li> Lunch: 11:00 to 2:00 PM</li>
+                          <li> Lite Lunch: 2:00 to 3:30 PM (Salad, Grill, Villa Toscana)</li>
+                          <li> Dinner: 4:30 to 7:00 PM</li>
+                      </ul>
+                      <br>
+                      <h6>Weekend Hours:</h6>
+                      <ul>
+                          <li>Brunch: 10:30 AM to 1:00 PM</li>
+                          <li>Dinner: 4:30 to 6:30 PM</li>
+                      </ul>
+                      <h4>Boars Head Cafeteria</h4>
+                      <ul>
+                          <li>Monday to Thursday Hours: 8:00 AM to 8:00 PM</li>
+                          <li>Friday Hours: 8:00 AM to 5:00 PM</li>
+                          <li>Saturday and Sunday Hours: Closed</li>
+                      </ul>
+                      <h4>Mama G's German Bakery and Coffeehouse</h4>
+                      <ul>
+                          <li>Monday to Saturday Hours: 6:00 AM to 4:00 PM</li>
+                          <li>Sunday Hours: Closed</li>
+                      </ul>
+                      <h4>McDonald's</h4>
+                      <ul>
+                          <li>Daily Hours: 5:00 AM to 11:00 PM</li>
+                          <li>Sunday to Thursday Drive Through Hours: 5:00 to 12:00 AM</li>
+                          <li>Friday and Saturday Drive Through Hours: 5:00 to 1:00 AM</li>
+                      </ul>
+                      <h4>Mirna's Cuban Cuisine</h4>
+                      <ul>
+                          <li>Monday to Saturday Hours: 11:00 AM to 8:00 PM</li>
+                          <li>Sunday Hours: Closed</li>
+                      </ul>
+                      <h4>Subway</h4>
+                      <ul>
+                          <li>Saturday to Wednesday Hours: 8:00 AM to 9:00 PM</li>
+                          <li>Thursday to Friday Hours: 8:00 AM to 9:30 PM</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Places of Interest -->
+          <div class="col-md-4">
+              <div class="card">
+                  <div class="card-header">
+                      <h6 class="mb-0">Places of Interest</h6>
+                  </div>
+                  <div class="card-body">
+                      <h4>Marie Selby Gardens</h4>
+                      <ul>
+                          <li>Daily Hours: 10:00 AM to 5:00 PM</li>
+                      </ul>
+                      <h4>Sarasota Jungle Gardens</h4>
+                      <ul>
+                          <li>Daily Hours: 10:00 AM to 4:00 PM</li>
+                      </ul>
+                      <h4>The John and Marie Ringling Museum of Art</h4>
+                      <ul>
+                          <li>Friday to Wednesday Hours: 10:00 AM to 5:00 PM</li>
+                          <li>Thursday Hours: 10:00 AM to 8:00 PM</li>
+                      </ul>
+                      <h4>Van Wezel Performing Arts Hall</h4>
+                      <ul>
+                          <li>Monday to Friday Box Office Hours: 10:00 AM to 6:00 PM</li>
+                          <li>Saturday Box Office Hours: 10:00 AM to 4:00 PM</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Transportation -->
+          <div class="col-md-4">
+              <div class="card">
+                  <div class="card-header">
+                      <h6 class="mb-0">Transportation</h6>
+                  </div>
+                  <div class="card-body">
+                      <h4>Breeze Transit</h4>
+                      <ul>
+                          <li>Monday to Saturday Hours: 5:00 AM to 11:00 PM</li>
+                          <li>Sunday Hours: 6:00 AM to 10:00 PM</li>
+                      </ul>
+                      <h4>Manatee County Area Transit - MCAT</h4>
+                      <ul>
+                          <li>Monday to Friday Hours: 8:00 AM to 6:00 PM</li>
+                          <li>Saturday and Sunday Hours: Closed</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+
+          <!-- NCF Food Forest -->
+          <div class="col-md-4">
+              <div class="card">
+                  <div class="card-header">
+                      <h6 class="mb-0">Food Forest</h6>
+                  </div>
+                  <div class="card-body">
+                      <ul>
+                          <li>Location: Near Caples Campus on the bay side of cammpus</li>
+                          <li>Offerings include native and non-native tropical and subtropical fruits and vegetables.</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+
+          <!-- NCF Art Installations -->
+          <div class="col-md-4">
+              <div class="card">
+                  <div class="card-header">
+                      <h6 class="mb-0">Art Installations</h6>
+                  </div>
+                  <div class="card-body">
+                      <h4>Band of Angels</h4>
+                      <ul>
+                          <li>Location: Palmer complex</li>
+                          <li>Artist: Professor Jack Cartlidge</li>
+                          <li>Year: 1973</li>
+                      </ul>
+                      <h4>Points of View</h4>
+                      <ul>
+                          <li>Location: R.V. Heiser Natural Sciences Complex</li>
+                          <li>Artists: Robert Stout and Stephanie Jurs</li>
+                          <li>Year: 2004</li>
+                      </ul>
+                      <h4>Robert and Beverly Koski Bell Tower and Academic Plaza</h4>
+                      <ul>
+                          <li>Location: Library</li>
+                          <li>Artist: n/a</li>
+                          <li>Year: 2013</li>
+                      </ul>
+                      <h4>The Four Winds</h4>
+                      <ul>
+                          <li>Location: Academic Center</li>
+                          <li>Artist: Bruce White</li>
+                          <li>Year: 2011</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Grocery and Supply Stores -->
+          <div class="col-md-4">
+              <div class="card">
+                  <div class="card-header">
+                      <h6 class="mb-0">Grocery and Supply Stores</h6>
+                  </div>
+                  <div class="card-body">
+                      <h4>CVS</h4>
+                      <ul>
+                          <li>Store Hours: 8:00 AM to 10:00 PM</li>
+                          <li>Pharmacy Hours: 8:00 AM or 9:00 AM to 1:30 PM, 2:00 PM to 8:00 PM or 9:00 PM</li>
+                          <li>Pharmacy opening and closing times vary by store</li>
+                      </ul>
+                      <h4>Publix</h4>
+                      <ul>
+                          <li>Hours: 7:00 AM to 9:00 PM or 10:00 PM</li>
+                          <li>Closing time varies by store</li>
+                      </ul>
+                      <h4>Target</h4>
+                      <ul>
+                          <li>Hours: 8:00 AM to 10:00 PM</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+    </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+{% endblock %}

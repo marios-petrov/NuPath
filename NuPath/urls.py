@@ -28,12 +28,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='Users/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='Users/logout.html'), name='logout'),
-
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 
     path('home/', features_views.home, name='home'),
+
+    path('resources/', features_views.resources, name='resources'),
+
     path('calendar/', features_views.calendar, name='calendar'),
     path('delete_calendar_event/', features_views.delete_calendar_event, name='delete_calendar_event'),
+
     path('doodlespace/', features_views.doodlespace, name='doodlespace'),
     path('save_doodle/', features_views.save_doodle, name='save_doodle'),
 ]

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # model for a calendar event
 class CalendarEvent(models.Model):
@@ -19,6 +20,7 @@ class CalendarEvent(models.Model):
     def __str__(self):
         return 'CalendarEvent ' + self.title
 
+# model for a doodle
 class Doodle(models.Model):
     image = models.ImageField(upload_to='doodles/')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -26,3 +28,17 @@ class Doodle(models.Model):
 
     def __str__(self):
         return f"Doodle {self.id} by {self.user.username}"
+
+# model for community post
+class Post(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return self.title

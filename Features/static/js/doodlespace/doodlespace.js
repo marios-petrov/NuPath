@@ -1,6 +1,5 @@
 // Initial references
 let canvas = document.getElementById("canvas");
-let backgroundButton = document.getElementById("color-background");
 let colorButton = document.getElementById("color-input");
 let clearButton = document.getElementById("button-clear");
 let eraseButton = document.getElementById("button-erase");
@@ -15,9 +14,6 @@ let context = canvas.getContext("2d");
 // Mouse position initialization
 let mouseX = 0;
 let mouseY = 0;
-// Canvas offset
-let rectLeft = canvas.getBoundingClientRect().left;
-let rectTop = canvas.getBoundingClientRect().top;
 
 // Initialize canvas with default settings
 const init = () => {
@@ -25,9 +21,10 @@ const init = () => {
     context.lineWidth = penSize.value; // Default pen size
     toolType.innerHTML = "Pen"; // Default tool type
 
-    canvas.style.backgroundColor = backgroundButton.value;
-    context.fillStyle = backgroundButton.value;
-    context.fillRect(0, 0, canvas.width, canvas.height); // Fill canvas background
+    // Set canvas background to white
+    canvas.style.backgroundColor = "#ffffff";
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height); // Fill canvas background with white
 };
 
 // Detect touch capability
@@ -40,10 +37,11 @@ const is_touch_device = () => {
     }
 };
 
-// Get accurate x and y position
+// Get accurate x and y position relative to the canvas
 const getXY = (e) => {
-    mouseX = (!is_touch_device() ? e.pageX : e.touches?.[0].pageX) - rectLeft;
-    mouseY = (!is_touch_device() ? e.pageY : e.touches?.[0].pageY) - rectTop;
+    const rect = canvas.getBoundingClientRect();
+    mouseX = (!is_touch_device() ? e.clientX : e.touches[0].clientX) - rect.left;
+    mouseY = (!is_touch_device() ? e.clientY : e.touches[0].clientY) - rect.top;
 };
 
 // Stop drawing
@@ -62,7 +60,7 @@ const startDrawing = (e) => {
 
 // Draw on canvas
 const drawOnCanvas = (e) => {
-    if (!is_touch_device()) {
+    if (e.cancelable) {
         e.preventDefault();
     }
     getXY(e);
@@ -86,11 +84,13 @@ canvas.addEventListener("mouseleave", stopDrawing);
 penButton.addEventListener("click", () => {
     toolType.innerHTML = "Pen";
     erase_bool = false;
+    context.globalCompositeOperation = "source-over";
 });
 
 eraseButton.addEventListener("click", () => {
     toolType.innerHTML = "Eraser";
     erase_bool = true;
+    context.globalCompositeOperation = "destination-out";
 });
 
 penSize.addEventListener("input", () => {
@@ -101,37 +101,62 @@ colorButton.addEventListener("change", () => {
     context.strokeStyle = colorButton.value;
 });
 
-backgroundButton.addEventListener("change", () => {
-    canvas.style.backgroundColor = backgroundButton.value;
-    // To ensure the background change is applied immediately
-    if (!draw_bool) {
-        context.fillStyle = backgroundButton.value;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-    }
-});
-
 clearButton.addEventListener("click", () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    canvas.style.backgroundColor = "#fff"; // Reset to default background color
-    backgroundButton.value = "#fff";
+    // Reset to default white background after clearing
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height);
 });
 
 // Resize canvas to fit available screen space
+// Resize canvas to fit available screen space
 function resizeCanvas() {
-    let optionsHeight = document.querySelector('.options').offsetHeight;
-    let availableHeight = window.innerHeight - optionsHeight;
-    canvas.width = window.innerWidth;
-    canvas.height = availableHeight;
-    context.fillStyle = backgroundButton.value;
-    context.fillRect(0, 0, canvas.width, canvas.height); // Reapply the background color on resize
+    // Use window's innerWidth and innerHeight as a starting point
+    let newWidth = window.innerWidth;
+    let newHeight = window.innerHeight;
+
+    // Account for the size of the navbar and options if they are present
+    const navbar = document.querySelector('nav');
+    const options = document.querySelector('.options');
+    if (navbar) {
+        newHeight -= navbar.offsetHeight;
+    }
+    if (options) {
+        newHeight -= options.offsetHeight;
+    }
+
+    // Now set the canvas width and height to the new calculated values
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+
+    // Reapply the white background to the entire canvas
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+
+// Fetch CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 // AJAX Save Doodle functionality
 function saveDoodle() {
     const imageData = canvas.toDataURL('image/png');
-    const csrfToken = getCookie('csrftoken'); // Fetch CSRF token from cookies
+    const csrfToken = getCookie('csrftoken');
 
-    fetch('/save_doodle/', { // Make sure this endpoint matches your URL configuration in Django
+    fetch('/save_doodle/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -149,26 +174,10 @@ function saveDoodle() {
     });
 }
 
-// Fetch CSRF token from cookies (Function reused from your setup)
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
 // Initialize and attach event listeners when the document is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     init();
     resizeCanvas();
-    document.getElementById('button-save').addEventListener('click', saveDoodle); // Make sure the ID matches your Save button's ID
+    document.getElementById('button-save').addEventListener('click', saveDoodle);
     window.addEventListener('resize', resizeCanvas);
 });

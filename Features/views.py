@@ -10,7 +10,12 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from .models import Doodle
 
-@require_http_methods(["POST"])
+def home(request):
+    return render(request, 'Features/home.html')
+
+def resources(request):
+    return render(request, 'Features/resources.html')
+@require_POST
 @login_required
 def save_doodle(request):
     # Parse the JSON body of the request
@@ -32,17 +37,11 @@ def save_doodle(request):
     else:
         return JsonResponse({'error': 'No image data provided.'}, status=400)
 
-# Create your views here.
 def doodlespace(request):
     return render(request, 'Features/doodlespace.html')
 
-
-def home(request):
-    return render(request, 'Features/home.html')
-
-def resources(request):
-    return render(request, 'Features/resources.html')
 @require_POST
+@login_required
 def delete_calendar_event(request):
     # Extract the event ID from the request data
     event_id = request.POST.get('event_id')
