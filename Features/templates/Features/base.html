@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <!--
 God bless GPT and its divine knowledge of bootstrap.
@@ -7,9 +6,10 @@ https://chat.openai.com/share/3f64ab55-9442-4306-baa4-a09f7464710c
 Author: Tre
 -->
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    {% load static %}
     <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
     <style>
       /* Brighten the text of active navbar items */
@@ -18,20 +18,20 @@ Author: Tre
         font-weight: bold; /* Optionally make the text bold */
       }
     </style>
-  </head>
+</head>
 
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
       <a class="navbar-brand" href="#">NuPath</a>
-
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <!-- Left-justified urls VVV -->
+          {% if user.is_authenticated %}
+          <!-- Insert authenticated user nav items -->
           <li class="nav-item {% if request.path == '/home/' %}active{% endif %}">
             <a class="nav-link" href="/home/">Home</a>
           </li>
@@ -55,27 +55,35 @@ Author: Tre
           <li class="nav-item {% if request.path == '/doodlespace/' %}active{% endif %}">
             <a class="nav-link" href="/doodlespace/">Doodles</a>
           </li>
-
+          <!-- Add other authenticated nav items here -->
+          {% endif %}
         </ul>
-        <!-- Right-justified buttons -->
+
         <ul class="navbar-nav ms-auto">
+          {% if user.is_authenticated %}
           <li class="nav-item {% if request.path == '/profile/' %}active{% endif %}">
             <a class="nav-link" href="/profile/">Profile</a>
           </li>
-
           <li class="nav-item">
             <form action="{% url 'logout' %}" method="post" class="form-inline">
               {% csrf_token %}
-              <button type="submit" class="btn btn-link nav-link" >Logout</button>
+              <button type="submit" class="btn btn-link nav-link">Logout</button>
             </form>
           </li>
+          {% else %}
+          <li class="nav-item {% if request.path == '/login/' %}active{% endif %}">
+            <a class="nav-link" href="/login/">Login</a>
+          </li>
+          <li class="nav-item {% if request.path == '/register/' %}active{% endif %}">
+            <a class="nav-link" href="/register/">Register</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </nav>
 
     <!-- Your content -->
-    <div class="container-centered d-flex flex-column vh-100" style="margin-top: 65px;"> <!-- Adjust margin-top according to your navbar height -->
-      <!-- Your Django template content goes here -->
+    <div class="container-centered d-flex flex-column vh-100" style="margin-top: 67px;">
       {% block content %}
       {% endblock %}
     </div>
@@ -84,37 +92,8 @@ Author: Tre
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <!-- CSRF Token Setup for AJAX -->
-    <script>
-        function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = jQuery.trim(cookies[i]);
-                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
 
-        var csrftoken = getCookie('csrftoken');
 
-        function csrfSafeMethod(method) {
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-
-        $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            }
-        });
-    </script>
 
     <!-- JavaScript to update page title (NEEDS MODIFICATION) -->
     <script>
@@ -125,8 +104,5 @@ Author: Tre
       });
     </script>
 
-    {% block extra_js %}
-    {% endblock %}
-
-</body>
+  </body>
 </html>

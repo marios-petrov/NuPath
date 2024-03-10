@@ -10,14 +10,12 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #f5f5f5; /* Example background color */
 }
 .container {
     width: 100vw; /* Viewport width */
     height: 100vh; /* Viewport height */
     display: flex;
     flex-direction: column;
-    justify-content: space-around; /* Adjust as per your content */
-    padding: 20px; /* Adjust padding */
+    justify-content: space-around;
     box-sizing: border-box;
 }

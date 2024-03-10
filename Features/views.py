@@ -9,10 +9,10 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from .models import Doodle
-
+@login_required
 def home(request):
     return render(request, 'Features/home.html')
-
+@login_required
 def resources(request):
     return render(request, 'Features/resources.html')
 @require_POST
@@ -54,7 +54,7 @@ def delete_calendar_event(request):
 
     # Return a success response
     return JsonResponse({'success': True})
-
+@login_required
 def calendar(request):
     calendar_events = CalendarEvent.objects.all();
     if request.method == 'POST':

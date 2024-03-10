@@ -1,6 +1,8 @@
+from django.apps import apps
 from django.contrib import admin
-from .models import *
 
-# Register your models here.
-admin.site.register(CalendarEvent)
-admin.site.register(Doodle)
+app = apps.get_app_config('Features')
+
+# Auto register all models using for loop
+for model_name, model in app.models.items():
+    admin.site.register(model)
