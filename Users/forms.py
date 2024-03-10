@@ -25,13 +25,17 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['image']
 
-class BadgesForm(forms.ModelForm):
-    task1 = forms.BooleanField(label='Picked classes and added them to your calendar', required=False)
-    task2 = forms.BooleanField(label='Picked a dorm room', required=False)
-    task3 = forms.BooleanField(label='Checked out the HAM menu', required=False)
-    task4 = forms.BooleanField(label='Checked out campus facilities', required=False)
-    task5 = forms.BooleanField(label='Gotten to know our faculty', required=False)
 
+# form for badges (Tre)
+class BadgesForm(forms.ModelForm):
+    picked_classes = forms.BooleanField(required=False)
+    picked_dorm_room = forms.BooleanField(required=False)
+    checked_ham_menu = forms.BooleanField(required=False)
+    checked_campus_facilities = forms.BooleanField(required=False)
+    known_faculty = forms.BooleanField(required=False)
+    
     class Meta:
         model = Profile
-        # fields = []
+        # boolean fields 
+        fields = ['picked_classes', 'picked_dorm_room', 'checked_ham_menu', 'checked_campus_facilities', 'known_faculty']
+        # I feel like this long list isn't ideal but wtv
