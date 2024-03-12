@@ -16,7 +16,7 @@ def home(request):
     recent_doodles = Doodle.objects.all().order_by('-created_at')[:5]
 
     context = {
-        'youtube_api_key': 'AIzaSyDVSk5WsEkeCoEH50pt2E1IlhCPzhA_jvw',
+        'youtube_api_key': 'HIDDEN',
         'channel_id': 'UCeGK7w0jvoIKUaGgGlit59Q',
         'recent_doodles': recent_doodles,
     }
