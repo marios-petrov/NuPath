@@ -4,10 +4,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods, require_POST
 from .forms import AddCalendarEvent
 from django.core.files.base import ContentFile
-from django.http import JsonResponse
-from django.views.decorators.http import require_http_methods
+from django.http import JsonResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from .models import *
+from django.shortcuts import render, redirect
+from .models import Post
 
 @login_required
 def home(request):
@@ -15,14 +16,18 @@ def home(request):
     recent_doodles = Doodle.objects.all().order_by('-created_at')[:5]
 
     context = {
-        'youtube_api_key': 'HIDDEN',
-        'channel_id': 'HIDDEN',
+        'youtube_api_key': 'AIzaSyDVSk5WsEkeCoEH50pt2E1IlhCPzhA_jvw',
+        'channel_id': 'UCeGK7w0jvoIKUaGgGlit59Q',
         'recent_doodles': recent_doodles,
     }
     return render(request, 'Features/home.html', context)
 @login_required
 def resources(request):
     return render(request, 'Features/resources.html')
+
+@login_required
+def catalyst(request):
+    return render(request, 'Features/catalyst.html')
 
 @login_required
 def community(request):
@@ -88,3 +93,44 @@ def calendar(request):
     else:
         return render(request, 'Features/calendar.html', {'events': calendar_events})
 
+@login_required
+def post_list(request):
+    posts = Post.objects.all().order_by('-date_posted')
+    return render(request, 'Features/community.html', {'posts': posts})
+
+@login_required
+def post_create(request):
+    if request.method == 'POST':
+        title = request.POST.get('title', '')
+        content = request.POST.get('content', '')
+        if title and content:  # Simple validation
+            Post.objects.create(title=title, content=content, author=request.user, date_posted=timezone.now())
+            return redirect('community-home')
+    # Redirect to the community page if not POST or if POST data is invalid
+    return redirect('community-home')
+
+@login_required
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.user != post.author:
+        return HttpResponseForbidden()
+    if request.method == 'POST':
+        post.delete()
+        return redirect('community-home')
+    else:
+        # For safety, only allow POST requests to delete a post
+        return HttpResponseForbidden()
+
+from django.http import JsonResponse
+
+@login_required
+def upvote_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.upvotes.add(request.user)
+    return JsonResponse({'success': True, 'upvotes': post.upvotes.count()})
+
+@login_required
+def downvote_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.downvotes.add(request.user)
+    return JsonResponse({'success': True, 'downvotes': post.downvotes.count()})
