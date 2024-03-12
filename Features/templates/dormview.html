@@ -11,13 +11,13 @@
 <!-- 5. NuPath also lists all the dorm details (room pictures, food options, location ) so they know where they are going. -->
 <body>
     {% block content %}
+    <a class="btn btn-primary m-2" href="{% url 'dorms' %}">Back to housing options...</a>
     {% if dorm.dormtype != 'Off Campus' %}
     <style>
         .carousel-item img{
             max-block-size: 50%;
         }
     </style>
-        <a class="btn btn-primary m-2" href="{% url 'dorms' %}">Back to housing options...</a>
         <!-- IMAGE CAROUSEL DISPLAY -->
         <div id="carouselExampleIndicators" class="carousel slide m-2" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -50,7 +50,7 @@
             {% csrf_token %}  <!-- this is needed to submit forms, prevents hijacking -->
             <input type="hidden" name="select" value="select_dorm">
             <input type="hidden" name="current_dormview" value="{{ dorm.id }}">
-            <button type="submit" class="{% if dorm.is_current_dorm %} btn btn-primary {% else %} btn btn-secondary {% endif %}">
+            <button type="submit" class="m-2 {% if dorm.is_current_dorm %} btn btn-primary {% else %} btn btn-secondary {% endif %}">
               {% if dorm.is_current_dorm %} Current dorm {% else %} Select dorm {% endif %}
               <!-- instead of using a boolean, in the future this should check the user's profile or a dorm profile's choice-->
             </button>
@@ -58,20 +58,23 @@
           <div class="m-2"> <!-- TEXT INFORMATION-->
             <h3>{{ dorm.dormtype }}</h3>
             <p>
-                {{ dorm.dormtype }} is located at... {{ dorm.get_address }}<br>
-                <!-- img src="https://s3.us-west-2.amazonaws.com/the-development-tracker/images/Old-Articles/minneapolis/home2-suites-by-hilton-in-the-works-for-prospect-park/ScreenShot2019-08-06at7.08.28PM-format2500wslughome2-suites-by-hilton-in-the-works-for-prospect-parkkey1.png" style="max-inline-size: 60%;" -->
+                {{ dorm.dormtype }} is located at... <a target="_blank" rel="noopener noreferrer" href="http://maps.apple.com/?q={{dorm.get_address}}">{{ dorm.get_address }}</a><br> 
+                <!-- There might be some search thing to fix here, check later. _blank opens it in a new tab. noopener noreferrer is just safer for the site!--> 
             </p>
             <h3>Food Options</h3>
-            <div class="container-fluid py-2" style="overflow: auto; "> 
-                <div class="d-flex flex-row flex-nowrap"> <!-- the flex-nowrap forces it to not to stack -->
+            <div class="card-deck"> 
+                <div class="d-flex align-items-stretch">
                     {% for option in dorm.get_foodoptions_list %} <!-- displays options associated from the dorm object -->
-                    <div class="card card-body m-2">{{ option }}</div>
+                    <div class="card card-body m-1">{{ option }}</div>
                     </div>
                     {% endfor %}
                 </div>
           </div>
         {% else %}
-          <p> I got nothing for ya, bud.</p>
+          <div class="m-2">
+          <h1> Looks like you don't live on campus... </h1>
+          <p> Have you tried looking at the <a href="">resources</a> page instead? </p> <!-- REMEMBER TO INSERT A LINK HERE-->
+          </div>
         {% endif %}
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     {% endblock %}

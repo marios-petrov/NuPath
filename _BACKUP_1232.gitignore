@@ -2,6 +2,15 @@ lib/
 lib64/
 bin/
 Lib/
+<<<<<<< HEAD
+*.DS_Store
+.idea/
+*.pyc
+__pycache__/
+venv/
+env/
+.env/
+=======
 
 # GPT-generated gitignore, link to chat here:
 # https://chat.openai.com/share/baf354c3-bf60-49d3-a328-34653baa3d97
@@ -29,5 +38,4 @@ env/
 
 # added this guy- folder for holding scratch files on my branch
 tre_scratch/
-
-requirements.txt
+>>>>>>> 1de114b2bd0d62bc11bb4207e3d74d79180807b4

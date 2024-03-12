@@ -4,8 +4,8 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-#paintArea {
-  position: relative;
+.paintArea {
+  position: center;
   border: 8px solid #0031ff;
   height: 70vh;
   width: 100%;
@@ -56,4 +56,43 @@ input[type="color"]::-webkit-color-swatch {
 input[type="color"]::moz-color-swatch {
   border-radius: 8px;
   border: 3px solid #000000;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+}
+
+#paintArea {
+    flex-grow: 1; /* Let paint area take up all available space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: center;
+    border: 8px solid #0031ff;
+    overflow: hidden;
+}
+
+canvas {
+    display: block; /* Remove default margin */
+    background-color: #fff; /* Default background */
+    position: center;
+}
+
+.options {
+    flex-basis: 30vh; /* Allocate specific space for options */
+    background-color: #0031ff;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+.options {
+  max-height: 40vh; /* Ensure options don't exceed 30% of the viewport height */
 }
