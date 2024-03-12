@@ -34,8 +34,11 @@ urlpatterns = [
     path('home/', features_views.home, name='home'),
 
     path('resources/', features_views.resources, name='resources'),
+    path('community/', features_views.community, name='community'),
+    #path('catalyst/', features_views.catalyst, name='catalyst'),
 
     path('calendar/', features_views.calendar, name='calendar'),
+    path('add_calendar_event/', features_views.add_calendar_event, name='add_calendar_event'),
     path('delete_calendar_event/', features_views.delete_calendar_event, name='delete_calendar_event'),
 
     path('doodlespace/', features_views.doodlespace, name='doodlespace'),

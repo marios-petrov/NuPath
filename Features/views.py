@@ -23,6 +23,10 @@ def home(request):
 @login_required
 def resources(request):
     return render(request, 'Features/resources.html')
+
+@login_required
+def community(request):
+    return render(request, 'Features/community.html')
 @require_POST
 @login_required
 def save_doodle(request):
@@ -51,6 +55,15 @@ def doodlespace(request):
 
 @require_POST
 @login_required
+def add_calendar_event(request):
+    # not ideal to have another view but it fixed the glaring dupe bug
+    event_form = AddCalendarEvent(request.POST or None)
+    if event_form.is_valid():
+        event_form.save()
+        return redirect('/calendar/')
+
+@require_POST
+@login_required
 def delete_calendar_event(request):
     # Extract the event ID from the request data
     event_id = request.POST.get('event_id')
@@ -63,6 +76,7 @@ def delete_calendar_event(request):
 
     # Return a success response
     return JsonResponse({'success': True})
+
 @login_required
 def calendar(request):
     calendar_events = CalendarEvent.objects.all();

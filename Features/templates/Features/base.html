@@ -44,16 +44,17 @@ Author: Tre
             <a class="nav-link" href="/calendar/">Planning</a>
           </li>
 
-          <li class="nav-item {% if request.path == '/resources/' %}active{% endif %}">
-            <a class="nav-link" href="/resources/">Resources</a>
-          </li>
 
-          <li class="nav-item {% if request.path == '/news/' %}active{% endif %}">
-            <a class="nav-link" href="/news/">News</a>
+          <li class="nav-item {% if request.path == '/catalyst/' %}active{% endif %}">
+            <a class="nav-link" href="/catalyst/">Catalyst</a>
           </li>
 
           <li class="nav-item {% if request.path == '/doodlespace/' %}active{% endif %}">
             <a class="nav-link" href="/doodlespace/">Doodles</a>
+          </li>
+
+          <li class="nav-item {% if request.path == '/resources/' %}active{% endif %}">
+            <a class="nav-link" href="/resources/">Resources</a>
           </li>
           <!-- Add other authenticated nav items here -->
           {% endif %}

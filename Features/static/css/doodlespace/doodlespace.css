@@ -92,7 +92,6 @@ canvas {
 }
 
 .options {
-    flex-basis: 30vh; /* Allocate specific space for options */
     background-color: #047bf6;
     padding: 20px;
     box-sizing: border-box;
