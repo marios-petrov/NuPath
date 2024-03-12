@@ -1,0 +1,5 @@
+#videoPlayer iframe {
+    max-width: 100%;
+    margin: auto;
+    display: block; /* This centers the video if its width is less than the container's */
+}

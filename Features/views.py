@@ -1,17 +1,25 @@
+import base64
+import json  # Import json for parsing the request body
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods, require_POST
 from .forms import AddCalendarEvent
-from .models import *
-import base64
-import json  # Import json for parsing the request body
 from django.core.files.base import ContentFile
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
-from .models import Doodle
+from .models import *
+
 @login_required
 def home(request):
-    return render(request, 'Features/home.html')
+    # Fetch the top 5 most recent doodles
+    recent_doodles = Doodle.objects.all().order_by('-created_at')[:5]
+
+    context = {
+        'youtube_api_key': 'AIzaSyDVSk5WsEkeCoEH50pt2E1IlhCPzhA_jvw',
+        'channel_id': 'UCeGK7w0jvoIKUaGgGlit59Q',
+        'recent_doodles': recent_doodles,
+    }
+    return render(request, 'Features/home.html', context)
 @login_required
 def resources(request):
     return render(request, 'Features/resources.html')
@@ -37,6 +45,7 @@ def save_doodle(request):
     else:
         return JsonResponse({'error': 'No image data provided.'}, status=400)
 
+@login_required
 def doodlespace(request):
     return render(request, 'Features/doodlespace.html')
 
