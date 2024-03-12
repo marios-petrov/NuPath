@@ -3,10 +3,35 @@
 {% load static %}
 
 {% block content %}
+<style>
+body {
+    background-image: url('/media/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.text-box {
+    background-color: rgba(255, 255, 255, 0.7); /* White background with 70% opacity */
+    border-radius: 4px; /* Optional: adds rounded corners to the box */
+    padding: 10px; /* Adds some space inside the box around the text */
+    display: inline-block; /* Wrap the background box tightly around the text */
+}
+
+/* Text shadow */
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Black shadow with 50% opacity */
+}
+
+/* Enhanced text style */
+.enhanced-text {
+    color: #000; /* Black text color */
+    font-weight: bold; /* Bold font weight */
+
+}
+</style>
 <title>Community</title>
 
-<div class="container mt-3">
-    <h2 class="text-center mb-4">NovoForum</h2>
+<div class="container mt-3 text-box">
+    <h2 class="text-center mb-4 text-shadow enhanced-text">NovoForum</h2>
     <button id="togglePostFormButton" class="btn btn-primary mb-3 float-right">Make New Post</button>
     <div class="clearfix"></div>
 
@@ -47,8 +72,7 @@
             <!-- Upvote and Downvote buttons with arrows -->
             <button type="button" class="vote-btn btn btn-success btn-sm" id="upvote-{{ post.id }}">+</button>
             <button type="button" class="vote-btn btn btn-danger btn-sm" id="downvote-{{ post.id }}">-</button>
-            <!-- Comments button -->
-            <button type="button" class="btn btn-info btn-sm">Comment</button>
+
             {% if post.author == request.user %}
             <form action="{% url 'post-delete' post.pk %}" method="post" style="display: inline;">
                 {% csrf_token %}

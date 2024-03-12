@@ -121,16 +121,23 @@ def post_delete(request, pk):
         # For safety, only allow POST requests to delete a post
         return HttpResponseForbidden()
 
-from django.http import JsonResponse
-
 @login_required
 def upvote_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    post.upvotes.add(request.user)
-    return JsonResponse({'success': True, 'upvotes': post.upvotes.count()})
+    if request.method == 'POST':
+        post = get_object_or_404(Post, pk=pk)
+        if request.user in post.downvotes.all():
+            post.downvotes.remove(request.user)
+        post.upvotes.add(request.user)
+        return JsonResponse({'success': True, 'upvotes': post.upvotes.count(), 'downvotes': post.downvotes.count()})
+    return JsonResponse({'success': False})
 
 @login_required
 def downvote_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    post.downvotes.add(request.user)
-    return JsonResponse({'success': True, 'downvotes': post.downvotes.count()})
+    if request.method == 'POST':
+        post = get_object_or_404(Post, pk=pk)
+        if request.user in post.upvotes.all():
+            post.upvotes.remove(request.user)
+        post.downvotes.add(request.user)
+        return JsonResponse({'success': True, 'upvotes': post.upvotes.count(), 'downvotes': post.downvotes.count()})
+    return JsonResponse({'success': False})
+
