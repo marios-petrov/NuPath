@@ -1,29 +1,43 @@
 {% extends "Features/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-  <html lang="en">
-
-    <div class="content-section">
-      <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-        <div class="media-body">
-          <h2 class="account-heading">{{ user.username }}{% if all_tasks_completed %} 🥇{% endif %}</h2>
+<title>Profile</title>
+<div class="container py-4">
+  <div class="row">
+    <!-- Profile image and info -->
+    <div class="col-md-4 mb-3">
+      <div class="card border-0 shadow">
+        <img src="{{ user.profile.image.url }}" class="card-img-top rounded-circle account-img" alt="Profile Image">
+        <div class="card-body text-center">
+          <h2 class="card-title">{{ user.username }}{% if all_tasks_completed %} 🥇{% endif %}</h2>
           <p class="text-secondary">{{ user.email }}</p>
         </div>
       </div>
-      
-      <form method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-          <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Onboarding Tasks</legend>
-            <div class="badges_form">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="picked_classes" name="picked_classes" {% if picked_classes %}checked{% endif %}>
-                <label class="form-check-label" for="picked_classes">
-                  Picked classes and added them to your <a target="_blank" href="{% url 'calendar' %}">calendar</a>
-                </label>
-              </div>
-              <div class="form-check">
+    </div>
+
+    <!-- Profile form and Badges -->
+    <div class="col-md-8">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <legend class="border-bottom mb-4 card-title">Profile Info</legend>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <!-- Badges section -->
+            <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Onboarding Tasks</legend>
+              <div class="badges_form">
+                <!-- Repeat this block for each badge/task -->
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="picked_classes" name="picked_classes" {% if picked_classes %}checked{% endif %}>
+                  <label class="form-check-label" for="picked_classes">
+                    Picked classes and added them to your <a target="_blank" href="{% url 'calendar' %}">calendar</a>
+                  </label>
+                </div>
+                 <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="picked_dorm_room" name="picked_dorm_room" {% if picked_dorm_room %}checked{% endif %}>
                 <label class="form-check-label" for="picked_dorm_room">
                   Picked your <a target="_blank" href="">dorm room</a>
@@ -47,17 +61,15 @@
                   Gotten to know <a target="_blank" href="https://www.ncf.edu/directory/">our faculty</a>
                 </label>
               </div>
+              </div>
+            </fieldset>
+            <div class="form-group text-center">
+                <button class="btn btn-primary" type="submit">Update</button>
             </div>
-          </fieldset>
-          <fieldset class="form-group">
-              <legend class="border-bottom mb-4">Profile Info</legend>
-              {{ u_form|crispy }}
-              {{ p_form|crispy }}
-          </fieldset>
-          <div class="form-group">
-              <button class="btn btn-outline-info" type="submit">Update</button>
-          </div>
-      </form>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
 {% endblock content %}
-
