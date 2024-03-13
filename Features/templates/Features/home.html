@@ -1,32 +1,74 @@
-{% extends './base.html' %}
+{% extends 'Features/base.html' %}
 
 {% load static %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
-    <!-- Custom Stylesheet -->
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-    <div id="videoPlayer">
-        <!-- Video player will be loaded here -->
-    </div>
-    <div id="recentShares">
-        <h2>Recent Shares</h2>
-        <!-- Additional content can be added here -->
-    </div>
 
-    <!-- Script to load a random video -->
-    <script src="{% static 'js/home.js' %}"></script>
-</body>
-</html>
+<link rel="stylesheet" href="{% static 'css/home/home.css' %}" />
+<title>Home</title>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Left column for video -->
+        <div class="col-md-6">
+            <div id="videoPlayerWrapper" class="d-flex justify-content-center mb-4">
+                <div id="videoPlayer" class="ratio ratio-16x9">
+                    <!-- Most Recent Video from NCF YouTube will be inserted here -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right column for top post and recent art -->
+        <div class="col-md-6">
+            <!-- Top Post Section -->
+            {% if highest_upvote_ratio_post %}
+            <div class="card shadow mb-4">
+            <div class="card-header">Top Forum Post of All Time!</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ highest_upvote_ratio_post.title }}</h5>
+                    <p class="card-text">{{ highest_upvote_ratio_post.content }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Posted by {{ highest_upvote_ratio_post.author }}</small>
+                        <span class="badge badge-success">+{{ highest_upvote_ratio_post.upvotes.count }}</span>
+                        <span class="badge badge-danger">-{{ highest_upvote_ratio_post.downvotes.count }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Most Recent Novo Art Section -->
+            <div class="card shadow mb-4">
+                <div class="card-header">Most Recent Novo Fine Art</div>
+                <div class="row">
+                    {% for doodle in recent_doodles %}
+                    <div class="col-6 mb-2">
+                        <div class="bg-white p-1">
+                            <img src="{{ doodle.image.url }}" class="img-fluid" alt="Doodle by {{ doodle.user.username }}">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var apiKey = '{{ youtube_api_key }}';
+        var channelId = '{{ channel_id }}';
+        var url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=1`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                var videoId = data.items[0].id.videoId;
+                var videoFrame = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                document.getElementById('videoPlayer').innerHTML = videoFrame;
+            })
+            .catch(error => console.log('Error fetching video:', error));
+    });
+</script>
+
 {% endblock %}

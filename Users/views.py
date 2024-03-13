@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import *
 
 
 def register(request):
@@ -23,19 +23,23 @@ def profile(request):
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES,
                                    instance=request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
+        badge_form = BadgesForm(request.POST, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid() and badge_form.is_valid():
             u_form.save()
             p_form.save()
+            badge_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
 
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
+        badge_form = BadgesForm(instance=request.user.profile)
 
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'badge_form': badge_form
     }
 
     return render(request, 'Users/profile.html', context)

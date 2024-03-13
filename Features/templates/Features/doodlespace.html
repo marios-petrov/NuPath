@@ -1,26 +1,15 @@
-{% extends './base.html' %}
+{% extends 'Features/base.html' %}
 
 {% load static %}
+
 {% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Drawing App</title>
-    <!-- Google Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/doodlespace/doodlespace.css' %}" />
-  </head>
-  <body>
-    <div id="paintArea">
-      <canvas id="canvas"></canvas>
-    </div>
+<link rel="stylesheet" href="{% static 'css/doodlespace/doodlespace.css' %}" />
+<title>Doodles</title>
+
+<div id="paintArea">
+   <canvas id="canvas"></canvas>
+  </div>
     <div class="options">
       <div class="tools" id="tools-section">
         <div class="tools-row">
@@ -32,20 +21,16 @@
             <h5>Color:</h5>
             <input type="color" id="color-input" />
           </div>
-          <div class="tools-wrapper">
-            <h5>Background:</h5>
-            <input type="color" id="color-background" />
-          </div>
         </div>
         <div class="tools-row">
           <button id="button-clear">Clear</button>
           <button id="button-pen">Pen</button>
           <button id="button-erase">Erase</button>
+          <button id="button-save">Share</button>
         </div>
       </div>
-    </div>
-    <!-- Script-->
-    <script src="{% static 'js/doodlespace/doodlespace.js' %}"></script>
-  </body>
-</html>
+</div>
+<!-- Script-->
+<script src="{% static 'js/doodlespace/doodlespace.js' %}"></script>
+
 {% endblock %}

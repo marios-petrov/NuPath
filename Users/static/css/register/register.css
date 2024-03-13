@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+  .container {
+    padding: 10px; /* Less padding on smaller screens */
+  }
+
+  /* You might want to adjust font sizes, input sizes, etc. */
+  input, textarea, select, button {
+    font-size: 14px; /* Smaller font size on mobile */
+  }
+
+
+}

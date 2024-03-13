@@ -6,20 +6,21 @@
 }
 .paintArea {
   position: center;
-  border: 8px solid #0031ff;
+  border: 8px solid #047bf6;
   height: 70vh;
   width: 100%;
 }
 .options {
   height: 30vh;
-  background-color: #0031ff;
-  padding: 30px;
+  background-color: #047bf6;
 }
+
 .tools-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between; /* This will space out the children evenly */
+  align-items: center;
+  gap: 10px; /* Reduced gap between flex items */
+  /* Other styles remain unchanged */
 }
 .tools-row h5 {
   margin-bottom: 10px;
@@ -34,11 +35,15 @@
   border: none;
   background-color: #ffffff;
   font-size: 18px;
-  color: #0031ff;
+  color: #047bf6;
+  width: 100%;
 }
 input[type="range"] {
-  height: 40px;
+  touch-action: manipulation;
+  max-width: 200px; /* Adjust the max-width as needed */
+  width: 100%; /* Make it responsive by setting width to 100% */
 }
+
 input[type="color"] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -76,7 +81,7 @@ body {
     justify-content: center;
     align-items: center;
     position: center;
-    border: 8px solid #0031ff;
+    border: 8px solid #047bf6;
     overflow: hidden;
 }
 
@@ -87,12 +92,9 @@ canvas {
 }
 
 .options {
-    flex-basis: 30vh; /* Allocate specific space for options */
-    background-color: #0031ff;
+    background-color: #047bf6;
     padding: 20px;
     box-sizing: border-box;
     overflow: auto;
 }
-.options {
-  max-height: 40vh; /* Ensure options don't exceed 30% of the viewport height */
-}
+

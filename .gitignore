@@ -2,6 +2,17 @@ lib/
 lib64/
 bin/
 Lib/
+*.DS_Store
+.idea/
+*.pyc
+__pycache__/
+venv/
+env/
+.env/
+lib/
+lib64/
+bin/
+Lib/
 
 # GPT-generated gitignore, link to chat here:
 # https://chat.openai.com/share/baf354c3-bf60-49d3-a328-34653baa3d97

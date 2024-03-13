@@ -1,0 +1,72 @@
+/* Styles for the video player */
+#videoPlayer iframe {
+    width: 100%;
+    height: auto; /* Adjust this if you want a fixed height */
+    aspect-ratio: 16 / 9;
+    border-radius: 0.25rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    margin-bottom: 2rem;
+}
+
+/* Styles for the Most Recent Novo Art section */
+#recentDoodles .card {
+    width: 100%; /* Adjust if you want a maximum width */
+    border-radius: 0.25rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+#recentDoodles .card-img-top {
+    width: 100%; /* Makes the image responsive */
+    height: auto; /* Maintains aspect ratio */
+    object-fit: cover; /* Ensures the image covers the card area */
+    border-top-left-radius: 0.25rem; /* Matches the card border radius */
+    border-top-right-radius: 0.25rem; /* Matches the card border radius */
+}
+
+/* Additional global styles if needed */
+.card-body p {
+    margin-bottom: 0; /* Removes the default margin-bottom from paragraphs if desired */
+}
+
+/* Styles for the video player */
+#videoPlayer iframe {
+    width: 100%;
+    height: auto; /* This will keep the aspect ratio intact */
+}
+
+/* Styles for the video wrapper to constrain its size */
+#videoPlayerWrapper {
+    max-width: 540px; /* Adjust this value as needed */
+    margin: auto;
+}
+
+/* Adjust the card images in the right column to fit the space */
+.card-img-top {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+/* Background styling for the "Most Recent Novo Art" section */
+.recent-doodles-bg {
+    padding: 2rem 0; /* Adjust the padding as needed */
+    background-color: #fff; /* Or any color or image you'd like to add */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for a "lifted card" effect */
+}
+/* Styles for the cards to improve readability over dark backgrounds */
+.card.bg-light {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white for readability */
+}
+
+/* Styling for the doodle images to ensure they are fully contained within their card */
+.bg-white {
+    background-color: #fff;
+    border-radius: 0.25rem;
+}
+body {
+    background-image: url('/media/home.jpg');
+    background-size: cover;
+    background-position: center;
+}

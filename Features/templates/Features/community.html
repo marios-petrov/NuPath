@@ -1,0 +1,163 @@
+{% extends 'Features/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+body {
+    background-image: url('/media/home.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.text-box {
+    background-color: rgba(255, 255, 255, 0.7); /* White background with 70% opacity */
+    border-radius: 4px; /* Optional: adds rounded corners to the box */
+    padding: 10px; /* Adds some space inside the box around the text */
+    display: inline-block; /* Wrap the background box tightly around the text */
+}
+
+/* Text shadow */
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Black shadow with 50% opacity */
+}
+
+/* Enhanced text style */
+.enhanced-text {
+    color: #000; /* Black text color */
+    font-weight: bold; /* Bold font weight */
+
+}
+</style>
+<title>Community</title>
+
+<div class="container mt-3 text-box">
+    <h2 class="text-center mb-4 text-shadow enhanced-text">NovoForum</h2>
+    <button id="togglePostFormButton" class="btn btn-primary mb-3 float-right">Make New Post</button>
+    <div class="clearfix"></div>
+
+    <!-- Post Creation Form, initially hidden -->
+    <div id="postForm" style="display: none;">
+        <form action="{% url 'post-create' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Content:</label>
+                <textarea class="form-control" name="content" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Submit Post</button>
+            <button type="button" class="btn btn-secondary" onclick="togglePostForm()">Cancel</button>
+        </form>
+        <hr>
+    </div>
+
+    {% for post in posts %}
+    <div class="card mb-3" id="post-{{ post.id }}">
+        <div class="card-header">
+            <strong>{{ post.title }}</strong>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ post.content }}</p>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <!-- Display upvotes to downvotes ratio -->
+                    <span id="vote-count-{{ post.id }}">{{ post.upvotes.count }}:{{ post.downvotes.count }}</span>
+                </div>
+                <div class="text-muted">
+                    Posted by {{ post.author }} on {{ post.date_posted|date:"F d, Y" }}
+                </div>
+            </div>
+            <!-- Upvote and Downvote buttons with arrows -->
+            <button type="button" class="vote-btn btn btn-success btn-sm" id="upvote-{{ post.id }}">+</button>
+            <button type="button" class="vote-btn btn btn-danger btn-sm" id="downvote-{{ post.id }}">-</button>
+
+            {% if post.author == request.user %}
+            <form action="{% url 'post-delete' post.pk %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+        <p>No posts to show.</p>
+    {% endfor %}
+</div>
+
+<script>
+    document.getElementById('togglePostFormButton').addEventListener('click', function() {
+        var formStyle = document.getElementById('postForm').style;
+        formStyle.display = formStyle.display === 'block' ? 'none' : 'block';
+    });
+
+    function togglePostForm() {
+        var formStyle = document.getElementById('postForm').style;
+        formStyle.display = 'none';
+    }
+
+    // Handle upvote and downvote AJAX requests
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('.vote-btn').forEach(function(button) {
+            button.onclick = function() {
+                var postId = this.id.split('-')[1];
+                var action = this.id.split('-')[0];
+                sendVote(postId, action);
+            };
+        });
+    });
+
+    function sendVote(postId, action) {
+    var xhr = new XMLHttpRequest();
+    var url = '';
+
+    // Determine which URL to use based on the action
+    if (action === 'upvote') {
+        url = "{% url 'post-upvote' '0' %}".replace('0', postId);
+    } else if (action === 'downvote') {
+        url = "{% url 'post-downvote' '0' %}".replace('0', postId);
+    }
+
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+
+    xhr.onload = function() {
+        if (this.status == 200) {
+            var response = JSON.parse(this.responseText);
+            if (response.success) {
+                // Update the display of upvotes and downvotes
+                document.getElementById('vote-count-' + postId).innerText = response.upvotes + ':' + response.downvotes;
+            } else {
+                // Handle error (optional)
+                console.error('Error upvoting or downvoting the post.');
+            }
+        } else {
+            // Handle HTTP error (optional)
+            console.error('HTTP error: ' + this.status);
+        }
+    };
+
+    xhr.send('action=' + action + '&postId=' + postId);
+}
+
+// Function to get the CSRF token
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+
+{% endblock %}
