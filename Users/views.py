@@ -37,7 +37,17 @@ def profile(request):
         badge_form = BadgesForm(instance=request.user.profile)
 
 
+    # Calculate if all tasks are completed
     pf = request.user.profile
+
+    all_tasks_completed = all([
+        pf.picked_classes == True,
+        pf.picked_dorm_room == True,
+        pf.checked_ham_menu == True,
+        pf.checked_campus_facilities == True,
+        pf.known_faculty == True
+    ]) # (did this for the little medal icon on profile page)
+
     context = {
         'u_form': u_form,
         'p_form': p_form,
@@ -46,7 +56,8 @@ def profile(request):
         'picked_dorm_room': pf.picked_dorm_room,
         'checked_ham_menu': pf.checked_ham_menu,
         'checked_campus_facilities': pf.checked_campus_facilities,
-        'known_faculty': pf.known_faculty
+        'known_faculty': pf.known_faculty,
+        'all_tasks_completed': all_tasks_completed
     }
 
     return render(request, 'Users/profile.html', context)
