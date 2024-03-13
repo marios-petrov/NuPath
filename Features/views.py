@@ -26,7 +26,7 @@ def home(request):
     ).order_by('-upvote_ratio').first()
 
     context = {
-        'youtube_api_key': 'AIzaSyDVSk5WsEkeCoEH50pt2E1IlhCPzhA_jvw',
+        'youtube_api_key': '',
         'channel_id': 'UCeGK7w0jvoIKUaGgGlit59Q',
         'recent_doodles': recent_doodles,
         'highest_upvote_ratio_post': highest_upvote_ratio_post,
@@ -157,7 +157,6 @@ def downvote_post(request, pk):
 @require_http_methods(["GET","POST"])
 def dorms(request):
 
-    # Querysets for the context
     dorms = Dorms.objects.all() #all the dorms available
     current_dorm = Dorms.objects.filter(is_current_dorm=True).first() #user's current dorm
     #using first() is supposed to be bad practice but there shouldn't be anything else in this list!
@@ -179,7 +178,7 @@ def dorms(request):
         'current_dorm': current_dorm,
         'checklist': checklist
     }
-    return render(request, 'dorms.html', context) 
+    return render(request, 'Features/dorms.html', context) 
 
 @require_http_methods(["GET", "POST"])
 def dormview(request, dorm): 
@@ -215,7 +214,7 @@ def dormview(request, dorm):
         'current_dorm': current_dorm
     }
     
-    return render(request, 'dormview.html', context)
+    return render(request, 'Features/dormview.html', context)
 
 # Create your views here.
 def doodlespace(request):
@@ -236,5 +235,5 @@ def catalyst(request):
         shownquote = quotes.last_displayed_quote
 
     
-    return render(request, 'catalyst.html', {'shownquote' : shownquote})
+    return render(request, 'Features/catalyst.html', {'shownquote' : shownquote})
 

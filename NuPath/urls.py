@@ -51,6 +51,10 @@ urlpatterns = [
     # Catalyst
     path('catalyst/', features_views.catalyst, name='catalyst'),
 
+    # Dorms
+    path('dorms/', features_views.dorms, name='dorms'),
+    path('dormview/<int:dorm>', features_views.dormview, name='dormview'), 
+
     # Calendar
     path('calendar/', features_views.calendar, name='calendar'),
     path('add_calendar_event/', features_views.add_calendar_event, name='add_calendar_event'),

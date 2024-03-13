@@ -48,7 +48,7 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={'pk': self.pk})
 
 class UserChecklist(models.Model):
-    #user = models.ForeignKey('YourUserModel', on_delete=models.CASCADE)  # Replace 'YourUserModel' with your actual user model
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     access_ncf_email = models.BooleanField(default=False)
     subscribe_to_ncfsafe = models.BooleanField(default=False)
@@ -59,15 +59,14 @@ class UserChecklist(models.Model):
     parking_pass = models.BooleanField(default=False)
     download_corq = models.BooleanField(default=False)
 
-    #def __str__(self):
-    #    return f'Checklist for User {self.user.username}'
+    def __str__(self):
+        return f'Checklist for User {self.user.username}'
 
 class Dorms(models.Model):
     dormtype = models.CharField(max_length=200)
-    address = models.CharField(max_length=200)  # i may make this editable at some point for off-campus students.
+    address = models.CharField(max_length=200) 
 
     #there's a better way to have several images, but i'd prefer to have a fixed three for each dorm. 
-    # alternatives later: manytomany....? or charfield storing urls...
     dormpic1 = models.ImageField(upload_to='dormview', default='default.webp', blank=True) #THIS ONLY WORKS WITH MEDIA FILE. FOR SOME REASON
     dormpic2 = models.ImageField(upload_to='dormview', default='default.webp', blank=True)
     dormpic3 = models.ImageField(upload_to='dormview', default='default.webp', blank=True)
@@ -100,7 +99,9 @@ class Dorms(models.Model):
 
 class Quotes(models.Model):
     # I'm going to be honest I don't want to use a model for this but IDK where I'd store this...
-    #user = models.ForeignKey('YourUserModel', on_delete=models.CASCADE)  # Replace 'YourUserModel' with your actual user model
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #This may be superfluous, but the idea is that everybody got a different quote, I think...
+
     quotebank = models.JSONField()
     last_displayed_quote = models.TextField(blank=True, null=True)  # Field to store the last displayed quote
 
