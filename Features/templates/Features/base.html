@@ -8,31 +8,31 @@ Author: Tre
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NuPath{% endblock %}</title> <!-- Default title -->
     {% load static %}
     <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
     <style>
       /* Brighten the text of active navbar items */
       .navbar-nav .nav-item.active .nav-link {
         color: #fff; /* Change to your desired color */
-        font-weight: bold;
+        font-weight: bold; /* Optionally make the text bold */
       }
-
     </style>
-</head>
+  </head>
 
   <body>
     <!-- Navbar -->
-     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-      <a class="navbar-brand" href="#">NuPath</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <a class="navbar-brand m-1" href="#">NuPath</a>
+
+      <button class="navbar-toggler m-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          {% if user.is_authenticated %}
-          <!-- Insert authenticated user nav items -->
+          <!-- Left-justified urls VVV -->
           <li class="nav-item {% if request.path == '/home/' %}active{% endif %}">
             <a class="nav-link" href="/home/">Home</a>
           </li>
@@ -45,57 +45,53 @@ Author: Tre
             <a class="nav-link" href="/calendar/">Planning</a>
           </li>
 
+          <li class="nav-item {% if request.path == '/resources/' %}active{% endif %}">
+            <a class="nav-link" href="/timer/">Resources</a>
+          </li>
 
-          <li class="nav-item {% if request.path == '/catalyst/' %}active{% endif %}">
-            <a class="nav-link" href="/catalyst/">Catalyst</a>
+          <li class="nav-item {% if request.path == '/news/' %}active{% endif %}">
+            <a class="nav-link" href="/news/">News</a>
           </li>
 
           <li class="nav-item {% if request.path == '/doodlespace/' %}active{% endif %}">
             <a class="nav-link" href="/doodlespace/">Doodles</a>
           </li>
 
-          <li class="nav-item {% if request.path == '/resources/' %}active{% endif %}">
-            <a class="nav-link" href="/resources/">Resources</a>
-          </li>
-          <!-- Add other authenticated nav items here -->
-          {% endif %}
         </ul>
-
+        <!-- Right-justified buttons -->
         <ul class="navbar-nav ms-auto">
-          {% if user.is_authenticated %}
           <li class="nav-item {% if request.path == '/profile/' %}active{% endif %}">
             <a class="nav-link" href="/profile/">Profile</a>
           </li>
-          <li class="nav-item">
-            <form action="{% url 'logout' %}" method="post" class="form-inline">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-link nav-link">Logout</button>
-            </form>
+
+          <li class="nav-item {% if request.path == '/logout/' %}active{% endif %}">
+            <a class="nav-link" href="/logout/">Logout</a>
           </li>
-          {% else %}
-          <li class="nav-item {% if request.path == '/login/' %}active{% endif %}">
-            <a class="nav-link" href="/login/">Login</a>
-          </li>
-          <li class="nav-item {% if request.path == '/register/' %}active{% endif %}">
-            <a class="nav-link" href="/register/">Register</a>
-          </li>
-          {% endif %}
         </ul>
       </div>
     </nav>
 
     <!-- Your content -->
-    <div class="container-centered d-flex flex-column vh-100" style="margin-top: 67px;">
+    <div class="container-centered" style="margin-top: 75px;"> <!-- Adjust margin-top according to your navbar height -->
+      <!-- Your Django template content goes here -->
       {% block content %}
       {% endblock %}
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
-
+    
+    
+    
+    <!-- JavaScript to update page title -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var pageTitle = document.title; // Get the current page title
+        var brandElement = document.querySelector(".navbar-brand"); // Select the navbar brand element
+        brandElement.textContent += " - " + pageTitle; // Update the navbar brand text with page title
+      });
+    </script>
 
   </body>
 </html>

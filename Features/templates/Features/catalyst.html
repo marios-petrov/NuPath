@@ -1,7 +1,35 @@
-{% extends 'Features/base.html' %}
-
+{% extends './base.html' %}
 {% load static %}
+<!-- Unfortunately, Andy made this one.-->
+<title>{% block title %}Catalyst{% endblock %}</title>
+<!--link href="css/FeedEk.css" rel="stylesheet" type="text/css" /-->
+    {% block content %}
+    <style>
+        .Catalyst{
+            height: fit-content;
+            border: 1px solid black;
+        }
+    </style>
 
-{% block content %}
+    <!-- MOTIVATIONAL QUOTE SECTION -->
+    <div class="container card justify-content-center w-75 p-2 mx-auto" style="margin: 8%;">
+        <p class="card-header">Quote of the Week</p>
+        <div class="card-body">
+        <p class="card-text">{{ shownquote }}</p>
+        </div>
+    </div>
 
-{% endblock %}
+    <!-- NEWS SECTION -->
+    <h2 class="m-3">And now, the news...</h2> 
+    <div class="ratio ratio-1x1 m-3" style="margin: 10px; padding:20%;">
+        <iframe src="https://ncfcatalyst.com/archives/" title="Catalyst" sandbox="allow-scripts" ></iframe>
+            <!-- This was supposed to be the FeedEk plugin.... but alas, I already agreed to this feature before 
+                I found out that the RSS feed would be super broken...-->
+    </div> 
+
+    <!--div class="ratio ratio-4x3" style="padding:20%;"> This is for if I manage to make same-origin iframe work...
+        <iframe src="{% url 'doodlespace' %}" sandbox="allow-scripts allow-same-origin" ></iframe>
+    </div --> 
+ 
+    <div style="padding: 10px;">
+    {% endblock %}
