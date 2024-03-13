@@ -7,5 +7,6 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('calendar/', views.calendar, name='calendar'),
     path('dorms', views.dorms, name='dorms'),
-    path('dormview/<int:dorm>', views.dormview, name='dormview'), #figure out dormtype
+    path('dormview/<int:dorm>', views.dormview, name='dormview'), 
+    path('catalyst/', views.catalyst, name='catalyst')
 ]

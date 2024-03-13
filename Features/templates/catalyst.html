@@ -1,25 +1,29 @@
+{% extends './base.html' %}
 {% load static %}
+<!-- Unfortunately, Andy made this one.-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Catalyst{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-language" content="en" />
+<title>{% block title %}Catalyst{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
+<!--link href="css/FeedEk.css" rel="stylesheet" type="text/css" /-->
 </head>
 <body>
-    <script>
-        $('#divFeed').FeedEk({
-            FeedUrl:'https://ncfcatalyst.com/feed',
-            MaxCount: 5,
-            ShowDesc: true,
-            ShowPubDate: true,
-            DescCharacterLimit: 100
-            });
-    </script>
-    <div id="divFeed"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="FeedEk.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    {% block content %}
+    <style>
+        .Catalyst{
+            height: fit-content;
+        }
+    </style>
+    <div class="ratio ratio-1x1" style="padding:20%;">
+    <iframe src="https://ncfcatalyst.com/archives/" title="Catalyst" sandbox="allow-scripts"></iframe>
+    </div> 
+    <!-- This was supposed to be the FeedEk plugin.... but alas, I already agreed to this feature despite 
+    feedek for some reason being incredibly broken-->
+    <div style="padding: 10px;">
+    {% endblock %}
 </body>
+
 </html>

@@ -13,13 +13,14 @@ def doodlespace(request):
 def dorms(request):
 
     # Querysets for the context
-    dorms = Dorms.objects.all() #this is here to display all the dorms available
-    current_dorm = Dorms.objects.filter(is_current_dorm=True).first() #this is here to display the user's current dorm
-    #checklist = Checklist.objects.all()
-    checklist = UserChecklist.objects.all().first() #this should be user=request.user when linked, instead of first()
+    dorms = Dorms.objects.all() #all the dorms available
+    current_dorm = Dorms.objects.filter(is_current_dorm=True).first() #user's current dorm
+    #using first() is supposed to be bad practice but there shouldn't be anything else in this list!
+    checklist = UserChecklist.objects.all().first() #this should be user=request.user when users are linked, instead of first()
 
-    if request.method == 'POST': #gpt generated
-        user_checklist = checklist
+    #GPT generated
+    if request.method == 'POST': 
+        user_checklist = checklist #right now this is because it's grabbing the first one, but this might not be needed in the future
         for field in user_checklist._meta.fields: #for boolean field in the user checklist
             field_name = field.name #capture the field
             if field_name != 'user' and field_name in request.POST: #if the field isn't the user field and is the request
@@ -37,14 +38,24 @@ def dorms(request):
 
 @require_http_methods(["GET", "POST"])
 def dormview(request, dorm): 
+    """Shows a dorm object from the dorms page. Allows user to select the dorm as their current dorm.
+    Deselects any other dorm they have selected currently.
+
+    Args:
+        request: any http method request that comes from the dormview page.
+        dorm (int): The object id of the dorm object. 
+
+    Returns:
+        render(request, dormview, context): _description_
+    """
     dorm = Dorms.objects.get(id=dorm)
     current_dorm = Dorms.objects.filter(is_current_dorm=True)
 
     if request.method == "POST":
         if 'select' in request.POST: 
             current_dormview = request.POST.get('current_dormview', '') # gets object id to set it to true/false!
-            dormselect = Dorms.objects.get(id=current_dormview)
-            dormselect.is_current_dorm = not dormselect.is_current_dorm
+            dormselect = Dorms.objects.get(id=current_dormview) #get just the dorm you're looking at
+            dormselect.is_current_dorm = not dormselect.is_current_dorm #toggle the dorm
             dormselect.save()
 
         for other_dorm in current_dorm: # unselects anything other dorm selected as true!
@@ -67,6 +78,9 @@ def doodlespace(request):
 
 def home(request):
     return render(request, 'Features/home.html')
+
+def catalyst(request):
+    return render(request, 'catalyst.html')
 
 # view for deleting calendar event, GPT chat link that helped create it below:
 # https://chat.openai.com/share/ef154ed4-f499-4712-890c-9113af4dfe38
