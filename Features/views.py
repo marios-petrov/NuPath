@@ -7,6 +7,7 @@ from .forms import AddCalendarEvent
 from django.contrib.auth.decorators import login_required
 import datetime
 from Users.models import Profile # for leaderboard page
+from django.db.models import Q # for 'or' statements in filters
 
 # Create your views here.
 @login_required
@@ -29,7 +30,8 @@ def delete_calendar_event(request):
     event = get_object_or_404(CalendarEvent, pk=event_id)
     
     # Delete the event from the database
-    event.delete()
+    if event.author is not None: # can't delete academic calendar events silly!
+        event.delete()
     
     # Return a success response
     return JsonResponse({'success': True})
@@ -48,11 +50,12 @@ def add_calendar_event(request):
 
 @login_required
 def calendar(request):
-    calendar_events = CalendarEvent.objects.all().filter(author = request.user);
+    calendar_events = CalendarEvent.objects.all().filter(Q(author=request.user) | Q(author=None));
+    # calendar events where author is None are academic calendar events
     today = datetime.datetime.now()
     start = today.replace(hour=0, minute=0, second=0, microsecond=0)
     end = today.replace(hour=23, minute=59, second=59, microsecond=999999)
-    todays_events = CalendarEvent.objects.filter(author=request.user, start_time__range=(start, end))
+    todays_events = CalendarEvent.objects.filter(Q(author=request.user) | Q(author=None), start_time__range=(start, end))
     # ^ the events filtered for the ones happening today
     return render(request, 'Features/calendar.html', {'events': calendar_events, 'todays_events': todays_events})
 
