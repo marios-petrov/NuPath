@@ -3,20 +3,55 @@
 {% load static %}
 
 {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/home/home.css' %}" />
 <title>Home</title>
 
-<div id="videoPlayer">
-    <!-- Most Recent Video from NCF YouTube will be inserted here -->
-</div>
-<div id="recentDoodles">
-    <h2>Most Recent Novo Art</h2>
-    <!-- Top 5 Most Recent Doodles -->
-    {% for doodle in recent_doodles %}
-    <div class="doodle">
-        <img src="{{ doodle.image.url }}" alt="Doodle by {{ doodle.user.username }}">
-        <p>Created by {{ doodle.user.username }}</p>
+<div class="container mt-5">
+    <div class="row">
+        <!-- Left column for video -->
+        <div class="col-md-6">
+            <div id="videoPlayerWrapper" class="d-flex justify-content-center mb-4">
+                <div id="videoPlayer" class="ratio ratio-16x9">
+                    <!-- Most Recent Video from NCF YouTube will be inserted here -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right column for top post and recent art -->
+        <div class="col-md-6">
+            <!-- Top Post Section -->
+            {% if highest_upvote_ratio_post %}
+            <div class="card shadow mb-4">
+            <div class="card-header">Top Forum Post of All Time!</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ highest_upvote_ratio_post.title }}</h5>
+                    <p class="card-text">{{ highest_upvote_ratio_post.content }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Posted by {{ highest_upvote_ratio_post.author }}</small>
+                        <span class="badge badge-success">+{{ highest_upvote_ratio_post.upvotes.count }}</span>
+                        <span class="badge badge-danger">-{{ highest_upvote_ratio_post.downvotes.count }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Most Recent Novo Art Section -->
+            <div class="card shadow mb-4">
+                <div class="card-header">Most Recent Novo Fine Art</div>
+                <div class="row">
+                    {% for doodle in recent_doodles %}
+                    <div class="col-6 mb-2">
+                        <div class="bg-white p-1">
+                            <img src="{{ doodle.image.url }}" class="img-fluid" alt="Doodle by {{ doodle.user.username }}">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
-    {% endfor %}
 </div>
 
 <script>

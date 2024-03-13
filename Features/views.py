@@ -10,17 +10,26 @@ from .models import *
 from django.shortcuts import render, redirect
 from .models import Post
 
+from django.db.models import Count, F
+
 @login_required
 def home(request):
     # Fetch the top 5 most recent doodles
-    recent_doodles = Doodle.objects.all().order_by('-created_at')[:5]
+    recent_doodles = Doodle.objects.all().order_by('-created_at')[:4]
+
+    # Calculate the highest upvote ratio
+    highest_upvote_ratio_post = Post.objects.annotate(
+        upvote_ratio=Count('upvotes') - Count('downvotes')
+    ).order_by('-upvote_ratio').first()
 
     context = {
-        'youtube_api_key': 'HIDDEN',
+        'youtube_api_key': 'AIzaSyDVSk5WsEkeCoEH50pt2E1IlhCPzhA_jvw',
         'channel_id': 'UCeGK7w0jvoIKUaGgGlit59Q',
         'recent_doodles': recent_doodles,
+        'highest_upvote_ratio_post': highest_upvote_ratio_post,
     }
     return render(request, 'Features/home.html', context)
+
 @login_required
 def resources(request):
     return render(request, 'Features/resources.html')
