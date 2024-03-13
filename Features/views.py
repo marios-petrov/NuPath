@@ -6,6 +6,7 @@ from .models import CalendarEvent
 from .forms import AddCalendarEvent
 from django.contrib.auth.decorators import login_required
 import datetime
+from Users.models import Profile # for leaderboard page
 
 # Create your views here.
 @login_required
@@ -54,3 +55,15 @@ def calendar(request):
     todays_events = CalendarEvent.objects.filter(author=request.user, start_time__range=(start, end))
     # ^ the events filtered for the ones happening today
     return render(request, 'Features/calendar.html', {'events': calendar_events, 'todays_events': todays_events})
+
+@login_required
+def leaderboard(request):
+    leaderboard_members = Profile.objects.all().filter(
+        picked_classes = True,
+        picked_dorm_room = True,
+        checked_ham_menu = True,
+        checked_campus_facilities = True,
+        known_faculty = True
+    ) # get all profiles with fully completed onboarding tasks
+
+    return render(request, 'Features/leaderboard.html', {'members': leaderboard_members})
