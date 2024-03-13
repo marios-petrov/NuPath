@@ -132,8 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-
-
     // Delete event button click handler
     $('#deleteEventButton').on('click', function() {
         var eventId = $(this).data('event-id');
@@ -177,6 +175,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // thank you gpt once again, updated link here:
 // https://chat.openai.com/share/ef154ed4-f499-4712-890c-9113af4dfe38
+
+// scuffed workaround for notifications
+function notify() {
+    let events_today = [ // holds all of the events that happen today
+        {% for e in todays_events %}
+        {
+            title: '{{e.title}}',
+            time: '{{e.start_time|date:"c"}}',
+            description: '{{e.description}}'
+        },
+        {% endfor %}
+    ];
+
+    // console.log(events_today);
+
+    let currentDateTime = new Date();
+    currentDateTime.setHours(currentDateTime.getHours() - 4); // Subtract 4 hours from current time
+    let current_time = currentDateTime.toISOString().slice(11, 16); // Get current time in 24-hour format (HH:mm)
+
+    // console.log("current time: " + current_time);
+
+    for (let i = 0; i < events_today.length; i++) {
+        let event = events_today[i];
+
+        let event_time_parts = event.time.split(':'); // Split event time into hours and minutes
+        let event_time_hh_mm = (event_time_parts[0] + ':' + event_time_parts[1]).slice(-5); // Combine hours and minutes
+
+        // both current_time and event_time_hh_mm are 24-hour time strings of "HH:mm"
+
+        if (event_time_hh_mm === current_time) {
+            let actual_time_parts = event_time_hh_mm.split(":"); // turning 24-hr back into 12-hr string
+            let actual_hours = parseInt(actual_time_parts[0]) % 12 || 12;
+            let actual_time = actual_hours + ":" + actual_time_parts[1];
+            let message = event.title + " at " + actual_time + "!";
+            alert(message);
+        }
+    }
+}
+
+let notifications = setInterval(notify, 60000); // check every 60 seconds for event start (ik its scuffed)
+
 
 </script>
 
