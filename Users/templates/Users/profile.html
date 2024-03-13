@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <title>Profile</title>
+
 <div class="container py-4">
   <div class="row">
     <!-- Profile image and info -->
@@ -9,7 +10,7 @@
       <div class="card border-0 shadow">
         <img src="{{ user.profile.image.url }}" class="card-img-top rounded-circle account-img" alt="Profile Image">
         <div class="card-body text-center">
-          <h2 class="card-title">{{ user.username }}</h2>
+          <h2 class="account-heading">{{ user.username }}{% if all_tasks_completed %} 🥇{% endif %}</h2>
           <p class="text-secondary">{{ user.email }}</p>
         </div>
       </div>
@@ -32,31 +33,31 @@
               <div class="badges_form">
                 <!-- Repeat this block for each badge/task -->
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="picked_classes" name="picked_classes">
-                  <label class="form-check-label" for="picked_classes">
-                    Picked classes and added them to your <a target="_blank" href="{% url 'calendar' %}">calendar</a>
-                  </label>
+                <input class="form-check-input" type="checkbox" id="picked_classes" name="picked_classes" {% if picked_classes %}checked{% endif %}>
+                <label class="form-check-label" for="picked_classes">
+                  Picked classes and added them to your <a target="_blank" href="{% url 'calendar' %}">calendar</a>
+                </label>
                 </div>
-                 <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="picked_dorm_room" name="picked_dorm_room">
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="picked_dorm_room" name="picked_dorm_room" {% if picked_dorm_room %}checked{% endif %}>
                 <label class="form-check-label" for="picked_dorm_room">
                   Picked your <a target="_blank" href="">dorm room</a>
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="checked_ham_menu" name="checked_ham_menu">
-                <label class="form-check-label" for="checked_ham_menu">
-                  Checked the <a target="_blank" href="https://www.metznewcollege.com/">HAM menu</a>
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="checked_campus_facilities" name="checked_campus_facilities">
+                <input class="form-check-input" type="checkbox" id="checked_campus_facilities" name="checked_campus_facilities" {% if checked_campus_facilities %}checked{% endif %}>
                 <label class="form-check-label" for="checked_campus_facilities">
                   Checked out <a target="_blank" href="https://www.ncf.edu/departments/">campus facilities</a>
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="known_faculty" name="known_faculty">
+                <input class="form-check-input" type="checkbox" id="checked_ham_menu" name="checked_ham_menu" {% if checked_ham_menu %}checked{% endif %}>
+                <label class="form-check-label" for="checked_ham_menu">
+                  Checked the <a target="_blank" href="https://www.metznewcollege.com/">HAM menu</a>
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="known_faculty" name="known_faculty" {% if known_faculty %}checked{% endif %}>
                 <label class="form-check-label" for="known_faculty">
                   Gotten to know <a target="_blank" href="https://www.ncf.edu/directory/">our faculty</a>
                 </label>

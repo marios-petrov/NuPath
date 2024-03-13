@@ -16,7 +16,6 @@
                     <!-- Most Recent Video from NCF YouTube will be inserted here -->
                 </div>
             </div>
-
         </div>
 
         <!-- Right column for top post and recent art -->
@@ -39,7 +38,7 @@
 
             <!-- Most Recent Novo Art Section -->
             <div class="card shadow mb-4">
-                <div class="card-header">Most Recent Novo Fine Art</div>
+                <div class="card-header">Top Forum Post of All Time!</div>
                 <div class="row">
                     {% for doodle in recent_doodles %}
                     <div class="col-6 mb-2">
@@ -55,7 +54,7 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+     document.addEventListener('DOMContentLoaded', function() {
         var apiKey = '{{ youtube_api_key }}';
         var channelId = '{{ channel_id }}';
         var url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=1`;

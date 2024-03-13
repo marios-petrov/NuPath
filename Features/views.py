@@ -1,15 +1,18 @@
 import base64
 import json  # Import json for parsing the request body
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_http_methods, require_POST
-from .forms import AddCalendarEvent
 from django.core.files.base import ContentFile
 from django.http import JsonResponse, HttpResponseForbidden
-from django.contrib.auth.decorators import login_required
 from .models import *
-from django.shortcuts import render, redirect
 from .models import Post
-
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_http_methods, require_POST
+from django.http import JsonResponse
+from .models import CalendarEvent
+from .forms import AddCalendarEvent
+from django.contrib.auth.decorators import login_required
+import datetime
+from Users.models import Profile # for leaderboard page
+from django.db.models import Q # for 'or' statements in filters
 from django.db.models import Count, F
 
 @login_required
@@ -23,7 +26,7 @@ def home(request):
     ).order_by('-upvote_ratio').first()
 
     context = {
-        'youtube_api_key': 'AIzaSyDVSk5WsEkeCoEH50pt2E1IlhCPzhA_jvw',
+        'youtube_api_key': 'AIzaSyA7iyQqwPGI-5wXDmwgm84zdVQEno9OyiM',
         'channel_id': 'UCeGK7w0jvoIKUaGgGlit59Q',
         'recent_doodles': recent_doodles,
         'highest_upvote_ratio_post': highest_upvote_ratio_post,
@@ -67,15 +70,9 @@ def save_doodle(request):
 def doodlespace(request):
     return render(request, 'Features/doodlespace.html')
 
-@require_POST
-@login_required
-def add_calendar_event(request):
-    # not ideal to have another view but it fixed the glaring dupe bug
-    event_form = AddCalendarEvent(request.POST or None)
-    if event_form.is_valid():
-        event_form.save()
-        return redirect('/calendar/')
 
+# view for deleting calendar event, GPT chat link that helped create it below:
+# https://chat.openai.com/share/ef154ed4-f499-4712-890c-9113af4dfe38
 @require_POST
 @login_required
 def delete_calendar_event(request):
@@ -86,21 +83,50 @@ def delete_calendar_event(request):
     event = get_object_or_404(CalendarEvent, pk=event_id)
 
     # Delete the event from the database
-    event.delete()
+    if event.author is not None:  # can't delete academic calendar events silly!
+        event.delete()
 
     # Return a success response
     return JsonResponse({'success': True})
 
+
+@require_POST
+@login_required
+def add_calendar_event(request):
+    # not ideal to have another view but it fixed the glaring dupe bug
+    event_form = AddCalendarEvent(request.POST or None)
+    if event_form.is_valid():
+        new_event = event_form.save(commit=False)
+        new_event.author = request.user
+        new_event.save()
+        # shouldn't need a many-to-many save afaik, event doesn't explicitly have that relationship with anything
+        return redirect('/calendar/')
+
+
 @login_required
 def calendar(request):
-    calendar_events = CalendarEvent.objects.all();
-    if request.method == 'POST':
-        event_form = AddCalendarEvent(request.POST or None)
-        if event_form.is_valid():
-            event_form.save()
-            return render(request, 'Features/calendar.html', {'events': calendar_events})
-    else:
-        return render(request, 'Features/calendar.html', {'events': calendar_events})
+    calendar_events = CalendarEvent.objects.all().filter(Q(author=request.user) | Q(author=None));
+    # calendar events where author is None are academic calendar events
+    today = datetime.datetime.now()
+    start = today.replace(hour=0, minute=0, second=0, microsecond=0)
+    end = today.replace(hour=23, minute=59, second=59, microsecond=999999)
+    todays_events = CalendarEvent.objects.filter(Q(author=request.user) | Q(author=None),
+                                                 start_time__range=(start, end))
+    # ^ the events filtered for the ones happening today
+    return render(request, 'Features/calendar.html', {'events': calendar_events, 'todays_events': todays_events})
+
+
+@login_required
+def leaderboard(request):
+    leaderboard_members = Profile.objects.all().filter(
+        picked_classes=True,
+        picked_dorm_room=True,
+        checked_ham_menu=True,
+        checked_campus_facilities=True,
+        known_faculty=True
+    )  # get all profiles with fully completed onboarding tasks
+
+    return render(request, 'Features/leaderboard.html', {'members': leaderboard_members})
 
 @login_required
 def post_list(request):
