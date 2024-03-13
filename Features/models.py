@@ -1,4 +1,6 @@
 from django.db import models
+from random import randint
+import random
 
 # Create your models here.
 
@@ -19,19 +21,6 @@ class CalendarEvent(models.Model):
 
 	def __str__(self):
 		return 'CalendarEvent ' + self.title
-
-"""
-class Checklist(models.Model):
-  
-    item = models.CharField(max_length=200)
-    checked = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.item
-    
-    def is_checked(self):
-        return self.checked
-    """
 
 class UserChecklist(models.Model):
     #user = models.ForeignKey('YourUserModel', on_delete=models.CASCADE)  # Replace 'YourUserModel' with your actual user model
@@ -71,16 +60,45 @@ class Dorms(models.Model):
     """
     
     def __str__(self):
-        return self.dormtype
+        return self.dormtype #returns name/type of dorm
     
     def get_address(self):
-        return self.address
+        return self.address #returns address as a string
     
     def get_foodoptions(self):
-        return self.foodoptions
+        return self.foodoptions #returns food options as a string
     
     def get_foodoptions_list(self):
-        return str(self.foodoptions).split(', ')
+        return str(self.foodoptions).split(', ') #returns food options as a list
     #the str() function is so i don't have to use an entire json processing function
+
+
+class Quotes(models.Model):
+    # I'm going to be honest I don't want to use a model for this but IDK where I'd store this...
+    #user = models.ForeignKey('YourUserModel', on_delete=models.CASCADE)  # Replace 'YourUserModel' with your actual user model
+    quotebank = models.JSONField()
+    last_displayed_quote = models.TextField(blank=True, null=True)  # Field to store the last displayed quote
+
+    def get_random_quote(self): #gpt... 
+        if not self.quotebank:
+            return None  # Return None if quote bank is empty
+            
+        # Extract the list of quotes from the quote bank
+        quotes_list = self.quotebank.get("quotebank", [])
     
-   
+        # Use random.choice() to select a random quote from the list of quotes
+        random_quote = random.choice(quotes_list)
+
+        # Extract the quote text and author from the randomly selected quote
+        quote = random_quote.get("quote", "")
+        author = random_quote.get("author", "")
+        self.last_displayed_quote = f"{quote} - {author}"  # Update last displayed quote
+        self.save()  # Save changes to the model instance
+        string = quote + ' - ' + author
+        
+
+        # Return the quote and author as two strings in a list
+        return string #i hope this isnt too much logic in the models LOL
+    
+    def get_quotebank(self):
+        return self.quotebank

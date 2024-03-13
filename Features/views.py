@@ -1,11 +1,14 @@
 from django.utils.dateparse import parse_time
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods, require_POST
+from django.views.decorators.clickjacking import xframe_options_exempt
 from django.http import JsonResponse
 from .forms import AddCalendarEvent
 from .models import *
+from datetime import date
 
 # Create your views here.
+@xframe_options_exempt #iframe capability
 def doodlespace(request):
     return render(request, 'doodlespace.html')
 
@@ -79,8 +82,29 @@ def doodlespace(request):
 def home(request):
     return render(request, 'Features/home.html')
 
+""" 
+ quotes_obj = Quotes.objects.first()  # Assuming you only have one Quotes object
+
+    # Get the quote bank from the Quotes object
+    quote_bank = quotes_obj.get_quotebank()
+
+    # Choose a random quote from the quote bank
+    random_quote = random.choice(quote_bank)
+"""
+
+@require_http_methods(["GET"])
 def catalyst(request):
-    return render(request, 'catalyst.html')
+    quotes = Quotes.objects.first() #this should be user=request.user when users are linked
+
+    if date.weekday == 6: #should change quote every sunday
+        #there could be quote rotation checks, but by that point i would just refactor the basis of this whole function
+        shownquote = quotes.get_random_quote
+        quotes.save()
+    else:
+        shownquote = quotes.last_displayed_quote
+
+    
+    return render(request, 'catalyst.html', {'shownquote' : shownquote})
 
 # view for deleting calendar event, GPT chat link that helped create it below:
 # https://chat.openai.com/share/ef154ed4-f499-4712-890c-9113af4dfe38
@@ -107,3 +131,4 @@ def calendar(request):
             return render(request, 'Features/calendar.html', {'events': calendar_events})
     else:
         return render(request, 'Features/calendar.html', {'events': calendar_events})
+
