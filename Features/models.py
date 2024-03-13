@@ -52,3 +52,70 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
 
+
+class Dorms(models.Model):
+    dormtype = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
+
+    # there's a better way to have several images, but i'd prefer to have a fixed three for each dorm.
+    dormpic1 = models.ImageField(upload_to='dormview', default='default.webp',
+                                 blank=True)  # THIS ONLY WORKS WITH MEDIA FILE. FOR SOME REASON
+    dormpic2 = models.ImageField(upload_to='dormview', default='default.webp', blank=True)
+    dormpic3 = models.ImageField(upload_to='dormview', default='default.webp', blank=True)
+    foodoptions = models.CharField(max_length=200, blank=True)
+
+    is_current_dorm = models.BooleanField(default=False)  # this should be temporary until user profiles store it
+    """
+    Talking to myself here so I don't forget, but we should store with the user what dorm they have 
+    saved & their dorm number to a profile. We would use a manytoone for this. 
+    It should be that a User can only pick one dorm, but that one dorm can be selected by many users.
+
+    This field would be this, in a user profile:
+        user_dorm = models.ForeignKey(Dorm, blank=True)
+    Then, the views page for dormview would check whether the viewing user's dorm matched the page's dorm, rather than a boolean.
+    """
+
+    def __str__(self):
+        return self.dormtype  # returns name/type of dorm
+
+    def get_address(self):
+        return self.address  # returns address as a string
+
+    def get_foodoptions(self):
+        return self.foodoptions  # returns food options as a string
+
+    def get_foodoptions_list(self):
+        return str(self.foodoptions).split(', ')  # returns food options as a list
+    # the str() function is so i don't have to use an entire json processing function
+
+
+class Quotes(models.Model):
+    # I'm going to be honest I don't want to use a model for this but IDK where I'd store this...
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # This may be superfluous, but the idea is that everybody got a different quote, I think...
+
+    quotebank = models.JSONField()
+    last_displayed_quote = models.TextField(blank=True, null=True)  # Field to store the last displayed quote
+
+    def get_random_quote(self):  # gpt...
+        if not self.quotebank:
+            return None  # Return None if quote bank is empty
+
+        # Extract the list of quotes from the quote bank
+        quotes_list = self.quotebank.get("quotebank", [])
+
+        # Use random.choice() to select a random quote from the list of quotes
+        random_quote = random.choice(quotes_list)
+
+        # Extract the quote text and author from the randomly selected quote
+        quote = random_quote.get("quote", "")
+        author = random_quote.get("author", "")
+        self.last_displayed_quote = f"{quote} - {author}"  # Update last displayed quote
+        self.save()  # Save changes to the model instance
+        string = quote + ' - ' + author
+
+        # Return the quote and author as two strings in a list
+        return string  # i hope this isnt too much logic in the models LOL
+
+    def get_quotebank(self):
+        return self.quotebank

@@ -1,19 +1,20 @@
-import base64
-import json  # Import json for parsing the request body
-from django.core.files.base import ContentFile
-from django.http import JsonResponse, HttpResponseForbidden
-from .models import *
-from .models import Post
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_http_methods, require_POST
-from django.http import JsonResponse
-from .models import CalendarEvent
-from .forms import AddCalendarEvent
-from django.contrib.auth.decorators import login_required
+
 import datetime
 from Users.models import Profile # for leaderboard page
 from django.db.models import Q # for 'or' statements in filters
 from django.db.models import Count, F
+import base64
+import json  # Import json for parsing the request body
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_http_methods, require_POST
+from .forms import AddCalendarEvent
+from django.core.files.base import ContentFile
+from django.http import JsonResponse, HttpResponseForbidden
+from django.contrib.auth.decorators import login_required
+from .models import *
+from django.shortcuts import render, redirect
+from .models import Post
+from datetime import date
 
 @login_required
 def home(request):
@@ -37,10 +38,10 @@ def home(request):
 def resources(request):
     return render(request, 'Features/resources.html')
 
+
 @login_required
 def catalyst(request):
     return render(request, 'Features/catalyst.html')
-
 @login_required
 def community(request):
     return render(request, 'Features/community.html')
@@ -114,7 +115,6 @@ def calendar(request):
                                                  start_time__range=(start, end))
     # ^ the events filtered for the ones happening today
     return render(request, 'Features/calendar.html', {'events': calendar_events, 'todays_events': todays_events})
-
 
 @login_required
 def leaderboard(request):
