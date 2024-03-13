@@ -1,0 +1,1325 @@
+[{
+	"model": "admin.logentry",
+	"pk": 1,
+	"fields": {
+		"action_time": "2024-03-13T06:41:51.326Z",
+		"user": 1,
+		"content_type": 8,
+		"object_id": "2",
+		"object_repr": "tre_nonadmin Profile",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Picked classes\", \"Picked dorm room\", \"Checked ham menu\", \"Checked campus facilities\", \"Known faculty\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 2,
+	"fields": {
+		"action_time": "2024-03-13T07:19:37.502Z",
+		"user": 1,
+		"content_type": 8,
+		"object_id": "3",
+		"object_repr": "dj_khaled Profile",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Picked dorm room\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 3,
+	"fields": {
+		"action_time": "2024-03-13T08:13:26.646Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "6",
+		"object_repr": "Event6 test-no-author @ 2024-03-13 08:13:23+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 4,
+	"fields": {
+		"action_time": "2024-03-13T08:14:08.981Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "6",
+		"object_repr": "Event6 test-no-author @ 2024-03-13 08:13:23+00:00 (hardcoded)",
+		"action_flag": 3,
+		"change_message": ""
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 5,
+	"fields": {
+		"action_time": "2024-03-13T08:16:49.849Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "7",
+		"object_repr": "Event7 Report For-Credit Mod 2 Internships in Handshake Deadline @ 2024-03-15 00:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 6,
+	"fields": {
+		"action_time": "2024-03-13T08:17:35.020Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "8",
+		"object_repr": "Event8 Final Payment Due on Payment Plans ($100 Penalty) @ 2024-03-15 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 7,
+	"fields": {
+		"action_time": "2024-03-13T08:18:01.950Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "9",
+		"object_repr": "Event9 Module I Ends @ 2024-03-15 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 8,
+	"fields": {
+		"action_time": "2024-03-13T08:18:24.705Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "10",
+		"object_repr": "Event10 Spring Break @ 2024-03-18 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 9,
+	"fields": {
+		"action_time": "2024-03-13T08:18:56.330Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "11",
+		"object_repr": "Event11 Spring Break @ 2024-03-19 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 10,
+	"fields": {
+		"action_time": "2024-03-13T08:19:25.421Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "12",
+		"object_repr": "Event12 Spring Break @ 2024-03-20 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 11,
+	"fields": {
+		"action_time": "2024-03-13T08:19:56.842Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "13",
+		"object_repr": "Event13 Spring Break @ 2024-03-21 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 12,
+	"fields": {
+		"action_time": "2024-03-13T08:20:43.045Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "14",
+		"object_repr": "Event14 Spring Break @ 2024-03-22 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 13,
+	"fields": {
+		"action_time": "2024-03-13T08:21:13.912Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "15",
+		"object_repr": "Event15 Module II Begins @ 2024-03-25 06:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 14,
+	"fields": {
+		"action_time": "2024-03-13T08:22:06.774Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "16",
+		"object_repr": "Event16 Deadline to Request Readmission for Fall Semester @ 2024-04-01 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 15,
+	"fields": {
+		"action_time": "2024-03-13T08:22:39.077Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "17",
+		"object_repr": "Event17 Thesis Prospectus Submission Deadline (for 6th Term Students) @ 2024-04-01 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 16,
+	"fields": {
+		"action_time": "2024-03-13T08:23:07.785Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "18",
+		"object_repr": "Event18 Off-Campus Study (OCS) Declaration Deadline @ 2024-04-01 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 17,
+	"fields": {
+		"action_time": "2024-03-13T08:23:41.869Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "19",
+		"object_repr": "Event19 Provisional AOC (PAOC) Submission Deadline (for 5th Term Students) @ 2024-04-01 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 18,
+	"fields": {
+		"action_time": "2024-03-13T08:24:07.196Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "20",
+		"object_repr": "Event20 Fall Semester Registration Begins @ 2024-04-03 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 19,
+	"fields": {
+		"action_time": "2024-03-13T08:24:42.085Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "21",
+		"object_repr": "Event21 Advising Day @ 2024-04-04 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 20,
+	"fields": {
+		"action_time": "2024-03-13T08:25:34.505Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "22",
+		"object_repr": "Event22 Contract Renegotiation Deadline @ 2024-04-19 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 21,
+	"fields": {
+		"action_time": "2024-03-13T08:26:19.336Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "23",
+		"object_repr": "Event23 Reading Day @ 2024-03-22 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 22,
+	"fields": {
+		"action_time": "2024-03-13T08:27:01.631Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "24",
+		"object_repr": "Event24 Reading Day @ 2024-04-23 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 23,
+	"fields": {
+		"action_time": "2024-03-13T08:27:24.154Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "25",
+		"object_repr": "Event25 Reading Day @ 2024-03-24 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 24,
+	"fields": {
+		"action_time": "2024-03-13T08:27:53.886Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "23",
+		"object_repr": "Event23 Reading Day @ 2024-04-22 12:00:00+00:00 (hardcoded)",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Start time\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 25,
+	"fields": {
+		"action_time": "2024-03-13T08:28:02.771Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "25",
+		"object_repr": "Event25 Reading Day @ 2024-04-24 12:00:00+00:00 (hardcoded)",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Start time\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 26,
+	"fields": {
+		"action_time": "2024-03-13T08:28:39.425Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "26",
+		"object_repr": "Event26 Certification Submission Deadline (potential graduates) @ 2024-05-14 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 27,
+	"fields": {
+		"action_time": "2024-03-13T08:30:04.992Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "23",
+		"object_repr": "Event23 Reading Day @ 2024-05-22 12:00:00+00:00 (hardcoded)",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Start time\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 28,
+	"fields": {
+		"action_time": "2024-03-13T08:30:12.898Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "24",
+		"object_repr": "Event24 Reading Day @ 2024-05-23 12:00:00+00:00 (hardcoded)",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Start time\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 29,
+	"fields": {
+		"action_time": "2024-03-13T08:30:20.024Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "25",
+		"object_repr": "Event25 Reading Day @ 2024-05-24 12:00:00+00:00 (hardcoded)",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Start time\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 30,
+	"fields": {
+		"action_time": "2024-03-13T08:30:38.885Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "23",
+		"object_repr": "Event23 Reading Day @ 2024-04-22 12:00:00+00:00 (hardcoded)",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Start time\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 31,
+	"fields": {
+		"action_time": "2024-03-13T08:30:55.014Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "23",
+		"object_repr": "Event23 Baccalaureate/Reading Day @ 2024-04-22 12:00:00+00:00 (hardcoded)",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Title\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 32,
+	"fields": {
+		"action_time": "2024-03-13T08:31:12.971Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "24",
+		"object_repr": "Event24 Baccalaureate/Reading Day @ 2024-04-23 12:00:00+00:00 (hardcoded)",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Title\", \"Start time\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 33,
+	"fields": {
+		"action_time": "2024-03-13T08:31:28.022Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "25",
+		"object_repr": "Event25 Baccalaureate/Reading Day @ 2024-04-24 12:00:00+00:00 (hardcoded)",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Title\", \"Start time\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 34,
+	"fields": {
+		"action_time": "2024-03-13T08:32:07.762Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "27",
+		"object_repr": "Event27 Spring Classes End @ 2024-05-10 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 35,
+	"fields": {
+		"action_time": "2024-03-13T08:32:50.687Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "28",
+		"object_repr": "Event28 Baccalaureate Examination Reports Due @ 2024-05-10 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 36,
+	"fields": {
+		"action_time": "2024-03-13T08:33:50.536Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "29",
+		"object_repr": "Event29 Evaluation Submission Deadline (potential graduates) @ 2024-05-13 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 37,
+	"fields": {
+		"action_time": "2024-03-13T08:34:07.807Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "30",
+		"object_repr": "Event30 Reading Day @ 2024-05-13 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 38,
+	"fields": {
+		"action_time": "2024-03-13T08:34:34.312Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "31",
+		"object_repr": "Event31 Reading Day @ 2024-05-14 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 39,
+	"fields": {
+		"action_time": "2024-03-13T08:34:55.796Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "32",
+		"object_repr": "Event32 Final Exams @ 2024-05-15 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 40,
+	"fields": {
+		"action_time": "2024-03-13T08:35:07.328Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "33",
+		"object_repr": "Event33 Final Exams @ 2024-05-16 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 41,
+	"fields": {
+		"action_time": "2024-03-13T08:35:21.488Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "34",
+		"object_repr": "Event34 Final Exams @ 2024-05-17 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 42,
+	"fields": {
+		"action_time": "2024-03-13T08:35:47.439Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "35",
+		"object_repr": "Event35 Commencement @ 2024-05-17 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 43,
+	"fields": {
+		"action_time": "2024-03-13T08:36:15.787Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "36",
+		"object_repr": "Event36 Evaluation Submission Deadline @ 2024-05-21 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 44,
+	"fields": {
+		"action_time": "2024-03-13T08:36:53.127Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "37",
+		"object_repr": "Event37 Contract Certification Deadline @ 2024-05-27 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 45,
+	"fields": {
+		"action_time": "2024-03-13T08:37:10.223Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "37",
+		"object_repr": "Event37 Contract Certification Deadline @ 2024-05-22 18:00:00+00:00 (hardcoded)",
+		"action_flag": 2,
+		"change_message": "[{\"changed\": {\"fields\": [\"Start time\"]}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 46,
+	"fields": {
+		"action_time": "2024-03-13T08:37:40.584Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "38",
+		"object_repr": "Event38 Offices Closed for Memorial Day @ 2024-05-27 12:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 47,
+	"fields": {
+		"action_time": "2024-03-13T08:38:07.784Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "39",
+		"object_repr": "Event39 Interterm ISP Evaluation Deadline @ 2024-05-29 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 48,
+	"fields": {
+		"action_time": "2024-03-13T08:38:35.411Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "40",
+		"object_repr": "Event40 Evaluation and Contract Submission Deadline @ 2024-05-29 18:00:00+00:00 (hardcoded)",
+		"action_flag": 1,
+		"change_message": "[{\"added\": {}}]"
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 49,
+	"fields": {
+		"action_time": "2024-03-13T08:39:05.499Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "5",
+		"object_repr": "Event5 notifications working @ 2024-03-12 22:04:00+00:00 by user tre",
+		"action_flag": 3,
+		"change_message": ""
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 50,
+	"fields": {
+		"action_time": "2024-03-13T08:39:05.524Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "4",
+		"object_repr": "Event4 test2 @ 2024-03-12 21:35:00+00:00 by user tre",
+		"action_flag": 3,
+		"change_message": ""
+	}
+}, {
+	"model": "admin.logentry",
+	"pk": 51,
+	"fields": {
+		"action_time": "2024-03-13T08:39:05.548Z",
+		"user": 1,
+		"content_type": 7,
+		"object_id": "2",
+		"object_repr": "Event2 its working? @ 2024-03-25 12:00:00+00:00 by user tre_nonadmin",
+		"action_flag": 3,
+		"change_message": ""
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 1,
+	"fields": {
+		"name": "Can add log entry",
+		"content_type": 1,
+		"codename": "add_logentry"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 2,
+	"fields": {
+		"name": "Can change log entry",
+		"content_type": 1,
+		"codename": "change_logentry"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 3,
+	"fields": {
+		"name": "Can delete log entry",
+		"content_type": 1,
+		"codename": "delete_logentry"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 4,
+	"fields": {
+		"name": "Can view log entry",
+		"content_type": 1,
+		"codename": "view_logentry"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 5,
+	"fields": {
+		"name": "Can add permission",
+		"content_type": 2,
+		"codename": "add_permission"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 6,
+	"fields": {
+		"name": "Can change permission",
+		"content_type": 2,
+		"codename": "change_permission"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 7,
+	"fields": {
+		"name": "Can delete permission",
+		"content_type": 2,
+		"codename": "delete_permission"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 8,
+	"fields": {
+		"name": "Can view permission",
+		"content_type": 2,
+		"codename": "view_permission"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 9,
+	"fields": {
+		"name": "Can add group",
+		"content_type": 3,
+		"codename": "add_group"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 10,
+	"fields": {
+		"name": "Can change group",
+		"content_type": 3,
+		"codename": "change_group"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 11,
+	"fields": {
+		"name": "Can delete group",
+		"content_type": 3,
+		"codename": "delete_group"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 12,
+	"fields": {
+		"name": "Can view group",
+		"content_type": 3,
+		"codename": "view_group"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 13,
+	"fields": {
+		"name": "Can add user",
+		"content_type": 4,
+		"codename": "add_user"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 14,
+	"fields": {
+		"name": "Can change user",
+		"content_type": 4,
+		"codename": "change_user"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 15,
+	"fields": {
+		"name": "Can delete user",
+		"content_type": 4,
+		"codename": "delete_user"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 16,
+	"fields": {
+		"name": "Can view user",
+		"content_type": 4,
+		"codename": "view_user"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 17,
+	"fields": {
+		"name": "Can add content type",
+		"content_type": 5,
+		"codename": "add_contenttype"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 18,
+	"fields": {
+		"name": "Can change content type",
+		"content_type": 5,
+		"codename": "change_contenttype"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 19,
+	"fields": {
+		"name": "Can delete content type",
+		"content_type": 5,
+		"codename": "delete_contenttype"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 20,
+	"fields": {
+		"name": "Can view content type",
+		"content_type": 5,
+		"codename": "view_contenttype"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 21,
+	"fields": {
+		"name": "Can add session",
+		"content_type": 6,
+		"codename": "add_session"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 22,
+	"fields": {
+		"name": "Can change session",
+		"content_type": 6,
+		"codename": "change_session"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 23,
+	"fields": {
+		"name": "Can delete session",
+		"content_type": 6,
+		"codename": "delete_session"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 24,
+	"fields": {
+		"name": "Can view session",
+		"content_type": 6,
+		"codename": "view_session"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 25,
+	"fields": {
+		"name": "Can add calendar event",
+		"content_type": 7,
+		"codename": "add_calendarevent"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 26,
+	"fields": {
+		"name": "Can change calendar event",
+		"content_type": 7,
+		"codename": "change_calendarevent"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 27,
+	"fields": {
+		"name": "Can delete calendar event",
+		"content_type": 7,
+		"codename": "delete_calendarevent"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 28,
+	"fields": {
+		"name": "Can view calendar event",
+		"content_type": 7,
+		"codename": "view_calendarevent"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 29,
+	"fields": {
+		"name": "Can add profile",
+		"content_type": 8,
+		"codename": "add_profile"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 30,
+	"fields": {
+		"name": "Can change profile",
+		"content_type": 8,
+		"codename": "change_profile"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 31,
+	"fields": {
+		"name": "Can delete profile",
+		"content_type": 8,
+		"codename": "delete_profile"
+	}
+}, {
+	"model": "auth.permission",
+	"pk": 32,
+	"fields": {
+		"name": "Can view profile",
+		"content_type": 8,
+		"codename": "view_profile"
+	}
+}, {
+	"model": "auth.user",
+	"pk": 1,
+	"fields": {
+		"password": "pbkdf2_sha256$720000$jiPEy6Een6jyuPfWTmW7ky$FUnwuBiLhIJrJx2EJaF77GX0IQbfnun7g1qqc2f/iqc=",
+		"last_login": "2024-03-13T07:18:26.594Z",
+		"is_superuser": true,
+		"username": "tre",
+		"first_name": "",
+		"last_name": "",
+		"email": "g.oneal26@ncf.edu",
+		"is_staff": true,
+		"is_active": true,
+		"date_joined": "2024-03-12T23:07:42.983Z",
+		"groups": [],
+		"user_permissions": []
+	}
+}, {
+	"model": "auth.user",
+	"pk": 2,
+	"fields": {
+		"password": "pbkdf2_sha256$720000$98Uza5uDYgjVu6odbC2muW$J/zmyiet5fzOymmWWxghRsifRBKfsMUZZM1L8Wi3B+U=",
+		"last_login": "2024-03-12T23:10:12.620Z",
+		"is_superuser": false,
+		"username": "tre_nonadmin",
+		"first_name": "",
+		"last_name": "",
+		"email": "g.oneal26@ncf.edu",
+		"is_staff": false,
+		"is_active": true,
+		"date_joined": "2024-03-12T23:09:56.082Z",
+		"groups": [],
+		"user_permissions": []
+	}
+}, {
+	"model": "auth.user",
+	"pk": 3,
+	"fields": {
+		"password": "pbkdf2_sha256$720000$qasWBYAmV8Cj2N62777ar8$y3aKTG3WEaivQUey7bMSOVWyO6R444oawhlKHhcoROM=",
+		"last_login": "2024-03-13T06:44:31.934Z",
+		"is_superuser": false,
+		"username": "dj_khaled",
+		"first_name": "",
+		"last_name": "",
+		"email": "g.oneal26@ncf.edu",
+		"is_staff": false,
+		"is_active": true,
+		"date_joined": "2024-03-13T06:44:21.157Z",
+		"groups": [],
+		"user_permissions": []
+	}
+}, {
+	"model": "contenttypes.contenttype",
+	"pk": 1,
+	"fields": {
+		"app_label": "admin",
+		"model": "logentry"
+	}
+}, {
+	"model": "contenttypes.contenttype",
+	"pk": 2,
+	"fields": {
+		"app_label": "auth",
+		"model": "permission"
+	}
+}, {
+	"model": "contenttypes.contenttype",
+	"pk": 3,
+	"fields": {
+		"app_label": "auth",
+		"model": "group"
+	}
+}, {
+	"model": "contenttypes.contenttype",
+	"pk": 4,
+	"fields": {
+		"app_label": "auth",
+		"model": "user"
+	}
+}, {
+	"model": "contenttypes.contenttype",
+	"pk": 5,
+	"fields": {
+		"app_label": "contenttypes",
+		"model": "contenttype"
+	}
+}, {
+	"model": "contenttypes.contenttype",
+	"pk": 6,
+	"fields": {
+		"app_label": "sessions",
+		"model": "session"
+	}
+}, {
+	"model": "contenttypes.contenttype",
+	"pk": 7,
+	"fields": {
+		"app_label": "Features",
+		"model": "calendarevent"
+	}
+}, {
+	"model": "contenttypes.contenttype",
+	"pk": 8,
+	"fields": {
+		"app_label": "Users",
+		"model": "profile"
+	}
+}, {
+	"model": "sessions.session",
+	"pk": "6t37xbgbx4v4cum28oh9nc8ufa5yeoir",
+	"fields": {
+		"session_data": ".eJxVjEEOwiAQRe_C2hAZChSX7nsGMgyMVA0kpV0Z765NutDtf-_9lwi4rSVsPS9hTuIilDj9bhHpkesO0h3rrUlqdV3mKHdFHrTLqaX8vB7u30HBXr41Ozcoq8G7BBrPA5OJaFF7SEweLPsEoxmzoQEzIwHrGMF4Rd4ZTUa8P-AVOBE:1rkIsc:xijR6ynlHrIf6HesSpJaZuHTq85q6FvjiUtM8NA4u3g",
+		"expire_date": "2024-03-27T07:18:26.638Z"
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 7,
+	"fields": {
+		"title": "Report For-Credit Mod 2 Internships in Handshake Deadline",
+		"description": "",
+		"start_time": "2024-03-15T00:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 8,
+	"fields": {
+		"title": "Final Payment Due on Payment Plans ($100 Penalty)",
+		"description": "",
+		"start_time": "2024-03-15T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 9,
+	"fields": {
+		"title": "Module I Ends",
+		"description": "",
+		"start_time": "2024-03-15T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 10,
+	"fields": {
+		"title": "Spring Break",
+		"description": "",
+		"start_time": "2024-03-18T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 11,
+	"fields": {
+		"title": "Spring Break",
+		"description": "",
+		"start_time": "2024-03-19T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 12,
+	"fields": {
+		"title": "Spring Break",
+		"description": "",
+		"start_time": "2024-03-20T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 13,
+	"fields": {
+		"title": "Spring Break",
+		"description": "",
+		"start_time": "2024-03-21T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 14,
+	"fields": {
+		"title": "Spring Break",
+		"description": "",
+		"start_time": "2024-03-22T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 15,
+	"fields": {
+		"title": "Module II Begins",
+		"description": "",
+		"start_time": "2024-03-25T06:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 16,
+	"fields": {
+		"title": "Deadline to Request Readmission for Fall Semester",
+		"description": "",
+		"start_time": "2024-04-01T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 17,
+	"fields": {
+		"title": "Thesis Prospectus Submission Deadline (for 6th Term Students)",
+		"description": "",
+		"start_time": "2024-04-01T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 18,
+	"fields": {
+		"title": "Off-Campus Study (OCS) Declaration Deadline",
+		"description": "",
+		"start_time": "2024-04-01T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 19,
+	"fields": {
+		"title": "Provisional AOC (PAOC) Submission Deadline (for 5th Term Students)",
+		"description": "",
+		"start_time": "2024-04-01T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 20,
+	"fields": {
+		"title": "Fall Semester Registration Begins",
+		"description": "",
+		"start_time": "2024-04-03T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 21,
+	"fields": {
+		"title": "Advising Day",
+		"description": "",
+		"start_time": "2024-04-04T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 22,
+	"fields": {
+		"title": "Contract Renegotiation Deadline",
+		"description": "",
+		"start_time": "2024-04-19T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 23,
+	"fields": {
+		"title": "Baccalaureate/Reading Day",
+		"description": "No classes",
+		"start_time": "2024-04-22T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 24,
+	"fields": {
+		"title": "Baccalaureate/Reading Day",
+		"description": "No classes",
+		"start_time": "2024-04-23T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 25,
+	"fields": {
+		"title": "Baccalaureate/Reading Day",
+		"description": "No classes",
+		"start_time": "2024-04-24T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 26,
+	"fields": {
+		"title": "Certification Submission Deadline (potential graduates)",
+		"description": "",
+		"start_time": "2024-05-14T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 27,
+	"fields": {
+		"title": "Spring Classes End",
+		"description": "",
+		"start_time": "2024-05-10T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 28,
+	"fields": {
+		"title": "Baccalaureate Examination Reports Due",
+		"description": "",
+		"start_time": "2024-05-10T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 29,
+	"fields": {
+		"title": "Evaluation Submission Deadline (potential graduates)",
+		"description": "",
+		"start_time": "2024-05-13T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 30,
+	"fields": {
+		"title": "Reading Day",
+		"description": "No classes",
+		"start_time": "2024-05-13T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 31,
+	"fields": {
+		"title": "Reading Day",
+		"description": "No classes",
+		"start_time": "2024-05-14T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 32,
+	"fields": {
+		"title": "Final Exams",
+		"description": "",
+		"start_time": "2024-05-15T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 33,
+	"fields": {
+		"title": "Final Exams",
+		"description": "",
+		"start_time": "2024-05-16T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 34,
+	"fields": {
+		"title": "Final Exams",
+		"description": "",
+		"start_time": "2024-05-17T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 35,
+	"fields": {
+		"title": "Commencement",
+		"description": "",
+		"start_time": "2024-05-17T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 36,
+	"fields": {
+		"title": "Evaluation Submission Deadline",
+		"description": "for students on probation",
+		"start_time": "2024-05-21T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 37,
+	"fields": {
+		"title": "Contract Certification Deadline",
+		"description": "for students on probation",
+		"start_time": "2024-05-22T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 38,
+	"fields": {
+		"title": "Offices Closed for Memorial Day",
+		"description": "",
+		"start_time": "2024-05-27T12:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 39,
+	"fields": {
+		"title": "Interterm ISP Evaluation Deadline",
+		"description": "",
+		"start_time": "2024-05-29T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Features.calendarevent",
+	"pk": 40,
+	"fields": {
+		"title": "Evaluation and Contract Submission Deadline",
+		"description": "",
+		"start_time": "2024-05-29T18:00:00Z",
+		"author": null
+	}
+}, {
+	"model": "Users.profile",
+	"pk": 1,
+	"fields": {
+		"user": 1,
+		"image": "default.png",
+		"picked_classes": true,
+		"picked_dorm_room": true,
+		"checked_ham_menu": true,
+		"checked_campus_facilities": true,
+		"known_faculty": true
+	}
+}, {
+	"model": "Users.profile",
+	"pk": 2,
+	"fields": {
+		"user": 2,
+		"image": "default.png",
+		"picked_classes": true,
+		"picked_dorm_room": true,
+		"checked_ham_menu": true,
+		"checked_campus_facilities": true,
+		"known_faculty": true
+	}
+}, {
+	"model": "Users.profile",
+	"pk": 3,
+	"fields": {
+		"user": 3,
+		"image": "default.png",
+		"picked_classes": true,
+		"picked_dorm_room": false,
+		"checked_ham_menu": true,
+		"checked_campus_facilities": true,
+		"known_faculty": true
+	}
+}]
