@@ -177,6 +177,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // https://chat.openai.com/share/ef154ed4-f499-4712-890c-9113af4dfe38
 
 // scuffed workaround for notifications
+// with some help (gpt a bit, also w3schools string parsing and date object):
+// https://chat.openai.com/share/aae85212-1b37-4937-9a5c-b1f84623cb6f
 function notify() {
     let events_today = [ // holds all of the events that happen today
         {% for e in todays_events %}

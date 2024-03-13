@@ -36,10 +36,17 @@ def profile(request):
         p_form = ProfileUpdateForm(instance=request.user.profile)
         badge_form = BadgesForm(instance=request.user.profile)
 
+
+    pf = request.user.profile
     context = {
         'u_form': u_form,
         'p_form': p_form,
-        'badge_form': badge_form
+        'badge_form': badge_form,
+        'picked_classes': pf.picked_classes, # added profile boolean fields to context to render the badges/checks
+        'picked_dorm_room': pf.picked_dorm_room,
+        'checked_ham_menu': pf.checked_ham_menu,
+        'checked_campus_facilities': pf.checked_campus_facilities,
+        'known_faculty': pf.known_faculty
     }
 
     return render(request, 'Users/profile.html', context)
