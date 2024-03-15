@@ -4,7 +4,80 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'css/home/home.css' %}" />
+<style>
+/* Styles for the video player */
+#videoPlayer iframe {
+    width: 100%;
+    height: auto; /* Adjust this if you want a fixed height */
+    aspect-ratio: 16 / 9;
+    border-radius: 0.25rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    margin-bottom: 2rem;
+}
+
+/* Styles for the Most Recent Novo Art section */
+#recentDoodles .card {
+    width: 100%; /* Adjust if you want a maximum width */
+    border-radius: 0.25rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+#recentDoodles .card-img-top {
+    width: 100%; /* Makes the image responsive */
+    height: auto; /* Maintains aspect ratio */
+    object-fit: cover; /* Ensures the image covers the card area */
+    border-top-left-radius: 0.25rem; /* Matches the card border radius */
+    border-top-right-radius: 0.25rem; /* Matches the card border radius */
+}
+
+/* Additional global styles if needed */
+.card-body p {
+    margin-bottom: 0; /* Removes the default margin-bottom from paragraphs if desired */
+}
+
+/* Styles for the video player */
+#videoPlayer iframe {
+    width: 100%;
+    height: auto; /* This will keep the aspect ratio intact */
+}
+
+/* Styles for the video wrapper to constrain its size */
+#videoPlayerWrapper {
+    max-width: 540px; /* Adjust this value as needed */
+    margin: auto;
+}
+
+/* Adjust the card images in the right column to fit the space */
+.card-img-top {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+/* Background styling for the "Most Recent Novo Art" section */
+.recent-doodles-bg {
+    padding: 2rem 0; /* Adjust the padding as needed */
+    background-color: #fff; /* Or any color or image you'd like to add */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for a "lifted card" effect */
+}
+/* Styles for the cards to improve readability over dark backgrounds */
+.card.bg-light {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white for readability */
+}
+
+/* Styling for the doodle images to ensure they are fully contained within their card */
+.bg-white {
+    background-color: #fff;
+    border-radius: 0.25rem;
+}
+body {
+    background-image: url('/media/home.jpg');
+    background-size: cover;
+    background-position: center;
+}
+</style>
 <title>Home</title>
 
 <div class="container mt-5">
@@ -14,6 +87,16 @@
             <div id="videoPlayerWrapper" class="d-flex justify-content-center mb-4">
                 <div id="videoPlayer" class="ratio ratio-16x9">
                     <!-- Most Recent Video from NCF YouTube will be inserted here -->
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header">About NuPath</div>
+                <div class="card-body">
+                    <h5 class="card-title">Welcome</h5>
+                    <p class="card-text">
+                        Whether new or returning, welcome to NuPath! This is New College's premier social, planning, and onboarding platform, specifically designed for Novos to connect and make the most of their time at New College. <br> <br> Here, you'll be able to see new posts from your peers and explore the other pages. Be sure to check out our community, leaderboard, planning, catalyst, doodles, dorms, resources, and profile page. Just explore the navigation bar at the top of the page to get started.
+                    </p>
                 </div>
             </div>
         </div>

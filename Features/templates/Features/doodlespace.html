@@ -3,8 +3,104 @@
 {% load static %}
 
 {% block content %}
+<style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
-<link rel="stylesheet" href="{% static 'css/doodlespace/doodlespace.css' %}" />
+.options {
+  height: 30vh;
+  background-color: #047bf6;
+}
+
+.tools-row {
+  display: flex;
+  justify-content: space-between; /* This will space out the children evenly */
+  align-items: center;
+  gap: 10px; /* Reduced gap between flex items */
+  /* Other styles remain unchanged */
+}
+.tools-row h5 {
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+.tools-row button {
+  padding: 12px 0;
+  border-radius: 25px;
+  border: none;
+  background-color: #ffffff;
+  font-size: 18px;
+  color: #047bf6;
+  width: 100%;
+}
+input[type="range"] {
+  touch-action: manipulation;
+  max-width: 200px; /* Adjust the max-width as needed */
+  width: 100%; /* Make it responsive by setting width to 100% */
+}
+
+input[type="color"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  width: 70px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+}
+input[type="color"]::-webkit-color-swatch {
+  border-radius: 8px;
+  border: 3px solid #000000;
+}
+input[type="color"]::moz-color-swatch {
+  border-radius: 8px;
+  border: 3px solid #000000;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+}
+
+#paintArea {
+    flex-grow: 1; /* Let paint area take up all available space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: center;
+    border: 8px solid #047bf6;
+    overflow: hidden;
+}
+
+canvas {
+    display: block; /* Remove default margin */
+    background-color: #fff; /* Default background */
+    position: center;
+}
+
+.options {
+    background-color: #047bf6;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+
+</style>
 <title>Doodles</title>
 
 <div id="paintArea">
@@ -30,7 +126,192 @@
         </div>
       </div>
 </div>
+
 <!-- Script-->
-<script src="{% static 'js/doodlespace/doodlespace.js' %}"></script>
+<script>
+// Initial references
+let canvas = document.getElementById("canvas");
+let colorButton = document.getElementById("color-input");
+let clearButton = document.getElementById("button-clear");
+let eraseButton = document.getElementById("button-erase");
+let penButton = document.getElementById("button-pen");
+let penSize = document.getElementById("pen-slider");
+let toolType = document.getElementById("tool-type");
+// Eraser and drawing flags
+let erase_bool = false;
+let draw_bool = false;
+// Canvas context
+let context = canvas.getContext("2d");
+// Mouse position initialization
+let mouseX = 0;
+let mouseY = 0;
+
+// Initialize canvas with default settings
+const init = () => {
+    context.strokeStyle = "#000"; // Default drawing color
+    context.lineWidth = penSize.value; // Default pen size
+    toolType.innerHTML = "Pen"; // Default tool type
+
+    // Set canvas background to white
+    canvas.style.backgroundColor = "#ffffff";
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height); // Fill canvas background with white
+};
+
+// Detect touch capability
+const is_touch_device = () => {
+    try {
+        document.createEvent("TouchEvent");
+        return true;
+    } catch (e) {
+        return false;
+    }
+};
+
+// Get accurate x and y position relative to the canvas
+const getXY = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = (!is_touch_device() ? e.clientX : e.touches[0].clientX) - rect.left;
+    mouseY = (!is_touch_device() ? e.clientY : e.touches[0].clientY) - rect.top;
+};
+
+// Stop drawing
+const stopDrawing = () => {
+    context.beginPath();
+    draw_bool = false;
+};
+
+// Start drawing
+const startDrawing = (e) => {
+    draw_bool = true;
+    getXY(e);
+    context.beginPath();
+    context.moveTo(mouseX, mouseY);
+};
+
+// Draw on canvas
+const drawOnCanvas = (e) => {
+    if (e.cancelable) {
+        e.preventDefault();
+    }
+    getXY(e);
+    if (draw_bool) {
+        context.lineTo(mouseX, mouseY);
+        context.stroke();
+        context.globalCompositeOperation = erase_bool ? "destination-out" : "source-over";
+    }
+};
+
+// Event listeners for drawing
+canvas.addEventListener("mousedown", startDrawing);
+canvas.addEventListener("touchstart", startDrawing);
+canvas.addEventListener("mousemove", drawOnCanvas);
+canvas.addEventListener("touchmove", drawOnCanvas);
+canvas.addEventListener("mouseup", stopDrawing);
+canvas.addEventListener("touchend", stopDrawing);
+canvas.addEventListener("mouseleave", stopDrawing);
+
+// Tool change listeners
+penButton.addEventListener("click", () => {
+    toolType.innerHTML = "Pen";
+    erase_bool = false;
+    context.globalCompositeOperation = "source-over";
+});
+
+eraseButton.addEventListener("click", () => {
+    toolType.innerHTML = "Eraser";
+    erase_bool = true;
+    context.globalCompositeOperation = "destination-out";
+});
+
+penSize.addEventListener("input", () => {
+    context.lineWidth = penSize.value;
+});
+
+colorButton.addEventListener("change", () => {
+    context.strokeStyle = colorButton.value;
+});
+
+clearButton.addEventListener("click", () => {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    // Reset to default white background after clearing
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+});
+
+// Resize canvas to fit available screen space
+// Resize canvas to fit available screen space
+function resizeCanvas() {
+    // Use window's innerWidth and innerHeight as a starting point
+    let newWidth = window.innerWidth;
+    let newHeight = window.innerHeight;
+
+    // Account for the size of the navbar and options if they are present
+    const navbar = document.querySelector('nav');
+    const options = document.querySelector('.options');
+    if (navbar) {
+        newHeight -= navbar.offsetHeight;
+    }
+    if (options) {
+        newHeight -= options.offsetHeight;
+    }
+
+    // Now set the canvas width and height to the new calculated values
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+
+    // Reapply the white background to the entire canvas
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+
+// Fetch CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// AJAX Save Doodle functionality
+function saveDoodle() {
+    const imageData = canvas.toDataURL('image/png');
+    const csrfToken = getCookie('csrftoken');
+
+    fetch('/save_doodle/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
+        },
+        body: JSON.stringify({ image_data: imageData }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Doodle saved successfully!');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error saving doodle.');
+    });
+}
+
+// Initialize and attach event listeners when the document is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    init();
+    resizeCanvas();
+    document.getElementById('button-save').addEventListener('click', saveDoodle);
+    window.addEventListener('resize', resizeCanvas);
+});
+</script>
 
 {% endblock %}

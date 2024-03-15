@@ -1,3 +1,9 @@
+body {
+    background-image: url('/media/home.jpg') !important;
+    background-size: cover;
+    background-position: center;
+}
+
 /* Styles for the video player */
 #videoPlayer iframe {
     width: 100%;
@@ -64,9 +70,4 @@
 .bg-white {
     background-color: #fff;
     border-radius: 0.25rem;
-}
-body {
-    background-image: url('/media/home.jpg');
-    background-size: cover;
-    background-position: center;
 }

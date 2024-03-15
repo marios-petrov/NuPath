@@ -181,10 +181,17 @@ def dorms(request):
     current_dorm = Dorms.objects.filter(is_current_dorm=True).first() #user's current dorm
     #using first() is supposed to be bad practice but there shouldn't be anything else in this list!
     """
-    checklist = UserChecklist.objects.filter(user=request.user)
+    try:
+        checklist = UserChecklist.objects.get(user=request.user)
+    except UserChecklist.DoesNotExist:
+        # Handle the scenario where the user doesn't have a pre-made checklist
+        # For example, create a new checklist for the user
+        # You can adjust this logic based on your requirements
+        checklist = UserChecklist.objects.create(user=request.user)
+        return redirect('dorms')
 
     #GPT generated
-    if request.method == 'POST': 
+    if request.method == 'POST':
         user_checklist = checklist #right now this is because it's grabbing the first one, but this might not be needed in the future
         for field in user_checklist._meta.fields: #for boolean field in the user checklist
             field_name = field.name #capture the field
@@ -193,22 +200,22 @@ def dorms(request):
                 setattr(user_checklist, field_name, field_value[0] == 'on') #so you can just bool using the index where 'on' would appear! it immediately is off otherwise
         user_checklist.save()
         return redirect('dorms')
-    
+
     context = {
         'dorms': dorms,
         #'current_dorm': current_dorm,
         'checklist': checklist
     }
-    return render(request, 'Features/dorms.html', context) 
+    return render(request, 'Features/dorms.html', context)
 
 @require_http_methods(["GET", "POST"])
-def dormview(request, dorm): 
+def dormview(request, dorm):
     """Shows a dorm object from the dorms page. Allows user to select the dorm as their current dorm.
     Deselects any other dorm they have selected currently.
 
     Args:
         request: any http method request that comes from the dormview page.
-        dorm (int): The object id of the dorm object. 
+        dorm (int): The object id of the dorm object.
 
     Returns:
         render(request, dormview, context): _description_
@@ -218,7 +225,7 @@ def dormview(request, dorm):
     current_dorm = Dorms.objects.filter(is_current_dorm=True)
 
     if request.method == "POST":
-        if 'select' in request.POST: 
+        if 'select' in request.POST:
             current_dormview = request.POST.get('current_dormview', '') # gets object id to set it to true/false!
             dormselect = Dorms.objects.get(id=current_dormview) #get just the dorm you're looking at
             dormselect.is_current_dorm = not dormselect.is_current_dorm #toggle the dorm
@@ -228,7 +235,7 @@ def dormview(request, dorm):
             if other_dorm != dormselect:
                 other_dorm.is_current_dorm = False
                 other_dorm.save() #don't forget to save!
-    
+
         return redirect('dormview', dorm=dorm.id)
 
         There's just straight up no time to fix this.
@@ -238,37 +245,35 @@ def dormview(request, dorm):
         'dorm': dorm,
         #'current_dorm': current_dorm
     }
-    
+
     return render(request, 'Features/dormview.html', context)
-
-# Create your views here.
-def doodlespace(request):
-    return render(request, 'Features/doodlespace.html')
-
-def home(request):
-    return render(request, 'Features/home.html')
-
-""" 
- quotes_obj = Quotes.objects.first()  # Assuming you only have one Quotes object
-
-    # Get the quote bank from the Quotes object
-    quote_bank = quotes_obj.get_quotebank()
-
-    # Choose a random quote from the quote bank
-    random_quote = random.choice(quote_bank)
-"""
 
 @login_required
 @require_http_methods(["GET"])
-def catalyst(request):
-    quotes = get_object_or_404(Quotes, user=request.user)
+def catalyst(request): #edited to change once a day
+    try:
+        quotes = Quotes.objects.get(user=request.user)
+    except Quotes.DoesNotExist:
+        defaultquotebank = {
+            "quotebank": [
+                {"quote": "If you want to achieve greatness stop asking for permission.", "author": "Anonymous"},
+                {"quote": "Things work out best for those who make the best of how things work out.", "author": "John Wooden"},
+                {"quote": "To live a creative life, we must lose our fear of being wrong.", "author": "Anonymous"},
+                {"quote": "If you are not willing to risk the usual you will have to settle for the ordinary.", "author": "Jim Rohn"},
+            ]
+        }
+        quotes = Quotes.objects.create(user=request.user, quotebank=defaultquotebank, last_displayed_quote="If you want to achieve greatness stop asking for permission. - Anonymous")
+        return redirect('dorms')
 
-    if date.weekday == 6: #should change quote every sunday
+    today = timezone.now().date()
+    last_updated = quotes.updated_at.date() if quotes.updated_at else None
+
+    if last_updated != today: #should change quote every day
         #there could be quote rotation checks, but by that point i would just refactor the basis of this whole function
         shownquote = quotes.get_random_quote()  # Call get_random_quote method
         quotes.save()
     else:
         shownquote = quotes.get_lastquote()
         quotes.save()
-    
+
     return render(request, 'Features/catalyst.html', {'shownquote' : shownquote})
