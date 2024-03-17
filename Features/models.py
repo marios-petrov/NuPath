@@ -4,7 +4,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import random
 
-
 # model for a calendar event
 class CalendarEvent(models.Model):
 
@@ -112,7 +111,6 @@ class Dorms(models.Model):
     def get_foodoptions_list(self):
         return str(self.foodoptions).split(', ') #returns food options as a list
     #the str() function is so i don't have to use an entire json processing function
-
 
 class Quotes(models.Model):
     # I'm going to be honest I don't want to use a model for this but IDK where I'd store this...

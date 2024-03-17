@@ -1,4 +1,3 @@
-
 import datetime
 from Users.models import Profile # for leaderboard page
 from django.db.models import Q # for 'or' statements in filters
@@ -14,21 +13,31 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from django.shortcuts import render, redirect
 from .models import Post
-from datetime import date
+
 
 @login_required
 def home(request):
-    # Fetch the top 5 most recent doodles
+    """
+    Renders the homepage with a context containing:
+    - The four most recent 'Doodle' objects.
+    - The 'Post' object with the highest upvote ratio.
+    - YouTube API key and channel ID for YouTube API calls (if applicable).
+
+    Assumes models 'Doodle' and 'Post' are defined with 'created_at',
+    'upvotes', and 'downvotes' fields or properties.
+    """
+    # Fetch the top 4 most recent doodles
     recent_doodles = Doodle.objects.all().order_by('-created_at')[:4]
 
-    # Calculate the highest upvote ratio
+    # Calculate the highest upvote ratio among posts
     highest_upvote_ratio_post = Post.objects.annotate(
         upvote_ratio=Count('upvotes') - Count('downvotes')
     ).order_by('-upvote_ratio').first()
 
+    # Context for rendering the template
     context = {
-        'youtube_api_key': 'AIzaSyA7iyQqwPGI-5wXDmwgm84zdVQEno9OyiM',
-        'channel_id': 'UCeGK7w0jvoIKUaGgGlit59Q',
+        'youtube_api_key': 'YOUR_YOUTUBE_API_KEY',  # Replace with your actual API key
+        'channel_id': 'YOUR_CHANNEL_ID',  # Replace with your actual channel ID
         'recent_doodles': recent_doodles,
         'highest_upvote_ratio_post': highest_upvote_ratio_post,
     }
@@ -36,24 +45,38 @@ def home(request):
 
 @login_required
 def resources(request):
+    """
+    Renders the 'resources' page. No additional context is passed to the template.
+    """
     return render(request, 'Features/resources.html')
 
 @login_required
 def community(request):
+    """
+    Renders the 'community' page. No additional context is passed to the template.
+    """
     return render(request, 'Features/community.html')
+
 @require_POST
 @login_required
 def save_doodle(request):
+    """
+    Saves a doodle image sent via POST request in base64 encoding.
+    Expects a JSON object in the request body with a key 'image_data' containing the image data.
+
+    Returns a JSON response indicating success or failure.
+    """
     # Parse the JSON body of the request
     data = json.loads(request.body)
     image_data = data.get('image_data')
+
     if image_data:
-        # Split the base64 string
+        # Split the base64 string to separate the encoding prefix from the image data
         format, imgstr = image_data.split(';base64,')
         # Extract the image file extension
         ext = format.split('/')[-1]
 
-        # Convert base64 to image file
+        # Convert base64 encoded data to an image file
         image = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
 
         # Save the image to a new Doodle object
@@ -65,6 +88,10 @@ def save_doodle(request):
 
 @login_required
 def doodlespace(request):
+    """
+    Renders the 'doodlespace' page. This page is meant for users to view and interact with doodles.
+    No additional context is passed to the template.
+    """
     return render(request, 'Features/doodlespace.html')
 
 
@@ -126,22 +153,38 @@ def leaderboard(request):
 
 @login_required
 def post_list(request):
+    """
+    Fetches and displays a list of all posts ordered by their posting date in descending order.
+    Renders the community page with the list of posts.
+    """
     posts = Post.objects.all().order_by('-date_posted')
     return render(request, 'Features/community.html', {'posts': posts})
 
 @login_required
 def post_create(request):
+    """
+    Handles the creation of a new post.
+    If the request method is POST, it attempts to create a new post with the title and content
+    provided in the request. Simple validation checks if title and content are present.
+    Upon successful creation, redirects to the community homepage.
+    If not a POST request or if validation fails, redirects to the community homepage.
+    """
     if request.method == 'POST':
         title = request.POST.get('title', '')
         content = request.POST.get('content', '')
         if title and content:  # Simple validation
             Post.objects.create(title=title, content=content, author=request.user, date_posted=timezone.now())
             return redirect('community-home')
-    # Redirect to the community page if not POST or if POST data is invalid
     return redirect('community-home')
 
 @login_required
 def post_delete(request, pk):
+    """
+    Deletes a post specified by its primary key (pk) if the request method is POST and
+    if the request user is the author of the post.
+    Returns a 403 Forbidden response if the request user is not the author or if the request method is not POST.
+    Redirects to the community homepage upon successful deletion.
+    """
     post = get_object_or_404(Post, pk=pk)
     if request.user != post.author:
         return HttpResponseForbidden()
@@ -149,11 +192,16 @@ def post_delete(request, pk):
         post.delete()
         return redirect('community-home')
     else:
-        # For safety, only allow POST requests to delete a post
         return HttpResponseForbidden()
 
 @login_required
 def upvote_post(request, pk):
+    """
+    Handles upvoting a post specified by its primary key (pk).
+    If the user has downvoted the post before, the downvote is removed before adding the upvote.
+    Only allows POST requests for upvoting to prevent CSRF attacks.
+    Returns a JSON response with the success status and updated upvote and downvote counts.
+    """
     if request.method == 'POST':
         post = get_object_or_404(Post, pk=pk)
         if request.user in post.downvotes.all():
@@ -164,6 +212,12 @@ def upvote_post(request, pk):
 
 @login_required
 def downvote_post(request, pk):
+    """
+    Handles downvoting a post specified by its primary key (pk).
+    If the user has upvoted the post before, the upvote is removed before adding the downvote.
+    Only allows POST requests for downvoting to prevent CSRF attacks.
+    Returns a JSON response with the success status and updated upvote and downvote counts.
+    """
     if request.method == 'POST':
         post = get_object_or_404(Post, pk=pk)
         if request.user in post.upvotes.all():
